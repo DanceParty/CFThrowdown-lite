@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-native-scripts": "1.7.0",
     "jest-expo": "^22.0.0",
+    "react-native-scripts": "1.7.0",
     "react-test-renderer": "16.0.0-beta.5"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -19,8 +19,17 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apollo-cache-inmemory": "^1.0.0",
+    "apollo-client": "^2.0.1",
+    "apollo-link": "^1.0.0",
+    "apollo-link-context": "^1.0.0",
+    "apollo-link-http": "^1.1.0",
     "expo": "^22.0.2",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
     "react": "16.0.0-beta.5",
-    "react-native": "^0.49.5"
+    "react-apollo": "^2.0.0",
+    "react-native": "^0.49.5",
+    "react-navigation": "^1.0.0-beta.19"
   }
 }
