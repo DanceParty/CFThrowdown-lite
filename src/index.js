@@ -1,15 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import './firebase/firebase'
+import fire from './firebase/firebase'
+
+import RootNavigator from './utils/router'
 
 export default class RootComponent extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <RootNavigator />
     );
   }
 }
