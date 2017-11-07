@@ -16,13 +16,13 @@ class AdminHome extends React.Component {
         <View style={styles.middle}>
           <Button
             onPress={() => console.log('navigate to create new workout')}
-            title="Leaderboard"
+            title="ADMIN"
             color="#841584"
             accessibilityLabel="Leaderboard Page"
           />
           <Button
             onPress={() => console.log('navigate to create new competitor')}
-            title="Workouts"
+            title="ADMIN"
             color="#841584"
             accessibilityLabel="Workouts Page"
           />
