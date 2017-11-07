@@ -15,14 +15,14 @@ class AdminHome extends React.Component {
       <View style={styles.container}>
         <View style={styles.middle}>
           <Button
-            onPress={() => console.log('navigate to create new workout')}
-            title="ADMIN"
+            onPress={() => this.props.navigation.navigate('NewWorkout')}
+            title="Create Workout"
             color="#841584"
             accessibilityLabel="Leaderboard Page"
           />
           <Button
-            onPress={() => console.log('navigate to create new competitor')}
-            title="ADMIN"
+            onPress={() => this.props.navigation.navigate('AddCompetitor')}
+            title="Add Competitor"
             color="#841584"
             accessibilityLabel="Workouts Page"
           />

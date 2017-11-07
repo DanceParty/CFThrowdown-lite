@@ -11,6 +11,8 @@ import AdminLogin from '../pages/AdminLogin'
 
 // private pages
 import AdminHome from '../pages/AdminHome'
+import NewWorkout from '../pages/NewWorkout'
+import AddCompetitor from '../pages/AddCompetitor'
 
 const PublicNavigator = StackNavigator({
   Home: {
@@ -46,9 +48,23 @@ const AdminNavigator = StackNavigator({
   AdminHome: {
     screen: AdminHome,
     navigationOptions: {
-      header: null
-    }
-  }
+      header: null,
+    },
+  },
+  NewWorkout: {
+    screen: NewWorkout,
+    navigationOptions: {
+      headerTitle: 'New Workout',
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
+  },
+  AddCompetitor: {
+    screen: AddCompetitor,
+    navigationOptions: {
+      headerTitle: 'Add Competitor',
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
+  },
 })
 
 const RootNavigator = (signedIn = false) => {
