@@ -1,14 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
-import fire from './firebase/firebase'
-
 import RootNavigator from './utils/router'
 
 export default class RootComponent extends React.Component {
+
+  state = {
+    user: null,
+    text: 'Text'
+  }
+
   render() {
+    const user = this.state.user
+    const NavComponent = RootNavigator(user)
     return (
-      <RootNavigator />
+      <NavComponent screenProps={this.state.user} />
     );
   }
 }

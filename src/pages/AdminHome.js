@@ -1,32 +1,38 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
-class Home extends React.Component {
+// firebase actions
+import { startSignout } from '../actions/auth'
+
+class AdminHome extends React.Component {
+
+  handleSignout = () => {
+    startSignout()
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.middle}>
           <Button
-            onPress={() => this.props.navigation.navigate('Leaderboard')}
+            onPress={() => console.log('navigate to create new workout')}
             title="Leaderboard"
             color="#841584"
             accessibilityLabel="Leaderboard Page"
           />
           <Button
-            onPress={() => this.props.navigation.navigate('Workouts')}
+            onPress={() => console.log('navigate to create new competitor')}
             title="Workouts"
             color="#841584"
             accessibilityLabel="Workouts Page"
           />
         </View>
         <View style={styles.bottom}>
-          <Text>
-            Admin?
-            <Text
-              style={styles.link}
-              onPress={() => this.props.navigation.navigate('AdminLogin')}
-            > Login here</Text>
+          <Text
+            style={styles.link}
+            onPress={this.handleSignout}
+          >
+            Logout
           </Text>
         </View>
       </View>
@@ -56,4 +62,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Home
+export default AdminHome
