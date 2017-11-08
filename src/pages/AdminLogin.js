@@ -14,7 +14,6 @@ class AdminLogin extends React.Component {
   handleLogin = () => {
     const email = this.state.email || null
     const password = this.state.password
-    console.log(email, password)
     startLogin(email, password)
   }
 

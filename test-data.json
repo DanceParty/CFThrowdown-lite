@@ -1,0 +1,38 @@
+{
+  "workouts": {
+    "abscasdwqasd": {
+      "name": "WOD #1",
+      "division": "RX",
+      "type": "Timed",
+      "Steps": ["Step 1", "Step 2", "Step 3"]
+    },
+    "fdskjnanqw": {
+      "name": "WOD #1",
+      "division": "Scaled",
+      "type": "Timed",
+      "Steps": ["Step 1 Scaled", "Step 2 Scaled", "Step 3 Scaled"]
+    }
+  },
+  "competitors": {
+    "Julie Dance": {
+      "firstName": "Julie",
+      "lastName": "Dance",
+      "division": "RX",
+      "scores": {
+        "WOD 1": 123,
+        "WOD 4": 12321,
+        "WOD 2": 12311
+      }
+    },
+    "Taylor Dance": {
+      "firstName": "Taylor",
+      "lastName": "Dance",
+      "division": "Scaled",
+      "scores": {
+        "WOD 1": 1,
+        "WOD 2": 2,
+        "WOD 3": 1
+      }
+    }
+  }
+}
