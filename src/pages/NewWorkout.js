@@ -63,6 +63,30 @@ class NewWorkout extends React.Component {
     }))
   }
 
+  handleRemoveStep = () => {
+    const stepsLength = this.state.steps.length
+    const stepsInputsLength = this.state.stepInputs.length
+
+    // if
+    // the input boxes to hold the steps and the steps themselves are both the same length
+    // ** meaning ** if there are no empty step input boxes
+    // then remove the last element in both arrays
+    // else
+    // that means there are more input boxes than there are steps
+    // ** meaning ** there are empty input boxes
+    // so we should only remove the last element in the input box array
+    if (stepsLength === stepsInputsLength) {
+      this.setState((prevState) => ({
+        stepInputs: prevState.stepInputs.filter((stepInput, index) => index !== stepsInputsLength-1),
+        steps: prevState.steps.filter((step, index) => index !== stepsLength-1)
+      }))
+    } else {
+      this.setState((prevState) => ({
+        stepInputs: prevState.stepInputs.filter((stepInput, index) => index != stepsInputsLength-1),
+      }))
+    }
+  }
+
   handleStepInput = (text, index) => {
     const newArray = [...this.state.steps]
     newArray[index] = text
@@ -168,6 +192,10 @@ class NewWorkout extends React.Component {
         <Button
           title="Add Step"
           onPress={this.handleAddStep}
+        />
+        <Button
+          title="Remove Step"
+          onPress={this.handleRemoveStep}
         />
         <Button
           title="Submit"
