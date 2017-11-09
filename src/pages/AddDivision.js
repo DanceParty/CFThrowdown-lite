@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
 
-import { addDivision } from '../firebase/firebase'
+import { addDivision } from '../actions/divisions'
 
 class AddDivision extends React.Component {
 

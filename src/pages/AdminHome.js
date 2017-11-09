@@ -26,13 +26,12 @@ class AdminHome extends React.Component {
             color="#841584"
             accessibilityLabel="Competitor Page"
           />
-        </View>
-        <Button
-          onPress={() => this.props.navigation.navigate('AddDivision')}
-          title="Add Division"
-          color="#841584"
-          accessibilityLabel="Division Page"
-        />
+          <Button
+            onPress={() => this.props.navigation.navigate('AddDivision')}
+            title="Add Division"
+            color="#841584"
+            accessibilityLabel="Division Page"
+          />
         </View>
         <View style={styles.bottom}>
           <Text
