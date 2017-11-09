@@ -36,6 +36,13 @@ class Competitors extends React.Component {
     if (this.state.competitors) {
       return (
         <View style={styles.container}>
+          <Text>
+            Filters:
+            <Text>
+
+            </Text>
+
+          </Text>
           <FlatList
             style={styles.list}
             data={this.state.competitors}
