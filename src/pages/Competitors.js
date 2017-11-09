@@ -16,15 +16,15 @@ class Competitors extends React.Component {
 
   componentWillMount() {
     // get all of the competitors and store them in an array in the state
-    getCompetitors().then((result) => {
+    getCompetitors().then((competitorsResult) => {
       // get competitors and store them in state
       this.setState({
-        competitors: result,
-        filteredCompetitors: result,
+        competitors: competitorsResult,
+        filteredCompetitors: competitorsResult,
       }, () => {
         // after storing competitors, grab all divisions and store in state
-        allDivisions().then((result) => {
-          const divisionList = Object.keys(result)
+        allDivisions().then((divisionsResult) => {
+          const divisionList = Object.keys(divisionsResult)
           this.setState({
             divisions: divisionList
           })
@@ -35,6 +35,7 @@ class Competitors extends React.Component {
 
   handleMaleFilter = () => {
     const competitors = this.state.competitors
+    // filter competitor array into a filtered array by gender 'male'
     const filteredArray = competitors.filter((competitor) => {
       if (competitor.gender === 'Male') {
         return true
@@ -49,6 +50,7 @@ class Competitors extends React.Component {
 
   handleFemaleFilter = () => {
     const competitors = this.state.competitors
+    // filter competitor array into a filtered array by gender 'female'
     const filteredArray = competitors.filter((competitor) => {
       if (competitor.gender === 'Female') {
         return true
@@ -64,6 +66,9 @@ class Competitors extends React.Component {
   handleDivisionFilter = (division) => {
     const competitors = this.state.competitors
     const currentGender = this.state.currentGender
+    // since there is no way to view previous filtered array
+    // we need to recreate the filtered array so the division filter
+    // doesn't stack on top of each other returning zero results
     const filteredDivisions = competitors.filter((competitor) => {
       if (currentGender) {
         if ((competitor.gender === currentGender) && (competitor.division === division)) {
