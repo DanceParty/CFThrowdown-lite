@@ -1,51 +1,121 @@
 import React from 'react'
-import { FlatList, Text, StyleSheet, View } from 'react-native'
+import { FlatList, TouchableHighlight, Text, StyleSheet, View } from 'react-native'
 
 // firebase
 import { getCompetitors } from '../actions/competitors'
+import { allDivisions } from '../actions/divisions'
 
 class Competitors extends React.Component {
 
   state = {
-    competitors: undefined
+    competitors: undefined,
+    filteredCompetitors: undefined,
+    divisions: undefined,
+    currentGender: undefined,
   }
 
   componentWillMount() {
-    let competitorsArray = []
-    let index = 0
     // get all of the competitors and store them in an array in the state
     getCompetitors().then((result) => {
-      const values = result.val()
-      Object.keys(values).forEach((key) => {
-
-        const id = key
-        const fullName = `${values[key].firstName} ${values[key].lastName}`
-        const gender = (values[key].male === false) ? 'Female' : 'Male'
-        const division = values[key].division
-
-        competitorsArray[index++] = { id, fullName, gender, division }
-
+      // get competitors and store them in state
+      this.setState({
+        competitors: result,
+        filteredCompetitors: result,
+      }, () => {
+        // after storing competitors, grab all divisions and store in state
+        allDivisions().then((result) => {
+          const divisionList = Object.keys(result)
+          this.setState({
+            divisions: divisionList
+          })
+        })
       })
-      this.setState(() => ({
-        competitors: competitorsArray
-      }))
     })
   }
 
+  handleMaleFilter = () => {
+    const competitors = this.state.competitors
+    const filteredArray = competitors.filter((competitor) => {
+      if (competitor.gender === 'Male') {
+        return true
+      }
+      return false
+    })
+    this.setState(() => ({
+      filteredCompetitors: filteredArray,
+      currentGender: 'Male',
+    }))
+  }
+
+  handleFemaleFilter = () => {
+    const competitors = this.state.competitors
+    const filteredArray = competitors.filter((competitor) => {
+      if (competitor.gender === 'Female') {
+        return true
+      }
+      return false
+    })
+    this.setState(() => ({
+      filteredCompetitors: filteredArray,
+      currentGender: 'Female'
+    }))
+  }
+
+  handleDivisionFilter = (division) => {
+    const competitors = this.state.competitors
+    const currentGender = this.state.currentGender
+    const filteredDivisions = competitors.filter((competitor) => {
+      if (currentGender) {
+        if ((competitor.gender === currentGender) && (competitor.division === division)) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        if (competitor.division === division) {
+          return true
+        } else {
+          return false
+        }
+      }
+    })
+    this.setState(() => ({
+      filteredCompetitors: filteredDivisions
+    }))
+  }
+
   render() {
-    if (this.state.competitors) {
+    if (this.state.filteredCompetitors && this.state.divisions) {
       return (
         <View style={styles.container}>
-          <Text>
-            Filters:
-            <Text>
-
-            </Text>
-
-          </Text>
+          <View>
+            <Text>Gender Filters:</Text>
+            <TouchableHighlight
+              onPress={this.handleMaleFilter}
+            >
+              <Text>Men</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={this.handleFemaleFilter}
+            >
+              <Text>Women</Text>
+            </TouchableHighlight>
+          </View>
+          <View>
+          <Text>Division Filters:</Text>
+            {
+              this.state.divisions.map((division, index) => {
+                return (
+                  <TouchableHighlight onPress={() => this.handleDivisionFilter(division)} key={index}>
+                    <Text>{division}</Text>
+                  </TouchableHighlight>
+                )
+              })
+            }
+          </View>
           <FlatList
             style={styles.list}
-            data={this.state.competitors}
+            data={this.state.filteredCompetitors}
             renderItem={({item}) =>
               <Text style={styles.text}>{item.fullName} - {item.gender} - {item.division}</Text>
             }
