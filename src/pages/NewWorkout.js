@@ -20,7 +20,6 @@ class NewWorkout extends React.Component {
   componentWillMount() {
     allDivisions().then((result) => {
       const divisionArray = Object.keys(result)
-      console.log(divisionArray)
       this.setState(() => ({
         divisionList: divisionArray
       }))
@@ -49,15 +48,15 @@ class NewWorkout extends React.Component {
     let workoutsArray = []
     // get all workouts for this division
     getDivisionWorkouts(workout.division).then((result) => {
+      // insert the new workout and store the value to access the key
+      const newWorkout = addWorkout(workout)
       if (result) {
         // if there are already workouts, add this workout to the array
-        workoutsArray = [...result, workout.name]
+        workoutsArray = [...result, newWorkout.key]
       } else {
-        // otherwise, create the workouts array
-        workoutsArray = [workout.name]
+        // otherwise, create the workouts key array
+        workoutsArray = [newWorkout.key]
       }
-      // add the workout
-      addWorkout(workout)
       // update the division to contain the workout
       updateDivisionWorkouts(workoutsArray, workout.division)
     })
