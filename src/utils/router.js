@@ -7,6 +7,7 @@ import { Constants } from 'expo'
 import Home from '../pages/Home'
 import Leaderboard from '../pages/Leaderboard'
 import Workouts from '../pages/Workouts'
+import Competitors from '../pages/Competitors'
 import AdminLogin from '../pages/AdminLogin'
 
 // private pages
@@ -33,6 +34,13 @@ const PublicNavigator = StackNavigator({
     screen: Leaderboard,
     navigationOptions: {
       headerTitle: 'Leaderboard',
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    }
+  },
+  Competitors: {
+    screen: Competitors,
+    navigationOptions: {
+      headerTitle: 'Competitors',
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     }
   },

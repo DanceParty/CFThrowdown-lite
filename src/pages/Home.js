@@ -19,6 +19,12 @@ class Home extends React.Component {
             color="#841584"
             accessibilityLabel="Workouts Page"
           />
+          <Button
+            onPress={() => this.props.navigation.navigate('Competitors')}
+            title="Competitors"
+            color="#841584"
+            accessibilityLabel="Competitors Page"
+          />
         </View>
         <View style={styles.bottom}>
           <Text>

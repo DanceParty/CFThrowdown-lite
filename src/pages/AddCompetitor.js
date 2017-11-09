@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
+import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 
 import { allDivisions } from '../actions/divisions'
 import { getWorkoutsByDivision } from '../actions/workouts'
+import { addCompetitor } from '../actions/competitors'
 
 class AddCompetitor extends React.Component {
 
@@ -11,7 +13,8 @@ class AddCompetitor extends React.Component {
     firstName: '',
     lastName: '',
     division: '',
-    scores: {},
+    male: false,
+    female: false,
     divisionList: []
   }
 
@@ -43,24 +46,41 @@ class AddCompetitor extends React.Component {
     }))
   }
 
+  handleMaleCheckbox = () => {
+    this.setState(() => ({
+      male: !this.state.male,
+      female: false
+    }))
+  }
+
+  handleFemaleCheckbox = () => {
+    this.setState(() => ({
+      female: !this.state.female,
+      male: false
+    }))
+  }
+
   submitCompetitorForm = () => {
     // query workouts for this division
     getWorkoutsByDivision(this.state.division).then((result) => {
-      console.log(result)
+      // store the key of each workout in an array
+      const scoresArray = Object.keys(result.val())
+      // create score object for competitor
+      const scoresObj = {}
+      scoresArray.forEach((workoutKey) => {
+        scoresObj[workoutKey] = 0
+      })
+      // create the competitor
+      const competitor = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        division: this.state.division,
+        male: this.state.male,
+        female: this.state.female,
+        scores: scoresObj,
+      }
+      addCompetitor(competitor)
     })
-    const competitor = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      division: this.state.division,
-      scores: this.state.scores,
-    }
-    // figure out which workouts are with this division
-
-    // create an object of those workouts with values of ''
-
-    // assign the state 'scores' to that object
-
-    // create competitor
   }
 
   render() {
@@ -97,11 +117,15 @@ class AddCompetitor extends React.Component {
             value={this.state.division}
           />
         </ModalSelector>
-        <TextInput
-          style={{ borderWidth: 1, borderColor: 'black' }}
-          placeholder="Division..."
-          onChangeText={(text) => this.handleDivisionChange(text)}
-          value={this.state.fivision}
+        <CheckBox
+          title="Male"
+          checked={this.state.male}
+          onPress={() => this.handleMaleCheckbox()}
+        />
+        <CheckBox
+          title="Female"
+          onPress={() => this.handleFemaleCheckbox()}
+          checked={this.state.female}
         />
         <Button
           title="Submit"

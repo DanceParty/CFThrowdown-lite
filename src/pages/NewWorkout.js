@@ -1,10 +1,14 @@
 import React from 'react'
 import { Button, Picker, Text, TextInput, View } from 'react-native'
+import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 
 // firebase
 import { addWorkout } from '../actions/workouts'
 import { allDivisions, getDivisionWorkouts, updateDivisionWorkouts } from '../actions/divisions'
+
+// icons
+import '@expo/vector-icons'
 
 class NewWorkout extends React.Component {
 
@@ -12,6 +16,8 @@ class NewWorkout extends React.Component {
     name: '',
     division: '',
     type: '',
+    male: false,
+    female: false,
     steps: [],
     stepInputs: ['input-0'],
     divisionList: [],
@@ -38,11 +44,40 @@ class NewWorkout extends React.Component {
     this.setState(() => ({ type: text }))
   }
 
+  handleMaleCheckbox = () => {
+    this.setState(() => ({
+      male: !this.state.male
+    }))
+  }
+
+  handleFemaleCheckbox = () => {
+    this.setState(() => ({
+      female: !this.state.female
+    }))
+  }
+
+  handleAddStep = () => {
+    const newKey = `input-${this.state.stepInputs.length}`
+    this.setState(() => ({
+      stepInputs: this.state.stepInputs.concat([newKey])
+    }))
+  }
+
+  handleStepInput = (text, index) => {
+    const newArray = [...this.state.steps]
+    newArray[index] = text
+    this.setState(() => ({
+      steps: newArray
+    }))
+  }
+
   handleWorkoutSubmit = () => {
     const workout = {
       name: this.state.name,
       division: this.state.division,
       type: this.state.type,
+      male: this.state.male,
+      female: this.state.female,
       steps: [...this.state.steps],
     }
     let workoutsArray = []
@@ -60,21 +95,6 @@ class NewWorkout extends React.Component {
       // update the division to contain the workout
       updateDivisionWorkouts(workoutsArray, workout.division)
     })
-  }
-
-  handleAddStep = () => {
-    const newKey = `input-${this.state.stepInputs.length}`
-    this.setState(() => ({
-      stepInputs: this.state.stepInputs.concat([newKey])
-    }))
-  }
-
-  handleStepInput = (text, index) => {
-    const newArray = [...this.state.steps]
-    newArray[index] = text
-    this.setState(() => ({
-      steps: newArray
-    }))
   }
 
   render() {
@@ -122,6 +142,16 @@ class NewWorkout extends React.Component {
             value={this.state.type}
           />
         </ModalSelector>
+        <CheckBox
+          title="Male"
+          checked={this.state.male}
+          onPress={() => this.handleMaleCheckbox()}
+        />
+        <CheckBox
+          title="Female"
+          onPress={() => this.handleFemaleCheckbox()}
+          checked={this.state.female}
+        />
         {
           this.state.stepInputs.map((input, index) => {
             return (

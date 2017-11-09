@@ -6,6 +6,6 @@ export const addWorkout = (workout) => {
 
 export const getWorkoutsByDivision = (division) => {
   return database.ref('workouts').orderByChild('division').equalTo(division).once('value').then((snapshot) => {
-    return snapshot.val()
+    return snapshot
   })
 }
