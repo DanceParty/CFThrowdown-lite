@@ -4,6 +4,39 @@ export const addWorkout = (workout) => {
   return database.ref('workouts').push(workout)
 }
 
+export const getWorkoutsByDivisionAndGender = (division, gender) => {
+  return database.ref('workouts').orderByChild('division').equalTo(division).once('value').then((snapshot) => {
+    if (snapshot.val()) {
+      let workoutArray = []
+      let index = 0
+      const result = snapshot.val()
+
+      if (gender === 'Male') {
+        Object.keys(result).forEach((key) => {
+          if (result[key].male === true) {
+            const id = key
+            const name = result[key].name
+            const type = result[key].type
+            workoutArray[index++] = { id, name, type }
+          }
+        })
+      }
+      if (gender === 'Female') {
+        Object.keys(result).forEach((key) => {
+          if (result[key].female === true) {
+            const id = key
+            const name = result[key].name
+            const type = result[key].type
+            workoutArray[index++] = { id, name, type }
+          }
+        })
+      }
+      console.log(workoutArray)
+      return workoutArray
+    }
+  })
+}
+
 export const getWorkoutsByDivision = (division) => {
   return database.ref('workouts').orderByChild('division').equalTo(division).once('value').then((snapshot) => {
     return snapshot

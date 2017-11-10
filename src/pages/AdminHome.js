@@ -21,8 +21,8 @@ class AdminHome extends React.Component {
             accessibilityLabel="Workouts Page"
           />
           <Button
-            onPress={() => this.props.navigation.navigate('AddCompetitor')}
-            title="Add Competitor"
+            onPress={() => this.props.navigation.navigate('AdminCompetitors')}
+            title="View Competitors"
             color="#841584"
             accessibilityLabel="Competitor Page"
           />

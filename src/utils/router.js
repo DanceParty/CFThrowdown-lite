@@ -15,6 +15,8 @@ import AdminHome from '../pages/AdminHome'
 import NewWorkout from '../pages/NewWorkout'
 import AddCompetitor from '../pages/AddCompetitor'
 import AddDivision from '../pages/AddDivision'
+import AdminCompetitors from '../pages/AdminCompetitors'
+import AdminCompetitorDetails from '../pages/AdminCompetitorDetails'
 
 const PublicNavigator = StackNavigator({
   Home: {
@@ -78,6 +80,19 @@ const AdminNavigator = StackNavigator({
     screen: AddDivision,
     navigationOptions: {
       headerTitle: 'Add Division',
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
+  },
+  AdminCompetitors: {
+    screen: AdminCompetitors,
+    navigationOptions: {
+      headerTitle: 'Competitors',
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
+  },
+  AdminCompetitorDetails: {
+    screen: AdminCompetitorDetails,
+    navigationOptions: {
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     },
   },

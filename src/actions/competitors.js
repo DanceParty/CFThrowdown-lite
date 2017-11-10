@@ -16,7 +16,8 @@ export const getCompetitors = () => {
         const fullName = `${result[key].firstName} ${result[key].lastName}`
         const gender = (result[key].male) ? 'Male' : 'Female'
         const division = result[key].division
-        competitorArray[index++] = { id, fullName, gender, division }
+        const scores = result[key].scores
+        competitorArray[index++] = { id, fullName, gender, division, scores }
       })
       // return an array of competitor objects
       return competitorArray
