@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, TouchableHighlight, Text, StyleSheet, View } from 'react-native'
+import { Button, FlatList, TouchableHighlight, Text, StyleSheet, View } from 'react-native'
 
 // firebase
 import { getCompetitors } from '../actions/competitors'
@@ -131,10 +131,19 @@ class AdminCompetitors extends React.Component {
             }
             keyExtractor={(item, index) => index}
           />
+          <Button
+            title="Add Competitor"
+            onPress={() => this.props.navigation.navigate('AddCompetitor')}
+          />
         </View>
       )
     } else {
-      return null
+      return (
+        <Button
+          title="Add Competitor"
+          onPress={() => this.props.navigation.navigate('AddCompetitor')}
+        />
+      )
     }
   }
 }

@@ -24,3 +24,7 @@ export const getCompetitors = () => {
     }
   })
 }
+
+export const updateCompetitor = (competitorId, scores) => {
+  return database.ref(`competitors/${competitorId}/scores`).set(scores)
+}

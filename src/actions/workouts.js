@@ -31,7 +31,6 @@ export const getWorkoutsByDivisionAndGender = (division, gender) => {
           }
         })
       }
-      console.log(workoutArray)
       return workoutArray
     }
   })

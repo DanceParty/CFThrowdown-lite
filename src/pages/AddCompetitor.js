@@ -4,7 +4,7 @@ import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 
 import { allDivisions } from '../actions/divisions'
-import { getWorkoutsByDivision } from '../actions/workouts'
+import { getWorkoutsByDivisionAndGender } from '../actions/workouts'
 import { addCompetitor } from '../actions/competitors'
 
 class AddCompetitor extends React.Component {
@@ -61,14 +61,13 @@ class AddCompetitor extends React.Component {
   }
 
   submitCompetitorForm = () => {
+    const gender = this.state.male ? 'Male' : 'Female'
     // query workouts for this division
-    getWorkoutsByDivision(this.state.division).then((result) => {
-      // store the key of each workout in an array
-      const scoresArray = Object.keys(result.val())
-      // create score object for competitor
+    getWorkoutsByDivisionAndGender(this.state.division, gender).then((result) => {
       const scoresObj = {}
-      scoresArray.forEach((workoutKey) => {
-        scoresObj[workoutKey] = 0
+      // create score object for competitor
+      result.map((workout) => {
+        scoresObj[workout.id] = 0
       })
       // create the competitor
       const competitor = {
