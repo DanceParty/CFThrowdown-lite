@@ -29,6 +29,7 @@ class AdminLogin extends React.Component {
           style={{borderWidth: 1, borderColor: 'black'}}
           onChangeText={(text) => this.setState(() => ({ password: text }))}
           value={this.state.password}
+          secureTextEntry
         />
         <Button
           onPress={this.handleLogin}
