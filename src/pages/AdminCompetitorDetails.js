@@ -14,23 +14,31 @@ class AdminCompetitorDetails extends React.Component {
   state = {
     workouts: undefined,
     editMode: false,
-    scores: undefined
+    scores: undefined,
   }
 
   componentWillMount() {
     // get workouts to match data with scores
     const divisionFilter = this.props.navigation.state.params.competitor.division
     const genderFilter = this.props.navigation.state.params.competitor.gender
-
-    getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
-      this.setState({
-        workouts: workoutResult,
-        scores: this.props.navigation.state.params.competitor.scores,
+    let scores = this.props.navigation.state.params.competitor.scores
+    this.setState({
+      scores: scores,
+    }, () => {
+      console.log('** 1st state', scores)
+      getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
+        this.setState({
+          workouts: workoutResult,
+        }, () => {
+          console.log(this.state)
+        })
       })
     })
+
+
   }
 
-  handleEditScores = () => {
+  handleEditMode = () => {
     const currentState = this.state.editMode
 
     if (!this.state.editMode) {
@@ -53,11 +61,15 @@ class AdminCompetitorDetails extends React.Component {
     const scoreObject = this.state.scores
     Object.keys(scoreObject).forEach((key) => {
       if (key === scoreId) {
-        scoreObject[key] = Number(text)
+        scoreObject[key] = Number(text) || ''
       }
     })
+
+
     this.setState({
       scores: scoreObject
+    }, () => {
+      console.log(this.state)
     })
   }
 
@@ -105,7 +117,7 @@ class AdminCompetitorDetails extends React.Component {
             })
           }
           <Button
-            onPress={this.handleEditScores}
+            onPress={this.handleEditMode}
             title={this.state.editMode ? `Save Changes` : `Edit Mode`}
             color='purple'
           />
