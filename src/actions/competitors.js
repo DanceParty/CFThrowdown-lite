@@ -29,6 +29,68 @@ export const getCompetitors = () => {
   })
 }
 
+export const getCompetitorByGenderAndDivision = (division, gender) => {
+  return database.ref(`competitors`).orderByChild('division').equalTo(division).once('value').then((snapshot) => {
+    if (snapshot.val()) {
+      let competitorArray = []
+      let index = 0
+      const result = snapshot.val()
+
+      if (gender === 'MaleFemale') {
+        Object.keys(result).forEach((key) => {
+          const id = key
+          const fullName = `${result[key].firstName} ${result[key].lastName}`
+          const gender = (result[key].male) ? 'Male' : 'Female'
+          const division = result[key].division
+          const scores = result[key].scores
+          let totalScore = 0
+          if (typeof scores !== "undefined") {
+            Object.keys(scores).forEach((key) => {
+              totalScore += scores[key]
+            })
+          }
+          competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+        })
+      } else if (gender === 'Male') {
+        Object.keys(result).forEach((key) => {
+          if (result[key].male === true) {
+            const id = key
+            const fullName = `${result[key].firstName} ${result[key].lastName}`
+            const gender = (result[key].male) ? 'Male' : 'Female'
+            const division = result[key].division
+            const scores = result[key].scores
+            let totalScore = 0
+            if (typeof scores !== "undefined") {
+              Object.keys(scores).forEach((key) => {
+                totalScore += scores[key]
+              })
+            }
+            competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+          }
+        })
+      } else if (gender === 'Female') {
+        Object.keys(result).forEach((key) => {
+          if (result[key].female === true) {
+            const id = key
+            const fullName = `${result[key].firstName} ${result[key].lastName}`
+            const gender = (result[key].male) ? 'Male' : 'Female'
+            const division = result[key].division
+            const scores = result[key].scores
+            let totalScore = 0
+            if (typeof scores !== "undefined") {
+              Object.keys(scores).forEach((key) => {
+                totalScore += scores[key]
+              })
+            }
+            competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+          }
+        })
+      }
+      return competitorArray
+    }
+  })
+}
+
 export const updateCompetitor = (competitorId, scores) => {
   return database.ref(`competitors/${competitorId}/scores`).set(scores)
 }

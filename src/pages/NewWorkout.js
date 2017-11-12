@@ -6,6 +6,7 @@ import ModalSelector from 'react-native-modal-selector'
 // firebase
 import { addWorkout } from '../actions/workouts'
 import { allDivisions, getDivisionWorkouts, updateDivisionWorkouts } from '../actions/divisions'
+import { updateCompetitor, getCompetitorByGenderAndDivision } from '../actions/competitors'
 
 // icons
 import '@expo/vector-icons'
@@ -105,6 +106,14 @@ class NewWorkout extends React.Component {
       steps: [...this.state.steps],
     }
     let workoutsArray = []
+    let gender = ''
+    if (this.state.male && this.state.female) {
+      gender = 'MaleFemale'
+    } else if (this.state.male) {
+      gender = 'Male'
+    } else if (this.state.female) {
+      gender = 'Female'
+    }
     // get all workouts for this division
     getDivisionWorkouts(workout.division).then((result) => {
       // insert the new workout and store the value to access the key
@@ -118,6 +127,44 @@ class NewWorkout extends React.Component {
       }
       // update the division to contain the workout
       updateDivisionWorkouts(workoutsArray, workout.division)
+
+      // loop through all competitors with this division and gender,
+      getCompetitorByGenderAndDivision(workout.division, gender).then((competitorResult) => {
+        console.log(competitorResult)
+        const newWorkoutKey = newWorkout.key
+        // iterate through array of all competitors
+        competitorResult.map((competitor) => {
+          let competitorId = competitor.id
+          // if there is not a scores object
+          // meaning that there are no scores yet for this competitor
+          // then create a new object with the workout
+          // and update competitor
+          console.log(competitor)
+          if (typeof competitor.scores === "undefined") {
+            console.log('There are no scores object')
+            const scores = {
+              [newWorkoutKey]: 0,
+            }
+            updateCompetitor(competitorId, scores)
+          } else {
+            // create a boolean to see if the workout already exists in the current competitor
+            let workoutIsPreset = false
+            let competitorScores = competitor.scores
+            // iterate through the scores of each competitor
+            Object.keys(competitorScores).forEach((key) => {
+              if (key === newWorkout.key) {
+                workoutIsPresent = true
+              }
+            })
+            if (!workoutIsPreset) {
+              competitorScores[newWorkoutKey] = 0
+              updateCompetitor(competitorId, competitorScores)
+            }
+          }
+        })
+      })
+      // and then double check that the 'key' of the newWorkout is
+      // in the skills object of the competitor
     })
   }
 
