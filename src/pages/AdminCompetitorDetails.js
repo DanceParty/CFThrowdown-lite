@@ -5,6 +5,9 @@ import { Button, FlatList, TouchableHighlight, Text, TextInput, StyleSheet, View
 import { getWorkoutsByDivisionAndGender } from '../actions/workouts'
 import { updateCompetitor } from '../actions/competitors'
 
+// helpers
+import { msToMinutesSeconds, minutesAndSecondsToMs } from '../utils/time'
+
 class AdminCompetitorDetails extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
@@ -22,15 +25,13 @@ class AdminCompetitorDetails extends React.Component {
     const divisionFilter = this.props.navigation.state.params.competitor.division
     const genderFilter = this.props.navigation.state.params.competitor.gender
     let scores = this.props.navigation.state.params.competitor.scores
+
     this.setState({
       scores: scores,
     }, () => {
-      console.log('** 1st state', scores)
       getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
         this.setState({
           workouts: workoutResult,
-        }, () => {
-          console.log(this.state)
         })
       })
     })
