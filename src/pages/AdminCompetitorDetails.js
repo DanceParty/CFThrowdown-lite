@@ -115,7 +115,7 @@ class AdminCompetitorDetails extends React.Component {
                         style={{ borderWidth: 1, borderColor: 'black' }}
                         onChangeText={(text) => this.handleScoreEdit(text, score.id)}
                         value={score.score.toString()}
-                      />
+                      /><Text>lbs</Text>
                     </View>
                   }
                   {
