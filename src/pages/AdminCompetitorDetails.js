@@ -81,7 +81,7 @@ class AdminCompetitorDetails extends React.Component {
       this.state.workouts.map((workout) => {
         Object.keys(competitor.scores).forEach((key) => {
           if (workout.id === key) {
-            scoresArray[index++] = { name: workout.name, score: competitor.scores[key], id: key }
+            scoresArray[index++] = { name: workout.name, type: workout.type, score: competitor.scores[key], id: key }
           }
         })
       })
@@ -104,14 +104,35 @@ class AdminCompetitorDetails extends React.Component {
           {
             this.state.editMode &&
             scoresArray.map((score, index) => {
+              console.log(score)
               return (
                 <View key={index}>
                   <Text>{score.name}:</Text>
-                  <TextInput
-                    style={{ borderWidth: 1, borderColor: 'black' }}
-                    onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                    value={score.score.toString()}
-                  />
+                  {
+                    score.type === 'Weight' &&
+                    <View>
+                      <TextInput
+                        style={{ borderWidth: 1, borderColor: 'black' }}
+                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
+                        value={score.score.toString()}
+                      />
+                    </View>
+                  }
+                  {
+                    score.type === 'Timed' &&
+                    <View>
+                      <TextInput
+                        style={{ borderWidth: 1, borderColor: 'black' }}
+                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
+                        value={score.score.toString()}
+                      /><Text>minutes</Text>
+                      <TextInput
+                        style={{ borderWidth: 1, borderColor: 'black' }}
+                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
+                        value={score.score.toString()}
+                      /><Text>seconds</Text>
+                    </View>
+                  }
                 </View>
               )
             })
