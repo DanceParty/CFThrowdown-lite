@@ -64,10 +64,15 @@ class AddCompetitor extends React.Component {
     const gender = this.state.male ? 'Male' : 'Female'
     // query workouts for this division
     getWorkoutsByDivisionAndGender(this.state.division, gender).then((result) => {
-      const scoresObj = {}
+      let scoresArray = []
+      let index = 0
       // create score object for competitor
       result.map((workout) => {
-        scoresObj[workout.id] = 0
+        scoresArray[index++] = {
+          workoutId: workout.id,
+          points: 0,
+          place: 0,
+        }
       })
       // create the competitor
       const competitor = {
@@ -76,7 +81,7 @@ class AddCompetitor extends React.Component {
         division: this.state.division,
         male: this.state.male,
         female: this.state.female,
-        scores: scoresObj,
+        scores: scoresArray,
       }
       addCompetitor(competitor)
     })

@@ -91,6 +91,10 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
   })
 }
 
-export const updateCompetitor = (competitorId, scores) => {
+export const updateCompetitorScores = (competitorId, scores) => {
   return database.ref(`competitors/${competitorId}/scores`).set(scores)
+}
+
+export const updateCompetitorTotalScore = (competitorId, totalScore) => {
+  return database.ref(`competitors/${competitorId}/totalScore`).set(totalScore)
 }

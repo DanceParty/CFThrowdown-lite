@@ -3,7 +3,7 @@ import { Button, FlatList, TouchableHighlight, Text, TextInput, StyleSheet, View
 
 // firebase
 import { getWorkoutsByDivisionAndGender } from '../actions/workouts'
-import { updateCompetitor } from '../actions/competitors'
+import { updateCompetitorScores, updateCompetitorTotalScore } from '../actions/competitors'
 
 // helpers
 import { msToMinutesSeconds, minutesAndSecondsToMs } from '../utils/time'
@@ -50,7 +50,13 @@ class AdminCompetitorDetails extends React.Component {
       // update scores for the competitor
       const competitorId = this.props.navigation.state.params.competitor.id
       const scores = this.state.scores
-      updateCompetitor(competitorId, scores)
+      let totalScore = 0
+      scores.map((scoreObj) => {
+        totalScore += scoreObj.points
+      })
+      console.log(totalScore)
+      updateCompetitorScores(competitorId, scores)
+      updateCompetitorTotalScore(competitorId, totalScore)
       // update state with no more edit mode
       this.setState((prevState) => ({
         editMode: !prevState.editMode,
@@ -59,31 +65,40 @@ class AdminCompetitorDetails extends React.Component {
   }
 
   handleScoreEdit = (text, scoreId) => {
-    const scoreObject = this.state.scores
-    Object.keys(scoreObject).forEach((key) => {
-      if (key === scoreId) {
-        scoreObject[key] = Number(text) || ''
-      }
-    })
+    const scoresArr = this.state.scores
 
+    // find the index of the workout we are entering
+    const scoreIndex = scoresArr.findIndex((obj => obj.workoutId === scoreId))
 
+    // at that index, change the score to match the new score
+    scoresArr[scoreIndex].points = Number(text) || ''
+
+    // set the state
     this.setState({
-      scores: scoreObject
-    }, () => {
-      console.log(this.state)
+      scores: scoresArr
     })
   }
 
   render() {
     const { competitor } = this.props.navigation.state.params
+
+    // if there are workouts for this division/gender combination
+    // create an array to store them all so we can add points
     if (this.state.workouts) {
       const scoresArray = []
       const index = 0
       this.state.workouts.map((workout) => {
-        Object.keys(competitor.scores).forEach((key) => {
-          if (workout.id === key) {
-            scoresArray[index++] = { name: workout.name, type: workout.type, score: competitor.scores[key], id: key }
-          }
+        competitor.scores.map((scoreObj) => {
+          Object.keys(scoreObj).forEach((key) => {
+            if (workout.id === scoreObj[key]) {
+              scoresArray[index++] = {
+                name: workout.name,
+                type: workout.type,
+                points: scoreObj['points'] || '',
+                id: workout.id
+              }
+            }
+          })
         })
       })
       return (
@@ -97,7 +112,7 @@ class AdminCompetitorDetails extends React.Component {
             scoresArray.map((score, index) => {
               return (
                 <View key={index}>
-                  <Text key={index}>{score.name} - {score.score}</Text>
+                  <Text key={index}>{score.name} - {score.points}</Text>
                 </View>
               )
             })
@@ -105,35 +120,21 @@ class AdminCompetitorDetails extends React.Component {
           {
             this.state.editMode &&
             scoresArray.map((score, index) => {
-              console.log(score)
               return (
                 <View key={index}>
                   <Text>{score.name}:</Text>
-                  {
-                    score.type === 'Weight' &&
-                    <View>
-                      <TextInput
-                        style={{ borderWidth: 1, borderColor: 'black' }}
-                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                        value={score.score.toString()}
-                      /><Text>lbs</Text>
-                    </View>
-                  }
-                  {
-                    score.type === 'Timed' &&
-                    <View>
-                      <TextInput
-                        style={{ borderWidth: 1, borderColor: 'black' }}
-                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                        value={score.score.toString()}
-                      /><Text>minutes</Text>
-                      <TextInput
-                        style={{ borderWidth: 1, borderColor: 'black' }}
-                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                        value={score.score.toString()}
-                      /><Text>seconds</Text>
-                    </View>
-                  }
+                  <View>
+                    <TextInput
+                      style={{ borderWidth: 1, borderColor: 'black' }}
+                      onChangeText={(text) => this.handleScoreEdit(text, score.id)}
+                      value={score.points.toString()}
+                    />
+                    {
+                      score.type === 'Weight' ?
+                      <Text>lbs</Text> :
+                      <Text>minutes + seconds</Text>
+                    }
+                  </View>
                 </View>
               )
             })
