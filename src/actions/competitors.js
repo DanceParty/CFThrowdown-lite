@@ -14,6 +14,8 @@ export const getCompetitors = () => {
       Object.keys(result).forEach((key) => {
         const id = key
         const fullName = `${result[key].firstName} ${result[key].lastName}`
+        const firstName = result[key].firstName
+        const lastName = result[key].lastName
         const gender = (result[key].male) ? 'Male' : 'Female'
         const division = result[key].division
         const scores = result[key].scores
@@ -21,7 +23,7 @@ export const getCompetitors = () => {
         Object.keys(scores).forEach((key) => {
           totalScore += scores[key]
         })
-        competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+        competitorArray[index++] = { id, fullName, firstName, lastName, gender, division, scores, totalScore }
       })
       // return an array of competitor objects
       return competitorArray
@@ -89,6 +91,10 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
       return competitorArray
     }
   })
+}
+
+export const updateCompetitor = (competitorId, competitor) => {
+  return database.ref(`competitors/${competitorId}`).set(competitor)
 }
 
 export const updateCompetitorScores = (competitorId, scores) => {

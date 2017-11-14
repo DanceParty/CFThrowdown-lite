@@ -71,7 +71,7 @@ class AddCompetitor extends React.Component {
         scoresArray[index++] = {
           workoutId: workout.id,
           points: 0,
-          place: 0,
+          place: 100000,
         }
       })
       // create the competitor

@@ -1,9 +1,12 @@
 import React from 'react'
 import { Button, FlatList, TouchableHighlight, Text, TextInput, StyleSheet, View } from 'react-native'
+import { CheckBox } from 'react-native-elements'
+import ModalSelector from 'react-native-modal-selector'
 
 // firebase
+import { allDivisions } from '../actions/divisions'
 import { getWorkoutsByDivisionAndGender } from '../actions/workouts'
-import { updateCompetitorScores, updateCompetitorTotalScore } from '../actions/competitors'
+import { updateCompetitor } from '../actions/competitors'
 
 // helpers
 import { msToMinutesSeconds, minutesAndSecondsToMs } from '../utils/time'
@@ -11,13 +14,17 @@ import { msToMinutesSeconds, minutesAndSecondsToMs } from '../utils/time'
 class AdminCompetitorDetails extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.competitor.fullName}`
+    title: `${navigation.state.params.competitor.firstName} ${navigation.state.params.competitor.lastName}`
   })
 
   state = {
+    competitor: this.props.navigation.state.params.competitor || undefined,
+    originalGender: this.props.navigation.state.params.competitor.gender,
+    originalDivision: this.props.navigation.state.params.competitor.division,
     workouts: undefined,
     editMode: false,
     scores: undefined,
+    divisionList: [],
   }
 
   componentWillMount() {
@@ -32,6 +39,13 @@ class AdminCompetitorDetails extends React.Component {
       getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
         this.setState({
           workouts: workoutResult,
+        }, () => {
+          allDivisions().then((result) => {
+            const divisionList = Object.keys(result)
+            this.setState(() => ({
+              divisionList: divisionList
+            }))
+          })
         })
       })
     })
@@ -48,19 +62,65 @@ class AdminCompetitorDetails extends React.Component {
       }))
     } else {
       // update scores for the competitor
-      const competitorId = this.props.navigation.state.params.competitor.id
-      const scores = this.state.scores
+      let gender = this.state.competitor.gender
+      let originalGender = this.state.originalGender
+      let division = this.state.competitor.division
+      let originalDivision = this.state.originalDivision
       let totalScore = 0
-      scores.map((scoreObj) => {
-        totalScore += scoreObj.points
-      })
-      console.log(totalScore)
-      updateCompetitorScores(competitorId, scores)
-      updateCompetitorTotalScore(competitorId, totalScore)
-      // update state with no more edit mode
-      this.setState((prevState) => ({
-        editMode: !prevState.editMode,
-      }))
+      const competitorId = this.props.navigation.state.params.competitor.id
+
+      console.log(gender, division)
+      // check if we need new workouts due to new gender or division
+      if (gender !== originalGender || division !== originalDivision) {
+        // get workouts of new gender + division
+        getWorkoutsByDivisionAndGender(division, gender).then((workoutResult) => {
+          console.log(workoutResult)
+          let scores = []
+          let index = 0
+          workoutResult.map((workout) => {
+            scores[index++] = {
+              workoutId: workout.id,
+              points: 0,
+              place: 100000,
+            }
+          })
+          let competitor = {
+            division: division,
+            female: (gender === 'Female'),
+            male: (gender === 'Male'),
+            firstName: this.state.competitor.firstName,
+            lastName: this.state.competitor.lastName,
+            scores: scores,
+            totalScores: totalScore,
+          }
+          updateCompetitor(competitorId, competitor)
+
+          this.setState((prevState) => ({
+            scores: scores,
+            editMode: !prevState.editMode,
+          }))
+        })
+      } else {
+        this.state.scores.map(scoreObj => totalScore += scoreObj.points)
+
+        let competitor = {
+          division: this.state.competitor.division,
+          female: (this.state.competitor.gender === 'Female'),
+          male: (this.state.competitor.gender === 'Male'),
+          firstName: this.state.competitor.firstName,
+          lastName: this.state.competitor.lastName,
+          scores: this.state.scores,
+          totalScore: totalScore,
+        }
+
+        updateCompetitor(competitorId, competitor)
+
+        // update state with no more edit mode
+        this.setState((prevState) => ({
+          editMode: !prevState.editMode,
+        }))
+      }
+      this.props.navigation.navigate('AdminHome')
     }
   }
 
@@ -73,10 +133,82 @@ class AdminCompetitorDetails extends React.Component {
     // at that index, change the score to match the new score
     scoresArr[scoreIndex].points = Number(text) || ''
 
+
+    let competitor = this.state.competitor
+    Object.keys(competitor).forEach((key) => {
+      if (key === 'scores') {
+        competitor[key] = scoresArr
+      }
+    })
     // set the state
     this.setState({
-      scores: scoresArr
+      competitor: competitor,
+      scores: scoresArr,
     })
+  }
+
+  handleFirstNameEdit = (text) => {
+    const competitor = this.state.competitor
+    Object.keys(competitor).forEach((key) => {
+      if (key === 'firstName') {
+        competitor[key] = text
+      }
+    })
+
+    this.setState({
+      competitor: competitor
+    })
+  }
+
+  handleLastNameEdit = (text) => {
+    const competitor = this.state.competitor
+    Object.keys(competitor).forEach((key) => {
+      if (key === 'lastName') {
+        competitor[key] = text
+      }
+    })
+
+    this.setState({
+      competitor: competitor
+    })
+  }
+
+  handleMaleCheckbox = () => {
+    let competitor = this.state.competitor
+    Object.keys(competitor).forEach((key) => {
+      if (key === 'gender') {
+        competitor[key] = 'Male'
+      }
+    })
+
+    this.setState({
+      competitor: competitor
+    })
+  }
+
+  handleFemaleCheckbox = () => {
+    let competitor = this.state.competitor
+    Object.keys(competitor).forEach((key) => {
+      if (key === 'gender') {
+        competitor[key] = 'Female'
+      }
+    })
+
+    this.setState({
+      competitor: competitor
+    })
+  }
+
+  handleDivisionChange = (value) => {
+    let competitor = this.state.competitor
+    Object.keys(competitor).forEach((key) => {
+      if (key === 'division') {
+        competitor[key] = value
+      }
+    })
+    this.setState(() => ({
+      competitor: competitor
+    }))
   }
 
   render() {
@@ -101,51 +233,107 @@ class AdminCompetitorDetails extends React.Component {
           })
         })
       })
-      return (
-        <View>
-          <Text><Text>NAME: </Text>{competitor.fullName}</Text>
-          <Text><Text>GENDER: </Text>{competitor.gender}</Text>
-          <Text><Text>DIVISION: </Text>{competitor.division}</Text>
-          <Text>SCORES:</Text>
-          {
-            !this.state.editMode &&
-            scoresArray.map((score, index) => {
-              return (
-                <View key={index}>
-                  <Text key={index}>{score.name} - {score.points}</Text>
-                </View>
-              )
-            })
-          }
-          {
-            this.state.editMode &&
-            scoresArray.map((score, index) => {
-              return (
-                <View key={index}>
-                  <Text>{score.name}:</Text>
-                  <View>
-                    <TextInput
-                      style={{ borderWidth: 1, borderColor: 'black' }}
-                      onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                      value={score.points.toString()}
-                    />
-                    {
-                      score.type === 'Weight' ?
-                      <Text>lbs</Text> :
-                      <Text>minutes + seconds</Text>
-                    }
+
+      if (!this.state.editMode && this.state) {
+        return (
+          <View>
+            <Text><Text>NAME: </Text>{competitor.firstName} {competitor.lastName}</Text>
+            <Text><Text>GENDER: </Text>{competitor.gender}</Text>
+            <Text><Text>DIVISION: </Text>{competitor.division}</Text>
+            <Text>SCORES:</Text>
+            {
+              !this.state.editMode &&
+              scoresArray.map((score, index) => {
+                return (
+                  <View key={index}>
+                    <Text key={index}>{score.name} - {score.points}</Text>
                   </View>
-                </View>
-              )
-            })
+                )
+              })
+            }
+            <Button
+              onPress={this.handleEditMode}
+              title='Edit Mode'
+              color='purple'
+            />
+          </View>
+        )
+      } else if (this.state.editMode) {
+        const pickerData = this.state.divisionList.map((division, index) => {
+          return {
+            key: index,
+            label: division,
           }
-          <Button
-            onPress={this.handleEditMode}
-            title={this.state.editMode ? `Save Changes` : `Edit Mode`}
-            color='purple'
-          />
-        </View>
-      )
+        })
+        return (
+          <View>
+            <Text>NAME: </Text>
+            <TextInput
+              style={{ borderWidth: 1, borderColor: 'black' }}
+              onChangeText={(text) => this.handleFirstNameEdit(text)}
+              value={this.state.competitor.firstName}
+            />
+            <TextInput
+              style={{ borderWidth: 1, borderColor: 'black' }}
+              onChangeText={(text) => this.handleLastNameEdit(text)}
+              value={this.state.competitor.lastName}
+            />
+            <Text>GENDER: </Text>
+            <CheckBox
+              title="Male"
+              checked={this.state.competitor.gender === 'Male'}
+              onPress={() => this.handleMaleCheckbox()}
+            />
+            <CheckBox
+              title="Female"
+              onPress={() => this.handleFemaleCheckbox()}
+              checked={this.state.competitor.gender === 'Female'}
+            />
+
+            <Text>DIVISION: </Text>
+            <ModalSelector
+              data={pickerData}
+              initValue={this.state.competitor.division}
+              onChange={(value) => this.handleDivisionChange(value.label)}
+            >
+              <TextInput
+                style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, height: 50 }}
+                editable={false}
+                placeholder={this.state.competitor.division}
+                value={this.state.division}
+              />
+            </ModalSelector>
+            <Text>SCORES:</Text>
+            {
+              this.state.editMode &&
+              scoresArray.map((score, index) => {
+                return (
+                  <View key={index}>
+                    <Text>{score.name}:</Text>
+                    <View>
+                      <TextInput
+                        style={{ borderWidth: 1, borderColor: 'black' }}
+                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
+                        value={score.points.toString()}
+                      />
+                      {
+                        score.type === 'Weight' ?
+                        <Text>lbs</Text> :
+                        <Text>minutes + seconds</Text>
+                      }
+                    </View>
+                  </View>
+                )
+              })
+            }
+            <Button
+              onPress={this.handleEditMode}
+              title="Save Changes"
+              color='purple'
+            />
+          </View>
+        )
+      }
     } else {
       return null
     }
