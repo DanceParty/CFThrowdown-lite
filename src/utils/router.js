@@ -16,7 +16,9 @@ import NewWorkout from '../pages/NewWorkout'
 import AddCompetitor from '../pages/AddCompetitor'
 import AddDivision from '../pages/AddDivision'
 import AdminCompetitors from '../pages/AdminCompetitors'
+import AdminWorkouts from '../pages/AdminWorkouts'
 import AdminCompetitorDetails from '../pages/AdminCompetitorDetails'
+import AdminWorkoutDetails from '../pages/AdminWorkoutDetails'
 
 const PublicNavigator = StackNavigator({
   Home: {
@@ -92,6 +94,18 @@ const AdminNavigator = StackNavigator({
   },
   AdminCompetitorDetails: {
     screen: AdminCompetitorDetails,
+    navigationOptions: {
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
+  },
+  AdminWorkouts: {
+    screen: AdminWorkouts,
+    navigationOptions: {
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
+  },
+  AdminWorkoutDetails: {
+    screen: AdminWorkoutDetails,
     navigationOptions: {
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     },

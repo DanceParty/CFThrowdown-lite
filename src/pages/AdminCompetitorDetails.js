@@ -91,7 +91,7 @@ class AdminCompetitorDetails extends React.Component {
             firstName: this.state.competitor.firstName,
             lastName: this.state.competitor.lastName,
             scores: scores,
-            totalScores: totalScore,
+            totalScore: totalScore,
           }
           updateCompetitor(competitorId, competitor)
 

@@ -19,10 +19,7 @@ export const getCompetitors = () => {
         const gender = (result[key].male) ? 'Male' : 'Female'
         const division = result[key].division
         const scores = result[key].scores
-        let totalScore = 0
-        Object.keys(scores).forEach((key) => {
-          totalScore += scores[key]
-        })
+        const totalScore = result[key].totalScore
         competitorArray[index++] = { id, fullName, firstName, lastName, gender, division, scores, totalScore }
       })
       // return an array of competitor objects
@@ -45,12 +42,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
           const gender = (result[key].male) ? 'Male' : 'Female'
           const division = result[key].division
           const scores = result[key].scores
-          let totalScore = 0
-          if (typeof scores !== "undefined") {
-            Object.keys(scores).forEach((key) => {
-              totalScore += scores[key]
-            })
-          }
+          const totalScore = result[key].totalScore
           competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
         })
       } else if (gender === 'Male') {
@@ -61,12 +53,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
             const gender = (result[key].male) ? 'Male' : 'Female'
             const division = result[key].division
             const scores = result[key].scores
-            let totalScore = 0
-            if (typeof scores !== "undefined") {
-              Object.keys(scores).forEach((key) => {
-                totalScore += scores[key]
-              })
-            }
+            const totalScore = result[key].totalScore
             competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
           }
         })
@@ -78,12 +65,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
             const gender = (result[key].male) ? 'Male' : 'Female'
             const division = result[key].division
             const scores = result[key].scores
-            let totalScore = 0
-            if (typeof scores !== "undefined") {
-              Object.keys(scores).forEach((key) => {
-                totalScore += scores[key]
-              })
-            }
+            const totalScore = result[key].totalScore
             competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
           }
         })
