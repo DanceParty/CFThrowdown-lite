@@ -27,8 +27,8 @@ class AdminHome extends React.Component {
             accessibilityLabel="Competitor Page"
           />
           <Button
-            onPress={() => this.props.navigation.navigate('AddDivision')}
-            title="Add Division"
+            onPress={() => this.props.navigation.navigate('AdminDivisions')}
+            title="Divisions"
             color="#841584"
             accessibilityLabel="Division Page"
           />

@@ -28,6 +28,31 @@ export const getCompetitors = () => {
   })
 }
 
+export const getCompetitorsByDivision = (division) => {
+  return database.ref(`competitors`).orderByChild('division').equalTo(division).once('value').then((snapshot) => {
+    if (snapshot.val()) {
+      let competitorArray = []
+      let index = 0
+      const res = snapshot.val()
+
+      Object.keys(res).forEach((key) => {
+        const id = key
+        const firstName = res[key].firstName
+        const lastName = res[key].lastName
+        const division = res[key].division
+        const female = res[key].female
+        const male = res[key].male
+        const scores = res[key].scores
+        const totalScore = res[key].totalScore
+        competitorArray[index++] = { id, firstName, lastName, division, female, male, scores, totalScore }
+      })
+      return competitorArray
+    } else {
+      return false
+    }
+  })
+}
+
 export const getCompetitorByGenderAndDivision = (division, gender) => {
   return database.ref(`competitors`).orderByChild('division').equalTo(division).once('value').then((snapshot) => {
     if (snapshot.val()) {

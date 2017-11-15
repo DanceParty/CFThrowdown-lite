@@ -33,24 +33,29 @@ class AdminCompetitorDetails extends React.Component {
     const genderFilter = this.props.navigation.state.params.competitor.gender
     let scores = this.props.navigation.state.params.competitor.scores
 
-    this.setState({
-      scores: scores,
-    }, () => {
-      getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
-        this.setState({
-          workouts: workoutResult,
-        }, () => {
-          allDivisions().then((result) => {
-            const divisionList = Object.keys(result)
-            this.setState(() => ({
-              divisionList: divisionList
-            }))
+    allDivisions().then((result) => {
+      const divisionList = Object.keys(result)
+      this.setState(() => ({
+        divisionList: divisionList
+      }))
+    })
+
+    if (divisionFilter && genderFilter) {
+      this.setState({
+        scores: scores,
+      }, () => {
+        getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
+          this.setState({
+            workouts: workoutResult,
           })
         })
       })
-    })
-
-
+    } else {
+      this.setState({
+        workouts: ["there are no workouts for this competitor."],
+        scores: ["No scores available"]
+      })
+    }
   }
 
   handleEditMode = () => {
@@ -219,20 +224,22 @@ class AdminCompetitorDetails extends React.Component {
     if (this.state.workouts) {
       const scoresArray = []
       const index = 0
-      this.state.workouts.map((workout) => {
-        competitor.scores.map((scoreObj) => {
-          Object.keys(scoreObj).forEach((key) => {
-            if (workout.id === scoreObj[key]) {
-              scoresArray[index++] = {
-                name: workout.name,
-                type: workout.type,
-                points: scoreObj['points'] || '',
-                id: workout.id
+      if (this.state.competitor.scores) {
+        this.state.workouts.map((workout) => {
+          competitor.scores.map((scoreObj) => {
+            Object.keys(scoreObj).forEach((key) => {
+              if (workout.id === scoreObj[key]) {
+                scoresArray[index++] = {
+                  name: workout.name,
+                  type: workout.type,
+                  points: scoreObj['points'] || '',
+                  id: workout.id
+                }
               }
-            }
+            })
           })
         })
-      })
+      }
 
       if (!this.state.editMode && this.state) {
         return (
@@ -293,13 +300,13 @@ class AdminCompetitorDetails extends React.Component {
             <Text>DIVISION: </Text>
             <ModalSelector
               data={pickerData}
-              initValue={this.state.competitor.division}
+              initValue={this.state.competitor.division || 'Select a Division'}
               onChange={(value) => this.handleDivisionChange(value.label)}
             >
               <TextInput
                 style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, height: 50 }}
                 editable={false}
-                placeholder={this.state.competitor.division}
+                placeholder={this.state.competitor.division || 'Select a Division'}
                 value={this.state.division}
               />
             </ModalSelector>
@@ -335,7 +342,12 @@ class AdminCompetitorDetails extends React.Component {
         )
       }
     } else {
-      return null
+      return (
+        <View>
+          <Text>{this.state.competitor.fullName}</Text>
+
+        </View>
+      )
     }
   }
 

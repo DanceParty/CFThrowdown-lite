@@ -1,5 +1,9 @@
 import { database } from '../firebase/firebase'
 
+export const removeWorkout = (workoutId) => {
+  return database.ref(`workouts/${workoutId}`).remove().then(() => console.log('workout:', workoutId, 'removed'))
+}
+
 export const addWorkout = (workout) => {
   return database.ref('workouts').push(workout)
 }
@@ -38,7 +42,25 @@ export const getWorkoutsByDivisionAndGender = (division, gender) => {
 
 export const getWorkoutsByDivision = (division) => {
   return database.ref('workouts').orderByChild('division').equalTo(division).once('value').then((snapshot) => {
-    return snapshot
+    if (snapshot.val()) {
+      let workoutArr = []
+      let index = 0
+      const res = snapshot.val()
+      // convert object of objects to array of objects
+      Object.keys(res).forEach((key) => {
+        const id = key
+        const male = result[key].male
+        const female = result[key].female
+        const name = result[key].name
+        const steps = result[key].steps
+        const type = result[key].type
+        const division = result[key].division
+        workoutArr[index++] = { id, male, female, name, steps, type, division }
+      })
+      return workoutArr
+    } else {
+      return false
+    }
   })
 }
 
