@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, Text, StyleSheet,  View } from 'react-native'
+import { Button, FlatList, Text, StyleSheet,  View } from 'react-native'
 
 import { allDivisions } from '../actions/divisions'
 
@@ -34,6 +34,10 @@ class AdminDivisions extends React.Component {
             >{item}</Text>
           }
           keyExtractor={(item, index) => index}
+        />
+        <Button
+          title="Add Division"
+          onPress={() => this.props.navigation.navigate('AddDivision')}
         />
         </View>
       )
