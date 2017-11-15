@@ -1,8 +1,8 @@
 import React from 'react'
 import { FlatList, Text, ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native'
 
-import { getCompetitors } from '../actions/competitors'
-import { allDivisions } from '../actions/divisions'
+import { getCompetitors } from '../../actions/competitors'
+import { allDivisions } from '../../actions/divisions'
 
 class Leaderboard extends React.Component {
 

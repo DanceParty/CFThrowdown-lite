@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
 // firebase actions
-import { startSignout } from '../actions/auth'
+import { startSignout } from '../../actions/auth'
 
 class AdminHome extends React.Component {
 

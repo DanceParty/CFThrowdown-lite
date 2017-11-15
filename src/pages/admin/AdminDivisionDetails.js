@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, Text, View } from 'react-native'
 
-import { getWorkouts, removeWorkout } from '../actions/workouts'
-import { removeDivision } from '../actions/divisions'
-import { getCompetitorsByDivision, updateCompetitor } from '../actions/competitors'
+import { getWorkouts, removeWorkout } from '../../actions/workouts'
+import { removeDivision } from '../../actions/divisions'
+import { getCompetitorsByDivision, updateCompetitor } from '../../actions/competitors'
 
 
 class AdminDivisionDetails extends React.Component {

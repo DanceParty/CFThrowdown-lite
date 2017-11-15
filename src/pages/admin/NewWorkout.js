@@ -4,9 +4,9 @@ import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 
 // firebase
-import { addWorkout } from '../actions/workouts'
-import { allDivisions, getDivisionWorkouts, updateDivisionWorkouts } from '../actions/divisions'
-import { updateCompetitorScores, getCompetitorByGenderAndDivision } from '../actions/competitors'
+import { addWorkout } from '../../actions/workouts'
+import { allDivisions, getDivisionWorkouts, updateDivisionWorkouts } from '../../actions/divisions'
+import { updateCompetitorScores, getCompetitorByGenderAndDivision } from '../../actions/competitors'
 
 // icons
 import '@expo/vector-icons'

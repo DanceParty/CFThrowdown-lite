@@ -1,11 +1,11 @@
 import React from 'react'
-import { FlatList, Text, ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native'
+import { Button, FlatList, Text, ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native'
 
 // firebase
-import { getWorkouts } from '../actions/workouts'
-import { allDivisions } from '../actions/divisions'
+import { getWorkouts } from '../../actions/workouts'
+import { allDivisions } from '../../actions/divisions'
 
-class Workouts extends React.Component {
+class AdminWorkouts extends React.Component {
 
   state = {
     workouts: undefined,
@@ -132,14 +132,27 @@ class Workouts extends React.Component {
             <FlatList
               style={styles.list}
               data={this.state.filteredWorkouts}
-              renderItem={({item}) => <Text style={styles.text}>{item.name}</Text>}
+              renderItem={({item}) =>
+                <Text
+                  style={styles.text}
+                  onPress={() => this.props.navigation.navigate('AdminWorkoutDetails', { workout: item })}
+                >{item.name}</Text>}
               keyExtractor={(item, index) => index}
+            />
+            <Button
+              title="Add Workout"
+              onPress={() => this.props.navigation.navigate('NewWorkout')}
             />
           </View>
         </ScrollView>
       )
     } else {
-      return null
+      return (
+        <Button
+          title="Add Workout"
+          onPress={() => this.props.navigation.navigate('NewWorkout')}
+        />
+      )
     }
   }
 }
@@ -161,4 +174,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Workouts
+export default AdminWorkouts

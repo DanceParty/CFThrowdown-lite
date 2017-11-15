@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Text, View } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
-import { getCompetitorByGenderAndDivision, updateCompetitorScores } from '../actions/competitors'
+import { getCompetitorByGenderAndDivision, updateCompetitorScores } from '../../actions/competitors'
 
 
 class AdminWorkoutDetails extends React.Component {

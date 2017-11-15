@@ -2,8 +2,8 @@ import React from 'react'
 import { Button, FlatList, TouchableHighlight, Text, StyleSheet, View } from 'react-native'
 
 // firebase
-import { getCompetitors } from '../actions/competitors'
-import { allDivisions } from '../actions/divisions'
+import { getCompetitors } from '../../actions/competitors'
+import { allDivisions } from '../../actions/divisions'
 
 class AdminCompetitors extends React.Component {
 

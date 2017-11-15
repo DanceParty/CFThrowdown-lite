@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, FlatList, Text, StyleSheet,  View } from 'react-native'
 
-import { allDivisions } from '../actions/divisions'
+import { allDivisions } from '../../actions/divisions'
 
 
 class AdminDivisions extends React.Component {

@@ -4,12 +4,12 @@ import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 
 // firebase
-import { allDivisions } from '../actions/divisions'
-import { getWorkoutsByDivisionAndGender } from '../actions/workouts'
-import { updateCompetitor } from '../actions/competitors'
+import { allDivisions } from '../../actions/divisions'
+import { getWorkoutsByDivisionAndGender } from '../../actions/workouts'
+import { updateCompetitor } from '../../actions/competitors'
 
 // helpers
-import { msToMinutesSeconds, minutesAndSecondsToMs } from '../utils/time'
+import { msToMinutesSeconds, minutesAndSecondsToMs } from '../../utils/time'
 
 class AdminCompetitorDetails extends React.Component {
 

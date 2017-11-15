@@ -3,9 +3,9 @@ import { Button, Text, TextInput, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 
-import { allDivisions } from '../actions/divisions'
-import { getWorkoutsByDivisionAndGender } from '../actions/workouts'
-import { addCompetitor } from '../actions/competitors'
+import { allDivisions } from '../../actions/divisions'
+import { getWorkoutsByDivisionAndGender } from '../../actions/workouts'
+import { addCompetitor } from '../../actions/competitors'
 
 class AddCompetitor extends React.Component {
 

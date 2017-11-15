@@ -4,23 +4,23 @@ import { StackNavigator } from 'react-navigation';
 import { Constants } from 'expo'
 
 // public pages
-import Home from '../pages/Home'
-import Leaderboard from '../pages/Leaderboard'
-import Workouts from '../pages/Workouts'
-import Competitors from '../pages/Competitors'
-import AdminLogin from '../pages/AdminLogin'
+import Home from '../pages/public/Home'
+import Leaderboard from '../pages/public/Leaderboard'
+import Workouts from '../pages/public/Workouts'
+import Competitors from '../pages/public/Competitors'
+import AdminLogin from '../pages/public/AdminLogin'
 
 // private pages
-import AdminHome from '../pages/AdminHome'
-import NewWorkout from '../pages/NewWorkout'
-import AddCompetitor from '../pages/AddCompetitor'
-import AddDivision from '../pages/AddDivision'
-import AdminCompetitors from '../pages/AdminCompetitors'
-import AdminWorkouts from '../pages/AdminWorkouts'
-import AdminDivisions from '../pages/AdminDivisions'
-import AdminCompetitorDetails from '../pages/AdminCompetitorDetails'
-import AdminWorkoutDetails from '../pages/AdminWorkoutDetails'
-import AdminDivisionDetails from '../pages/AdminDivisionDetails'
+import AdminHome from '../pages/admin/AdminHome'
+import NewWorkout from '../pages/admin/NewWorkout'
+import AddCompetitor from '../pages/admin/AddCompetitor'
+import AddDivision from '../pages/admin/AddDivision'
+import AdminCompetitors from '../pages/admin/AdminCompetitors'
+import AdminWorkouts from '../pages/admin/AdminWorkouts'
+import AdminDivisions from '../pages/admin/AdminDivisions'
+import AdminCompetitorDetails from '../pages/admin/AdminCompetitorDetails'
+import AdminWorkoutDetails from '../pages/admin/AdminWorkoutDetails'
+import AdminDivisionDetails from '../pages/admin/AdminDivisionDetails'
 
 const PublicNavigator = StackNavigator({
   Home: {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Text, TextInput, View } from 'react-native'
 
 // firebase actions
-import { startLogin } from '../actions/auth'
+import { startLogin } from '../../actions/auth'
 
 class AdminLogin extends React.Component {
 
