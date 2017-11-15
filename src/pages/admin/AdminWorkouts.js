@@ -5,6 +5,10 @@ import { Button, FlatList, Text, ScrollView, StyleSheet, TouchableHighlight, Vie
 import { getWorkouts } from '../../actions/workouts'
 import { allDivisions } from '../../actions/divisions'
 
+// components
+import WorkoutList from '../../components/WorkoutList'
+
+
 class AdminWorkouts extends React.Component {
 
   state = {
@@ -129,16 +133,11 @@ class AdminWorkouts extends React.Component {
               }
             </View>
 
-            <FlatList
-              style={styles.list}
-              data={this.state.filteredWorkouts}
-              renderItem={({item}) =>
-                <Text
-                  style={styles.text}
-                  onPress={() => this.props.navigation.navigate('AdminWorkoutDetails', { workout: item })}
-                >{item.name}</Text>}
-              keyExtractor={(item, index) => index}
+            <WorkoutList
+              navigation={this.props.navigation}
+              filteredWorkouts={this.state.filteredWorkouts}
             />
+
             <Button
               title="Add Workout"
               onPress={() => this.props.navigation.navigate('NewWorkout')}
@@ -164,14 +163,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  list: {
-    margin: 10
-  },
-  text: {
-    flex: 1,
-    margin: 25,
-    textAlign: 'center'
-  }
 })
 
 export default AdminWorkouts
