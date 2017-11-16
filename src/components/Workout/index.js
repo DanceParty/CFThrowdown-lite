@@ -1,30 +1,40 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { Button, Text, View } from 'react-native'
 
 
 class Workout extends React.Component {
 
+  onSubmitWorkout = () => {
+    this.props.onSubmitWorkout()
+  }
+
   render() {
-    const navigate = this.props.navigation.navigate
-    const workout = this.props.item
+    const workout = this.props.workout
+    const gender = this.props.gender
+    const admin = this.props.admin
+    const steps = this.props.workout.steps
     return (
-      <Text
-        stlye={styles.text}
-        onPress={() => navigate('AdminWorkoutDetails', { workout: workout })}
-      >
-        {workout.name}
-      </Text>
+      <View>
+        <Text>Division: <Text>{workout.division}</Text></Text>
+        <Text>Gender: <Text>{gender}</Text></Text>
+        <Text>Type: <Text>{workout.type}</Text></Text>
+        <Text>Steps:
+          {
+            steps.map((step, index) => <Text key={index}> {step}</Text>)
+          }
+        </Text>
+
+        {
+          admin &&
+          <Button
+            title="Submit Workout Scores"
+            onPress={() => this.onSubmitWorkout()}
+          />
+        }
+      </View>
     )
   }
 
 }
-
-const styles = StyleSheet.create({
-  text: {
-    flex: 1,
-    margin: 25,
-    textAlign: 'center'
-  }
-})
 
 export default Workout

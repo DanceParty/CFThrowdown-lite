@@ -26,7 +26,7 @@ class AdminDivisionDetails extends React.Component {
         let index = 0
         res.map((workout) => {
           if (workout.division === division) {
-            workoutIdArr[index++] = workout.id
+            workoutIdArr[index += 1] = workout.id
           }
         })
         // reset workouts

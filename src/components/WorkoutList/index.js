@@ -1,26 +1,37 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
 
 // components
-import Workout from '../Workout'
+import WorkoutListItem from '../WorkoutListItem'
 
 
 class WorkoutList extends React.Component {
 
   render() {
+    const admin = this.props.admin
+    const workouts = this.props.filteredWorkouts
+    const navigation = this.props.navigation
     return (
       <View>
         <FlatList
           style={styles.list}
-          data={this.props.filteredWorkouts}
+          data={workouts}
           renderItem={({item}) =>
-            <Workout
-              navigation={this.props.navigation}
+            <WorkoutListItem
+              navigation={navigation}
               item={item}
+              admin={admin}
             />
           }
           keyExtractor={(item, index) => index}
         />
+        {
+          admin &&
+          <Button
+            title="Add Workout"
+            onPress={() => this.props.navigation.navigate('NewWorkout')}
+          />
+        }
       </View>
     )
   }

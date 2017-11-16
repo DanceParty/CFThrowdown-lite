@@ -7,6 +7,7 @@ import { allDivisions } from '../../actions/divisions'
 
 // components
 import WorkoutList from '../../components/WorkoutList'
+import WorkoutFilter from '../../components/WorkoutFilter'
 
 
 class AdminWorkouts extends React.Component {
@@ -15,78 +16,64 @@ class AdminWorkouts extends React.Component {
     workouts: undefined,
     filteredWorkouts: undefined,
     divisions: undefined,
-    currentGender: 'Male',
+    currentGender: undefined,
     currentDivision: 'RX',
   }
 
   componentWillMount() {
-    getWorkouts().then((workoutsResult) => {
-      // create Male filter
-      const defaultFilteredWorkouts = workoutsResult.filter((workout) => {
-        //console.log(workout)
-        if (this.state.currentGender === 'Male') {
-          return (workout.male) && (workout.division === this.state.currentDivision)
-        } else if (this.state.currentGender === 'Female') {
-          return (workout.female) && (workout.division === this.state.currentDivision)
-        }
-        return false
+    getWorkouts().then((res) => {
+      // default filter is RX Males
+      const defaultFilteredWorkouts = res.filter((workout) => {
+          return (workout.male) && (workout.division === 'RX')
       })
 
       this.setState({
-        workouts: workoutsResult,
         filteredWorkouts: defaultFilteredWorkouts,
-      }, () => {
-        allDivisions().then((divisionsResult) => {
-          const divisionList = Object.keys(divisionsResult)
-          this.setState({
-            divisions: divisionList,
-          })
-        })
+        workouts: res,
+        currentGender: 'Male',
+        currentDivision: 'RX',
       })
+    })
+
+    allDivisions().then((divisionsResult) => {
+      const divisionList = Object.keys(divisionsResult)
+
+      this.setState({
+        divisions: divisionList,
+      })
+
     })
   }
 
-  handleMaleFilter = () => {
-    if (this.state.currentGender === 'Male') {
-      return null
-    } else {
-      const filteredWorkouts = this.state.workouts.filter((workout) => {
-        return (workout.male) && (workout.division === this.state.currentDivision)
-      })
-      this.setState({
-        filteredWorkouts: filteredWorkouts,
-        currentGender: 'Male',
-      })
-    }
-  }
+  handleGenderFilter = (gender) => {
+    const workouts = this.state.workouts
+    const currentDivision = this.state.currentDivision
+    const filteredWorkouts = workouts.filter((workout) => {
+      if (gender === 'Male') {
+        return workout.male && (workout.division === currentDivision)
+      } else if (gender === 'Female') {
+        return workout.female && (workout.division === currentDivision)
+      }
+    })
 
-  handleFemaleFilter = () => {
-    if (this.state.currentGender === 'Female') {
-      return null
-    } else {
-      const filteredWorkouts = this.state.workouts.filter((workout) => {
-        return (workout.female) && (workout.division === this.state.currentDivision)
-      })
-      this.setState({
-        filteredWorkouts: filteredWorkouts,
-        currentGender: 'Female',
-      })
-    }
+    this.setState({
+      filteredWorkouts: filteredWorkouts,
+      currentGender: gender,
+    })
   }
 
   handleDivisionFilter = (division) => {
-    let fitleredWorkouts = []
-    if (this.state.currentGender === 'Female') {
-      filteredWorkouts = this.state.workouts.filter((workout) => {
+    const gender = this.state.currentGender
+    const filteredWorkouts = this.state.workouts.filter((workout) => {
+      if (gender === 'Female') {
         return (workout.female) && (workout.division === division)
-      })
-    } else if (this.state.currentGender === 'Male') {
-      filteredWorkouts = this.state.workouts.filter((workout) => {
+      } else if (gender === 'Male') {
         return (workout.male) && (workout.division === division)
-      })
-    } else {
-      return null
-    }
+      } else {
+        return false
+      }
+    })
+
     this.setState({
       currentDivision: division,
       filteredWorkouts: filteredWorkouts,
@@ -97,50 +84,19 @@ class AdminWorkouts extends React.Component {
     if (this.state.filteredWorkouts && this.state.divisions) {
       return (
         <ScrollView>
+          <WorkoutFilter
+            gender={this.state.currentGender}
+            divisions={this.state.divisions}
+            selectedDivision={this.state.currentDivision}
+            handleGenderFilter={this.handleGenderFilter}
+            handleDivisionFilter={this.handleDivisionFilter}
+          />
+
           <View style={styles.container}>
-
-            <View>
-              <Text>Gender Filters:</Text>
-              <TouchableHighlight
-                onPress={this.handleMaleFilter}
-              >
-                <Text style={ (this.state.currentGender === 'Male') && {color: 'red'}}>Men</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                onPress={this.handleFemaleFilter}
-              >
-                <Text style={ (this.state.currentGender === 'Female') && {color: 'red'}}>Women</Text>
-              </TouchableHighlight>
-            </View>
-
-            <View>
-              <Text>Division Filters:</Text>
-              {
-                this.state.divisions.map((division, index) => {
-                  return (
-                    <TouchableHighlight
-                      onPress={() => this.handleDivisionFilter(division)}
-                      key={index}
-                    >
-                      <Text
-                        style={ (this.state.currentDivision === division) && { color: 'red'} }
-                      >
-                        {division}
-                      </Text>
-                    </TouchableHighlight>
-                  )
-                })
-              }
-            </View>
-
             <WorkoutList
               navigation={this.props.navigation}
               filteredWorkouts={this.state.filteredWorkouts}
-            />
-
-            <Button
-              title="Add Workout"
-              onPress={() => this.props.navigation.navigate('NewWorkout')}
+              admin={true}
             />
           </View>
         </ScrollView>

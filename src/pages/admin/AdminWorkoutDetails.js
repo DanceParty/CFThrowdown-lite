@@ -2,7 +2,14 @@ import React from 'react'
 import { Button, Text, View } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
+// actions
 import { getCompetitorByGenderAndDivision, updateCompetitorScores } from '../../actions/competitors'
+
+// utils
+import { getGenderString } from '../../utils/competitors'
+
+// components
+import Workout from '../../components/Workout'
 
 
 class AdminWorkoutDetails extends React.Component {
@@ -12,19 +19,14 @@ class AdminWorkoutDetails extends React.Component {
   })
 
   state = {
-    workout: this.props.navigation.state.params.workout
+    workout: this.props.navigation.state.params.workout,
   }
 
-  submitWorkoutScores = () => {
+  onSubmitWorkout = () => {
     // store state variables
     const workout = this.state.workout
     const division = workout.division
-    let gender = 'Male'
-    if (workout.female && workout.male) {
-      gender = 'MaleFemale'
-    } else if (workout.female && !workout.male) {
-      gender = 'Female'
-    }
+    const gender = getGenderString(workout.male, workout.female)
     // get all competitors for this workouts gender & division
     getCompetitorByGenderAndDivision(division, gender).then((res) => {
       // iterate through each one with arr.sort, and compare the values
@@ -110,34 +112,20 @@ class AdminWorkoutDetails extends React.Component {
 
   render() {
     const workout = this.state.workout
-    if (workout) {
-      let gender = 'Male'
-      if (workout.female && workout.male) {
-        gender = 'Male & Female'
-      } else if (workout.female && !workout.male) {
-        gender = 'Male'
-      }
+    const gender = getGenderString(workout.male, workout.female)
+    if (workout && gender) {
       return (
         <View>
-          <Text><Text>DIVISION: </Text>{workout.division}</Text>
-          <Text>
-            <Text>GENDER: </Text>{gender}</Text>
-          <Text><Text>SCORE TYPE: </Text>{workout.type}</Text>
-          <View>
-          {
-            workout.steps.map((step, index) => {
-              return (
-                <Text key={index}>{step}</Text>
-              )
-            })
-          }
-          </View>
-          <Button
-            title="Submit Workout Scores"
-            onPress={() => this.submitWorkoutScores()}
+          <Workout
+            workout={workout}
+            gender={gender}
+            admin={true}
+            onSubmitWorkout={this.onSubmitWorkout}
           />
         </View>
       )
+    } else {
+      return null
     }
   }
 

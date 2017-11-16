@@ -20,7 +20,7 @@ export const getCompetitors = () => {
         const division = result[key].division
         const scores = result[key].scores
         const totalScore = result[key].totalScore
-        competitorArray[index++] = { id, fullName, firstName, lastName, gender, division, scores, totalScore }
+        competitorArray[index+=1] = { id, fullName, firstName, lastName, gender, division, scores, totalScore }
       })
       // return an array of competitor objects
       return competitorArray
@@ -44,7 +44,7 @@ export const getCompetitorsByDivision = (division) => {
         const male = res[key].male
         const scores = res[key].scores
         const totalScore = res[key].totalScore
-        competitorArray[index++] = { id, firstName, lastName, division, female, male, scores, totalScore }
+        competitorArray[index += 1] = { id, firstName, lastName, division, female, male, scores, totalScore }
       })
       return competitorArray
     } else {
@@ -60,7 +60,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
       let index = 0
       const result = snapshot.val()
 
-      if (gender === 'MaleFemale') {
+      if (gender === 'Male & Female') {
         Object.keys(result).forEach((key) => {
           const id = key
           const fullName = `${result[key].firstName} ${result[key].lastName}`
@@ -68,7 +68,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
           const division = result[key].division
           const scores = result[key].scores
           const totalScore = result[key].totalScore
-          competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+          competitorArray[index += 1] = { id, fullName, gender, division, scores, totalScore }
         })
       } else if (gender === 'Male') {
         Object.keys(result).forEach((key) => {
@@ -79,7 +79,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
             const division = result[key].division
             const scores = result[key].scores
             const totalScore = result[key].totalScore
-            competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+            competitorArray[index += 1] = { id, fullName, gender, division, scores, totalScore }
           }
         })
       } else if (gender === 'Female') {
@@ -91,7 +91,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
             const division = result[key].division
             const scores = result[key].scores
             const totalScore = result[key].totalScore
-            competitorArray[index++] = { id, fullName, gender, division, scores, totalScore }
+            competitorArray[index += 1] = { id, fullName, gender, division, scores, totalScore }
           }
         })
       }

@@ -83,7 +83,7 @@ class AdminCompetitorDetails extends React.Component {
           let scores = []
           let index = 0
           workoutResult.map((workout) => {
-            scores[index++] = {
+            scores[index += 1] = {
               workoutId: workout.id,
               points: 0,
               place: 100000,
@@ -229,7 +229,7 @@ class AdminCompetitorDetails extends React.Component {
           competitor.scores.map((scoreObj) => {
             Object.keys(scoreObj).forEach((key) => {
               if (workout.id === scoreObj[key]) {
-                scoresArray[index++] = {
+                scoresArray[index += 1] = {
                   name: workout.name,
                   type: workout.type,
                   points: scoreObj['points'] || '',

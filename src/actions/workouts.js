@@ -21,7 +21,7 @@ export const getWorkoutsByDivisionAndGender = (division, gender) => {
             const id = key
             const name = result[key].name
             const type = result[key].type
-            workoutArray[index++] = { id, name, type }
+            workoutArray[index += 1] = { id, name, type }
           }
         })
       }
@@ -31,7 +31,7 @@ export const getWorkoutsByDivisionAndGender = (division, gender) => {
             const id = key
             const name = result[key].name
             const type = result[key].type
-            workoutArray[index++] = { id, name, type }
+            workoutArray[index += 1] = { id, name, type }
           }
         })
       }
@@ -55,7 +55,7 @@ export const getWorkoutsByDivision = (division) => {
         const steps = result[key].steps
         const type = result[key].type
         const division = result[key].division
-        workoutArr[index++] = { id, male, female, name, steps, type, division }
+        workoutArr[index += 1] = { id, male, female, name, steps, type, division }
       })
       return workoutArr
     } else {
@@ -80,7 +80,7 @@ export const getWorkouts = () => {
         const type = result[key].type
         const division = result[key].division
 
-        workoutArray[index++] = { id, male, female, name, steps, type, division }
+        workoutArray[index += 1] = { id, male, female, name, steps, type, division }
       })
       // return an array of workout objects
       return workoutArray

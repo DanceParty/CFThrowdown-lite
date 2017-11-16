@@ -69,7 +69,7 @@ class AddCompetitor extends React.Component {
         let index = 0
         // create score object for competitor
         result.map((workout) => {
-          scoresArray[index++] = {
+          scoresArray[index += 1] = {
             workoutId: workout.id,
             points: 0,
             place: 100000,
