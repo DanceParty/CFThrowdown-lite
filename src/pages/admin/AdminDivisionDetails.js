@@ -23,7 +23,7 @@ class AdminDivisionDetails extends React.Component {
       if (res) {
         // check which workouts are matching the division
         let workoutIdArr = []
-        let index = 0
+        let index = -1
         res.map((workout) => {
           if (workout.division === division) {
             workoutIdArr[index += 1] = workout.id

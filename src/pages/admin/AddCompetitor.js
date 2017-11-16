@@ -66,7 +66,7 @@ class AddCompetitor extends React.Component {
     getWorkoutsByDivisionAndGender(this.state.division, gender).then((result) => {
       if (result) {
         let scoresArray = []
-        let index = 0
+        let index = -1
         // create score object for competitor
         result.map((workout) => {
           scoresArray[index += 1] = {

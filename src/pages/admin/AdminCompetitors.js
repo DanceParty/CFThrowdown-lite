@@ -15,20 +15,18 @@ class AdminCompetitors extends React.Component {
   }
 
   componentWillMount() {
+    allDivisions().then((res) => {
+      const divisionList = Object.keys(res)
+      this.setState({
+        divisions: divisionList
+      })
+    })
     // get all of the competitors and store them in an array in the state
-    getCompetitors().then((competitorsResult) => {
+    getCompetitors().then((res) => {
       // get competitors and store them in state
       this.setState({
-        competitors: competitorsResult,
-        filteredCompetitors: competitorsResult,
-      }, () => {
-        // after storing competitors, grab all divisions and store in state
-        allDivisions().then((divisionsResult) => {
-          const divisionList = Object.keys(divisionsResult)
-          this.setState({
-            divisions: divisionList
-          })
-        })
+        competitors: res,
+        filteredCompetitors: res,
       })
     })
   }

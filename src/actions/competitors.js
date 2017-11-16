@@ -8,7 +8,7 @@ export const getCompetitors = () => {
   return database.ref(`competitors`).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let competitorArray = []
-      let index = 0
+      let index = -1
       const result = snapshot.val()
       // convert object of objects to array of objects
       Object.keys(result).forEach((key) => {
@@ -32,7 +32,7 @@ export const getCompetitorsByDivision = (division) => {
   return database.ref(`competitors`).orderByChild('division').equalTo(division).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let competitorArray = []
-      let index = 0
+      let index = -1
       const res = snapshot.val()
 
       Object.keys(res).forEach((key) => {
@@ -57,7 +57,7 @@ export const getCompetitorByGenderAndDivision = (division, gender) => {
   return database.ref(`competitors`).orderByChild('division').equalTo(division).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let competitorArray = []
-      let index = 0
+      let index = -1
       const result = snapshot.val()
 
       if (gender === 'Male & Female') {

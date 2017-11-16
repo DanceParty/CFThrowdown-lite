@@ -12,7 +12,7 @@ export const getWorkoutsByDivisionAndGender = (division, gender) => {
   return database.ref('workouts').orderByChild('division').equalTo(division).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let workoutArray = []
-      let index = 0
+      let index = -1
       const result = snapshot.val()
 
       if (gender === 'Male') {
@@ -44,7 +44,7 @@ export const getWorkoutsByDivision = (division) => {
   return database.ref('workouts').orderByChild('division').equalTo(division).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let workoutArr = []
-      let index = 0
+      let index = -1
       const res = snapshot.val()
       // convert object of objects to array of objects
       Object.keys(res).forEach((key) => {
@@ -68,7 +68,7 @@ export const getWorkouts = () => {
   return database.ref(`workouts`).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let workoutArray = []
-      let index = 0
+      let index = -1
       const result = snapshot.val()
       // convert object of objects to array of objects
       Object.keys(result).forEach((key) => {

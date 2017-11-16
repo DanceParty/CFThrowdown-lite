@@ -79,9 +79,8 @@ class AdminCompetitorDetails extends React.Component {
       if (gender !== originalGender || division !== originalDivision) {
         // get workouts of new gender + division
         getWorkoutsByDivisionAndGender(division, gender).then((workoutResult) => {
-          console.log(workoutResult)
           let scores = []
-          let index = 0
+          let index = -1
           workoutResult.map((workout) => {
             scores[index += 1] = {
               workoutId: workout.id,
@@ -223,7 +222,7 @@ class AdminCompetitorDetails extends React.Component {
     // create an array to store them all so we can add points
     if (this.state.workouts) {
       const scoresArray = []
-      const index = 0
+      const index = -1
       if (this.state.competitor.scores) {
         this.state.workouts.map((workout) => {
           competitor.scores.map((scoreObj) => {
