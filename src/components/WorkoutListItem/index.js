@@ -14,6 +14,8 @@ class WorkoutListItem extends React.Component {
         onPress={() => {
           if (admin) {
             navigate('AdminWorkoutDetails', { workout: workout })
+          } else {
+            navigate('WorkoutDetails', { workout: workout })
           }
           // navigate to public page
         }}

@@ -9,6 +9,7 @@ import Leaderboard from '../pages/public/Leaderboard'
 import Workouts from '../pages/public/Workouts'
 import Competitors from '../pages/public/Competitors'
 import AdminLogin from '../pages/public/AdminLogin'
+import WorkoutDetails from '../pages/public/WorkoutDetails'
 
 // private pages
 import AdminHome from '../pages/admin/AdminHome'
@@ -35,6 +36,12 @@ const PublicNavigator = StackNavigator({
       headerTitle: 'Workouts',
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     }
+  },
+  WorkoutDetails: {
+    screen: WorkoutDetails,
+    navigationOptions: {
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
   },
   Leaderboard: {
     screen: Leaderboard,

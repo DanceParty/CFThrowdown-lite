@@ -64,13 +64,14 @@ class WorkoutDetailsContainer extends React.Component {
   render() {
     const workout = this.props.workout
     const gender = getGenderString(workout.male, workout.female)
+    const admin = this.props.admin
     if (workout && gender) {
       return (
         <View>
           <Workout
             workout={workout}
             gender={gender}
-            admin={true}
+            admin={admin}
             onSubmitWorkout={this.onSubmitWorkout}
           />
         </View>
