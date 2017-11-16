@@ -4,14 +4,6 @@ import { TouchableHighlight, StyleSheet, Text, View } from 'react-native'
 
 class WorkoutFilter extends React.Component {
 
-  handleMaleFilter = () => {
-    this.props.handleMaleFilter()
-  }
-
-  handleFemaleFilter = () => {
-    this.props.handleFemaleFilter()
-  }
-
   handleGenderFilter = (gender) => {
     this.props.handleGenderFilter(gender)
   }

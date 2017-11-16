@@ -90,7 +90,7 @@ const AdminNavigator = StackNavigator({
   AdminCompetitors: {
     screen: AdminCompetitors,
     navigationOptions: {
-      headerTitle: 'Competitors',
+      headerTitle: 'Competitors - Admin',
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     },
   },
@@ -103,6 +103,7 @@ const AdminNavigator = StackNavigator({
   AdminWorkouts: {
     screen: AdminWorkouts,
     navigationOptions: {
+      headerTitle: 'Workouts - Admin',
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     },
   },
@@ -115,7 +116,7 @@ const AdminNavigator = StackNavigator({
   AdminDivisions: {
     screen: AdminDivisions,
     navigationOptions: {
-      headerTitle: 'Divisions',
+      headerTitle: 'Divisions - Admin',
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     },
   },

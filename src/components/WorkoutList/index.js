@@ -12,7 +12,7 @@ class WorkoutList extends React.Component {
     const workouts = this.props.filteredWorkouts
     const navigation = this.props.navigation
     return (
-      <View>
+      <View style={styles.container}>
         <FlatList
           style={styles.list}
           data={workouts}
@@ -29,7 +29,7 @@ class WorkoutList extends React.Component {
           admin &&
           <Button
             title="Add Workout"
-            onPress={() => this.props.navigation.navigate('NewWorkout')}
+            onPress={() => navigation.navigate('NewWorkout')}
           />
         }
       </View>
@@ -39,6 +39,12 @@ class WorkoutList extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   list: {
     margin: 10,
   },
