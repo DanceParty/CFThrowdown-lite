@@ -115,10 +115,17 @@ class CompetitorContainer extends React.Component {
       )
     } else {
       return (
-        <Button
-          title="Add Competitor"
-          onPress={() => this.props.navigation.navigate('AddCompetitor')}
-        />
+        <View>
+          {
+            admin ?
+            <Button
+              title="Add Competitor"
+              onPress={() => navigation.navigate('AddCompetitor')}
+            />
+            :
+            null
+          }
+        </View>
       )
     }
   }
