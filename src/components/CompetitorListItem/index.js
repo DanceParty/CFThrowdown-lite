@@ -5,10 +5,11 @@ import { StyleSheet, Text } from 'react-native'
 const CompetitorListItem = (props) => {
   const navigation = props.navigation
   const competitor = props.competitor
+  const admin = props.admin
   return (
     <Text
       style={styles.text}
-      onPress={() => navigation.navigate('AdminCompetitorDetails', { competitor: competitor })}
+      onPress={() => admin ? navigation.navigate('AdminCompetitorDetails', { competitor: competitor }) : console.log('Navigate To CompetitorDetails')}
     >
       {competitor.fullName} - {competitor.gender} - {competitor.division}
     </Text>

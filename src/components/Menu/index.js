@@ -43,11 +43,7 @@ class Menu extends React.Component {
               Logout
             </Text>
             :
-            <Text
-              style={styles.link}
-              onPress={this.handleSignout}
-            >
-              Login
+            <Text>Admin? <Text style={styles.link} onPress={() => navigation.navigate('AdminLogin')}>Login Here</Text>
             </Text>
           }
         </View>

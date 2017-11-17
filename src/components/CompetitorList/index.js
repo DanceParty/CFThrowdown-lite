@@ -16,6 +16,7 @@ const CompetitorList = (props) => {
         data={competitors}
         renderItem={({item}) =>
           <CompetitorListItem
+            admin={admin}
             navigation={navigation}
             competitor={item}
           />
