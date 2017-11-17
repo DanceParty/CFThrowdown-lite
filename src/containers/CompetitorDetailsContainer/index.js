@@ -13,7 +13,7 @@ import { msToMinutesSeconds, minutesAndSecondsToMs } from '../../utils/time'
 
 // components
 import Competitor from '../../components/Competitor'
-import CompetitorForm from '../../components/CompetitorForm'
+import CompetitorEditForm from '../../components/CompetitorEditForm'
 
 
 class CompetitorDetailsContainer extends React.Component {
@@ -261,7 +261,7 @@ class CompetitorDetailsContainer extends React.Component {
           }
         })
         return (
-          <CompetitorForm
+          <CompetitorEditForm
             competitor={competitor}
             selectedDivision={selectedDivision}
             modalData={modalData}

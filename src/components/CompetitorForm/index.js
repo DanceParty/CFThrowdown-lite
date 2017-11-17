@@ -6,106 +6,73 @@ import ModalSelector from 'react-native-modal-selector'
 
 class CompetitorForm extends React.Component {
 
-  handleFirstNameEdit = (text) => {
-    this.props.handleFirstNameEdit(text)
+  handleFirstNameChange = (text) => {
+    this.props.handleFirstNameChange(text)
   }
 
-  handleLastNameEdit = (text) => {
-    this.props.handleLastNameEdit(text)
-  }
-
-  handleMaleCheckbox = () => {
-    this.props.handleMaleCheckbox()
-  }
-
-  handleFemaleCheckbox = () => {
-    this.props.handleFemaleCheckbox()
+  handleLastNameChange = (text) => {
+    this.props.handleLastNameChange(text)
   }
 
   handleDivisionChange = (text) => {
     this.props.handleDivisionChange(text)
   }
 
-  handleScoreEdit = (text, scoreId) => {
-    this.props.handleScoreEdit(text, scoreId)
+  handleGenderCheckbox = (text) => {
+    this.props.handleGenderCheckbox(text)
   }
 
-  handleEditMode = () => {
-    this.props.handleEditMode()
+  submitCompetitorForm = () => {
+    this.props.submitCompetitorForm()
   }
 
   render() {
-    const competitor = this.props.competitor
-    const firstName = this.props.competitor.firstName
-    const lastName = this.props.competitor.lastName
-    const isMale = this.props.competitor.gender === 'Male'
-    const isFemale = this.props.competitor.gender === 'Female'
-    const division = this.props.competitor.division || 'Select A Division'
-    const selectedDivision = this.props.selectedDivision
-    const scores = this.props.scores
+    const firstName = this.props.firstName
+    const lastName = this.props.lastName
+    const division = this.props.division
+    const male = this.props.male
+    const female = this.props.female
     const modalData = this.props.modalData
     return (
       <View>
-        <Text>NAME: </Text>
+        <Text>Add Competitor</Text>
         <TextInput
           style={styles.textInput}
+          placeholder="First name..."
           value={firstName}
-          onChangeText={(text) => this.handleFirstNameEdit(text)}
+          onChangeText={(text) => this.handleFirstNameChange(text)}
         />
         <TextInput
           style={styles.textInput}
+          placeholder="Last name..."
           value={lastName}
-          onChangeText={(text) => this.handleLastNameEdit(text)}
+          onChangeText={(text) => this.handleLastNameChange(text)}
         />
-        <Text>GENDER: </Text>
-        <CheckBox
-          title="Male"
-          checked={isMale}
-          onPress={() => this.handleMaleCheckbox()}
-        />
-        <CheckBox
-          title="Female"
-          checked={isFemale}
-          onPress={() => this.handleFemaleCheckbox()}
-        />
-
-        <Text>DIVISION: </Text>
         <ModalSelector
           data={modalData}
-          initValue={division}
+          initValue="Select a division"
           onChange={(value) => this.handleDivisionChange(value.label)}
         >
           <TextInput
-            style={styles.modalPicker}
+            style={styles.modalInput}
             editable={false}
-            placeholder={division}
-            value={selectedDivision}
+            placeholder="Select a division"
+            value={division}
           />
         </ModalSelector>
-        <Text>SCORES:</Text>
-        {
-          scores.map((score, index) => {
-            const points = score.points.toString()
-            const pointsText = (score.type === 'Weighted') ? <Text>lbs</Text> : <Text>minutes + seconds</Text>
-            return (
-              <View key={index}>
-                <Text>{score.name}:</Text>
-                <View>
-                  <TextInput
-                    style={styles.textInput}
-                    value={points}
-                    onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                  />
-                  { pointsText }
-                </View>
-              </View>
-            )
-          })
-        }
+        <CheckBox
+          title="Male"
+          checked={male}
+          onPress={() => this.handleGenderCheckbox('Male')}
+        />
+        <CheckBox
+          title="Female"
+          checked={female}
+          onPress={() => this.handleGenderCheckbox('Female')}
+        />
         <Button
-          onPress={this.handleEditMode}
-          title="Save Changes"
-          color='purple'
+          title="Submit"
+          onPress={this.submitCompetitorForm}
         />
       </View>
     )
@@ -115,14 +82,14 @@ class CompetitorForm extends React.Component {
 const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#ccc',
   },
-  modalPicker: {
+  modalInput: {
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
     height: 50,
-  }
+  },
 })
 
 export default CompetitorForm
