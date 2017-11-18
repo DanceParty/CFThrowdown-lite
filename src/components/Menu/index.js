@@ -1,5 +1,9 @@
 import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import Button from 'apsl-react-native-button'
+
+// components
+import PrimaryButton from '../PrimaryButton'
 
 
 class Menu extends React.Component {
@@ -8,29 +12,41 @@ class Menu extends React.Component {
     this.props.handleSignout()
   }
 
+  handleWorkoutPress = () => {
+    const admin = this.props.admin
+    const navigation = this.props.navigation
+    return admin ? navigation.navigate('AdminWorkouts') : navigation.navigate('Workouts')
+  }
+
+  handleCompetitorsPress = () => {
+    const admin = this.props.admin
+    const navigation = this.props.navigation
+    return admin ? navigation.navigate('AdminCompetitors') : navigation.navigate('Competitors')
+  }
+
+  handleLeaderboardOrDivisionPress = () => {
+    const admin = this.props.admin
+    const navigation = this.props.navigation
+    return admin ? navigation.navigate('AdminDivisions') : navigation.navigate('Leaderboard')
+  }
+
   render() {
     const admin = this.props.admin
     const navigation=this.props.navigation
     return (
       <View style={styles.container}>
         <View style={styles.middle}>
-          <Button
-            onPress={() => admin ? navigation.navigate('AdminWorkouts') : navigation.navigate('Workouts')}
-            title="Workouts"
-            color="#841584"
-            accessibilityLabel="Workouts Page"
+          <PrimaryButton
+            text="Workouts"
+            handleButtonPress={this.handleWorkoutPress}
           />
-          <Button
-            onPress={() => admin ? navigation.navigate('AdminCompetitors') : navigation.navigate('Competitors')}
-            title="Competitors"
-            color="#841584"
-            accessibilityLabel="Competitor Page"
+          <PrimaryButton
+            text="Competitors"
+            handleButtonPress={this.handleCompetitorsPress}
           />
-          <Button
-            onPress={() => admin ? navigation.navigate('AdminDivisions') : navigation.navigate('Leaderboard')}
-            title={admin ? 'Divisions' : 'Leaderboard'}
-            color="#841584"
-            accessibilityLabel={admin ? 'Divisions' : 'Leaderboard'}
+          <PrimaryButton
+            text={admin ? "Divisions" : "Leaderboard"}
+            handleButtonPress={this.handleLeaderboardOrDivisionPress}
           />
         </View>
         <View style={styles.bottom}>
@@ -55,12 +71,13 @@ class Menu extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
   },
   middle: {
-    flex: 1,
+    flex: 3,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-around',
   },
   bottom: {
     flex: 1,
@@ -72,6 +89,19 @@ const styles = StyleSheet.create({
   link: {
     color: 'purple',
   },
+  buttonText: {
+    fontSize: 18,
+    color: '#3f83a7',
+  },
+  button: {
+    height: 50,
+    width: 300,
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#3f83a7',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 })
 
 export default Menu
