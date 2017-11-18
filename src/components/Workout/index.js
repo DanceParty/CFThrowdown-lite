@@ -8,6 +8,10 @@ class Workout extends React.Component {
     this.props.onSubmitWorkout()
   }
 
+  handleRemoveWorkout = () => {
+    this.props.handleRemoveWorkout()
+  }
+
   render() {
     const workout = this.props.workout
     const gender = this.props.gender
@@ -26,10 +30,16 @@ class Workout extends React.Component {
 
         {
           admin &&
-          <Button
-            title="Submit Workout Scores"
-            onPress={() => this.onSubmitWorkout()}
-          />
+          <View>
+            <Button
+              title="Submit Workout Scores"
+              onPress={() => this.onSubmitWorkout()}
+            />
+            <Button
+              title="Remove"
+              onPress={() => this.handleRemoveWorkout()}
+            />
+          </View>
         }
       </View>
     )

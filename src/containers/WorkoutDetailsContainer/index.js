@@ -4,6 +4,8 @@ import { NavigationActions } from 'react-navigation'
 
 // actions
 import { getCompetitorByGenderAndDivision, updateCompetitorScores } from '../../actions/competitors'
+import { getDivisionWorkouts, updateDivisionWorkouts } from '../../actions/divisions'
+import { removeWorkout } from '../../actions/workouts'
 
 // utils
 import { getGenderString } from '../../utils/competitors'
@@ -61,6 +63,40 @@ class WorkoutDetailsContainer extends React.Component {
     this.props.navigation.dispatch(resetNav)
   }
 
+  handleRemoveWorkout = () => {
+    const workout = this.props.workout
+    const division = this.props.workout.division
+    const gender = getGenderString(workout.male, workout.female)
+    // remove all references to this workout in competitors
+    getCompetitorByGenderAndDivision(division, gender).then((res) => {
+      if (res) {
+        const competitorArr = res
+        competitorArr.map((competitor) => {
+          const newScores = competitor.scores.filter((score) => {
+            return score.workoutId !== workout.id
+          })
+          updateCompetitorScores(competitor.id, newScores)
+        })
+      } else {
+        return false
+      }
+    })
+
+    // remove all references to this workout in divisions
+    getDivisionWorkouts(division).then((res) => {
+      const workoutArr = res
+      filteredWorkouts = workoutArr.filter((workoutId) => {
+        return workoutId !== workout.id
+      })
+      updateDivisionWorkouts(filteredWorkouts, division)
+    })
+
+    // remove this workout
+    removeWorkout(workout.id)
+
+    this.props.navigation.navigate('AdminHome')
+  }
+
   render() {
     const workout = this.props.workout
     const gender = getGenderString(workout.male, workout.female)
@@ -73,6 +109,7 @@ class WorkoutDetailsContainer extends React.Component {
             gender={gender}
             admin={admin}
             onSubmitWorkout={this.onSubmitWorkout}
+            handleRemoveWorkout={this.handleRemoveWorkout}
           />
         </View>
       )
