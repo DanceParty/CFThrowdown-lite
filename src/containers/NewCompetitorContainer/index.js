@@ -22,10 +22,12 @@ class NewCompetitorContainer extends React.Component {
   componentWillMount() {
     // get all divisions and assign them to the state
     allDivisions().then((result) => {
-      const divisionList = Object.keys(result)
-      this.setState(() => ({
-        divisionList: divisionList
-      }))
+      if (result) {
+        const divisionList = Object.keys(result)
+        this.setState(() => ({
+          divisionList: divisionList
+        }))
+      }
     })
   }
 

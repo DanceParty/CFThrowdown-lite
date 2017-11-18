@@ -49,8 +49,6 @@ class WorkoutDetailsContainer extends React.Component {
           // update each competitor
           updateCompetitorScores(competitorId, updateScores)
         })
-      } else {
-        return false
       }
     })
     const resetNav = NavigationActions.reset({
@@ -84,11 +82,13 @@ class WorkoutDetailsContainer extends React.Component {
 
     // remove all references to this workout in divisions
     getDivisionWorkouts(division).then((res) => {
-      const workoutArr = res
-      filteredWorkouts = workoutArr.filter((workoutId) => {
-        return workoutId !== workout.id
-      })
-      updateDivisionWorkouts(filteredWorkouts, division)
+      if (res) {
+        const workoutArr = res
+        filteredWorkouts = workoutArr.filter((workoutId) => {
+          return workoutId !== workout.id
+        })
+        updateDivisionWorkouts(filteredWorkouts, division)
+      }
     })
 
     // remove this workout

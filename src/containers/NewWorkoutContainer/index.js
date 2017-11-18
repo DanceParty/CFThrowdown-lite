@@ -24,6 +24,7 @@ class NewWorkoutContainer extends React.Component {
     type: '',
     male: false,
     female: false,
+    description: '',
     steps: [],
     stepInputs: ['input-0'],
     divisionList: [],
@@ -31,10 +32,12 @@ class NewWorkoutContainer extends React.Component {
 
   componentWillMount() {
     allDivisions().then((result) => {
-      const divisionArray = Object.keys(result)
-      this.setState(() => ({
-        divisionList: divisionArray
-      }))
+      if (result) {
+        const divisionArray = Object.keys(result)
+        this.setState(() => ({
+          divisionList: divisionArray
+        }))
+      }
     })
   }
 
@@ -50,16 +53,15 @@ class NewWorkoutContainer extends React.Component {
     this.setState(() => ({ type: text }))
   }
 
-  handleMaleCheckbox = () => {
+  handleGenderCheckbox = (gender) => {
     this.setState((prevState) => ({
-      male: !prevState.male
+      male: (gender === 'Male') ? !prevState.male : prevState.male,
+      female: (gender === 'Female') ? !prevState.female : prevState.female,
     }))
   }
 
-  handleFemaleCheckbox = () => {
-    this.setState((prevState) => ({
-      female: !prevState.female
-    }))
+  handleDescriptionChange = (text) => {
+    this.setState(() => ({ description: text }))
   }
 
   handleAddStep = () => {
@@ -103,6 +105,7 @@ class NewWorkoutContainer extends React.Component {
       male: this.state.male,
       female: this.state.female,
       steps: [...this.state.steps],
+      description: this.state.description,
     }
     let workoutsArray = []
     const gender = getGenderString(this.state.male, this.state.female)
@@ -164,8 +167,6 @@ class NewWorkoutContainer extends React.Component {
             }
           }
         })
-      } else {
-        return false
       }
     })
     const resetNav = NavigationActions.reset({
@@ -211,12 +212,12 @@ class NewWorkoutContainer extends React.Component {
         handleNameChange={this.handleNameChange}
         handleDivisionChange={this.handleDivisionChange}
         handleTypeChange={this.handleTypeChange}
-        handleMaleCheckbox={this.handleMaleCheckbox}
-        handleFemaleCheckbox={this.handleFemaleCheckbox}
+        handleGenderCheckbox={this.handleGenderCheckbox}
         handleStepInput={this.handleStepInput}
         handleAddStep={this.handleAddStep}
         handleRemoveStep={this.handleRemoveStep}
         handleWorkoutSubmit={this.handleWorkoutSubmit}
+        handleDescriptionChange={this.handleDescriptionChange}
       />
     )
   }

@@ -10,6 +10,7 @@ import Workouts from '../pages/public/Workouts'
 import Competitors from '../pages/public/Competitors'
 import AdminLogin from '../pages/public/AdminLogin'
 import WorkoutDetails from '../pages/public/WorkoutDetails'
+import CompetitorDetails from '../pages/public/CompetitorDetails'
 
 // private pages
 import AdminHome from '../pages/admin/AdminHome'
@@ -56,6 +57,12 @@ const PublicNavigator = StackNavigator({
       headerTitle: 'Competitors',
       headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
     }
+  },
+  CompetitorDetails: {
+    screen: CompetitorDetails,
+    navigationOptions: {
+      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+    },
   },
   AdminLogin: {
     screen: AdminLogin,

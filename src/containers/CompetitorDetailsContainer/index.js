@@ -35,20 +35,24 @@ class CompetitorDetailsContainer extends React.Component {
     let scores = this.props.navigation.state.params.competitor.scores
 
     allDivisions().then((result) => {
-      const divisionList = Object.keys(result)
-      this.setState(() => ({
-        divisionList: divisionList
-      }))
+      if (result) {
+        const divisionList = Object.keys(result)
+        this.setState(() => ({
+          divisionList: divisionList
+        }))
+      }
     })
 
     if (divisionFilter && genderFilter) {
       this.setState({
         scores: scores,
       }, () => {
-        getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((workoutResult) => {
-          this.setState({
-            workouts: workoutResult,
-          })
+        getWorkoutsByDivisionAndGender(divisionFilter, genderFilter).then((res) => {
+          if (res) {
+            this.setState({
+              workouts: res,
+            })
+          }
         })
       })
     } else {
@@ -178,30 +182,14 @@ class CompetitorDetailsContainer extends React.Component {
     })
   }
 
-  handleMaleCheckbox = () => {
+  handleGenderCheckbox = (gender) => {
     let competitor = this.state.competitor
     Object.keys(competitor).forEach((key) => {
       if (key === 'gender') {
-        competitor[key] = 'Male'
+        competitor[key] = gender
       }
     })
-
-    this.setState({
-      competitor: competitor
-    })
-  }
-
-  handleFemaleCheckbox = () => {
-    let competitor = this.state.competitor
-    Object.keys(competitor).forEach((key) => {
-      if (key === 'gender') {
-        competitor[key] = 'Female'
-      }
-    })
-
-    this.setState({
-      competitor: competitor
-    })
+    this.setState({ competitor: competitor })
   }
 
   handleDivisionChange = (value) => {
@@ -268,8 +256,7 @@ class CompetitorDetailsContainer extends React.Component {
             scores={scoresArray}
             handleFirstNameEdit={this.handleFirstNameEdit}
             handleLastNameEdit={this.handleLastNameEdit}
-            handleMaleCheckbox={this.handleMaleCheckbox}
-            handleFemaleCheckbox={this.handleFemaleCheckbox}
+            handleGenderCheckbox={this.handleGenderCheckbox}
             handleDivisionChange={this.handleDivisionChange}
             handleScoreEdit={this.handleScoreEdit}
             handleEditMode={this.handleEditMode}

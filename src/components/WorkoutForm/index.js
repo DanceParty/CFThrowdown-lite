@@ -18,12 +18,12 @@ class WorkoutForm extends React.Component {
     this.props.handleTypeChange(text)
   }
 
-  handleMaleCheckbox = () => {
-    this.props.handleMaleCheckbox()
+  handleDescriptionChange = (text) => {
+    this.props.handleDescriptionChange(text)
   }
 
-  handleFemaleCheckbox = () => {
-    this.props.handleFemaleCheckbox()
+  handleGenderCheckbox = (gender) => {
+    this.props.handleGenderCheckbox(gender)
   }
 
   handleStepInput = (text, index) => {
@@ -52,6 +52,7 @@ class WorkoutForm extends React.Component {
     const female = this.props.female
     const stepInputs = this.props.stepInputs
     const steps = this.props.steps
+    const description = this.props.description
     return (
       <View>
         <Text>Add a new workout</Text>
@@ -87,13 +88,21 @@ class WorkoutForm extends React.Component {
         </ModalSelector>
         <CheckBox
           title="Male"
-          onPress={() => this.handleMaleCheckbox()}
+          onPress={() => this.handleGenderCheckbox('Male')}
           checked={male}
         />
         <CheckBox
           title="Female"
-          onPress={() => this.handleFemaleCheckbox()}
+          onPress={() => this.handleGenderCheckbox('Female')}
           checked={female}
+        />
+        <TextInput
+          multiline
+          maxLength={1000}
+          autoCapitalize="sentences"
+          placeholder="Enter workout standards..."
+          value={description}
+          onChangeText={(text) => this.handleDescriptionChange(text)}
         />
         {
           stepInputs.map((input, index) => {

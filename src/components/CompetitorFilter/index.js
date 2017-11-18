@@ -3,12 +3,8 @@ import { Button, FlatList, TouchableHighlight, Text, StyleSheet, View } from 're
 
 class CompetitorFilter extends React.Component {
 
-  handleMaleFilter = () => {
-    this.props.handleMaleFilter()
-  }
-
-  handleFemaleFilter = () => {
-    this.props.handleFemaleFilter()
+  handleGenderFilter = (gender) => {
+    this.props.handleGenderFilter(gender)
   }
 
   handleDivisionFilter = (division) => {
@@ -21,12 +17,12 @@ class CompetitorFilter extends React.Component {
       <View>
         <Text>Gender Filters:</Text>
         <TouchableHighlight
-          onPress={this.handleMaleFilter}
+          onPress={() => this.handleGenderFilter('Male')}
         >
           <Text>Men</Text>
         </TouchableHighlight>
         <TouchableHighlight
-          onPress={this.handleFemaleFilter}
+          onPress={() => this.handleGenderFilter('Female')}
         >
           <Text>Women</Text>
         </TouchableHighlight>

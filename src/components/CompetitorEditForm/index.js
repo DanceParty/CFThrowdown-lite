@@ -14,12 +14,8 @@ class CompetitorEditForm extends React.Component {
     this.props.handleLastNameEdit(text)
   }
 
-  handleMaleCheckbox = () => {
-    this.props.handleMaleCheckbox()
-  }
-
-  handleFemaleCheckbox = () => {
-    this.props.handleFemaleCheckbox()
+  handleGenderCheckbox = (gender) => {
+    this.props.handleGenderCheckbox(gender)
   }
 
   handleDivisionChange = (text) => {
@@ -61,12 +57,12 @@ class CompetitorEditForm extends React.Component {
         <CheckBox
           title="Male"
           checked={isMale}
-          onPress={() => this.handleMaleCheckbox()}
+          onPress={() => this.handleGenderCheckbox('Male')}
         />
         <CheckBox
           title="Female"
           checked={isFemale}
-          onPress={() => this.handleFemaleCheckbox()}
+          onPress={() => this.handleGenderCheckbox('Female')}
         />
 
         <Text>DIVISION: </Text>

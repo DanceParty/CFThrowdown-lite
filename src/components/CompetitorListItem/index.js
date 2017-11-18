@@ -9,7 +9,7 @@ const CompetitorListItem = (props) => {
   return (
     <Text
       style={styles.text}
-      onPress={() => admin ? navigation.navigate('AdminCompetitorDetails', { competitor: competitor }) : console.log('Navigate To CompetitorDetails')}
+      onPress={() => admin ? navigation.navigate('AdminCompetitorDetails', { competitor: competitor }) : navigation.navigate('CompetitorDetails', { competitor: competitor })}
     >
       {competitor.fullName} - {competitor.gender} - {competitor.division}
     </Text>

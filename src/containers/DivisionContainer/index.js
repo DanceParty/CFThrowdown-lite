@@ -15,10 +15,12 @@ class DivisionContainer extends React.Component {
 
   componentWillMount() {
     allDivisions().then((res) => {
-      const divisionArr = Object.keys(res)
-      this.setState({
-        divisions: divisionArr,
-      })
+      if (res) {
+        const divisionArr = Object.keys(res)
+        this.setState({
+          divisions: divisionArr,
+        })
+      }
     })
   }
 
@@ -35,7 +37,12 @@ class DivisionContainer extends React.Component {
         />
       )
     } else {
-      return null
+      return (
+        <Button
+          title="Add Division"
+          onPress={() => this.props.navigation.navigate('AddDivision')}
+        />
+      )
     }
   }
 

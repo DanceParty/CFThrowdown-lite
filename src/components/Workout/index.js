@@ -27,7 +27,7 @@ class Workout extends React.Component {
             steps.map((step, index) => <Text key={index}> {step}</Text>)
           }
         </Text>
-
+        <Text>Description: {workout.description}</Text>
         {
           admin &&
           <View>

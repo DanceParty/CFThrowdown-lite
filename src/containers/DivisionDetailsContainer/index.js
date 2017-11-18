@@ -35,8 +35,6 @@ class DivisionDetailsContainer extends React.Component {
         // find all competitors that have division selected
         // remove division and scores
 
-      } else {
-        return false
       }
     })
 
@@ -56,8 +54,6 @@ class DivisionDetailsContainer extends React.Component {
           }
           updateCompetitor(competitor.id, updatedCompetitor)
         })
-      } else {
-        return false
       }
     })
   }

@@ -31,26 +31,30 @@ class LeaderboardContainer extends React.Component {
   componentWillMount() {
     // get divisions
     allDivisions().then((divisionResult) => {
-      // create array of divisions
-      const divisionList = Object.keys(divisionResult)
-      // try and store 'RX' by grabbing the shortest element of the array
-      const currDivision = divisionList.reduce((a, b) => (a.length <= b.length) ? a : b)
+      if (divisionResult) {
+        // create array of divisions
+        const divisionList = Object.keys(divisionResult)
+        // try and store 'RX' by grabbing the shortest element of the array
+        const currDivision = divisionList.reduce((a, b) => (a.length <= b.length) ? a : b)
 
-      this.setState({
-        divisions: divisionList,
-        currentDivision: currDivision
-      }, () => {
-        getCompetitors().then((competitorRes) => {
-          // create filtered array of competitors that fit the filter set in state
-          const filteredCompetitors = competitorRes.filter((competitor) => {
-            return (competitor.gender === this.state.currentGender) && (competitor.division === this.state.currentDivision)
-          })
-          this.setState({
-            competitors: competitorRes,
-            filteredCompetitors: filteredCompetitors,
+        this.setState({
+          divisions: divisionList,
+          currentDivision: currDivision
+        }, () => {
+          getCompetitors().then((competitorRes) => {
+            if (competitorRes) {
+              // create filtered array of competitors that fit the filter set in state
+              const filteredCompetitors = competitorRes.filter((competitor) => {
+                return (competitor.gender === this.state.currentGender) && (competitor.division === this.state.currentDivision)
+              })
+              this.setState({
+                competitors: competitorRes,
+                filteredCompetitors: filteredCompetitors,
+              })
+            }
           })
         })
-      })
+      }
     })
   }
 

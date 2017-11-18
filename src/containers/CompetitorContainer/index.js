@@ -21,49 +21,49 @@ class CompetitorContainer extends React.Component {
 
   componentWillMount() {
     allDivisions().then((res) => {
-      const divisionList = Object.keys(res)
-      this.setState({
-        divisions: divisionList
-      })
+      if (res) {
+        const divisionList = Object.keys(res)
+        this.setState({
+          divisions: divisionList
+        })
+      } else {
+        this.setState({
+          divisions: []
+        })
+      }
     })
     // get all of the competitors and store them in an array in the state
     getCompetitors().then((res) => {
-      // get competitors and store them in state
-      this.setState({
-        competitors: res,
-        filteredCompetitors: res,
+      if (res) {
+        // get competitors and store them in state
+        this.setState({
+          competitors: res,
+          filteredCompetitors: res,
+        })
+      } else {
+        this.setState({
+          competitors: [],
+          filteredCompetitors: [],
+        })
+      }
+    })
+  }
+
+  handleGenderFilter = (gender) => {
+    const currGender = this.state.currentGender
+    if (gender === currGender) {
+      return false
+    } else {
+      const competitors = this.state.competitors
+      // filter competitor array into a filtered array by gender 'male'
+      const filteredArray = competitors.filter((competitor) => {
+        return (competitor.gender === gender) ? true : false
       })
-    })
-  }
-
-  handleMaleFilter = () => {
-    const competitors = this.state.competitors
-    // filter competitor array into a filtered array by gender 'male'
-    const filteredArray = competitors.filter((competitor) => {
-      if (competitor.gender === 'Male') {
-        return true
-      }
-      return false
-    })
-    this.setState(() => ({
-      filteredCompetitors: filteredArray,
-      currentGender: 'Male',
-    }))
-  }
-
-  handleFemaleFilter = () => {
-    const competitors = this.state.competitors
-    // filter competitor array into a filtered array by gender 'female'
-    const filteredArray = competitors.filter((competitor) => {
-      if (competitor.gender === 'Female') {
-        return true
-      }
-      return false
-    })
-    this.setState(() => ({
-      filteredCompetitors: filteredArray,
-      currentGender: 'Female'
-    }))
+      this.setState(() => ({
+        filteredCompetitors: filteredArray,
+        currentGender: gender,
+      }))
+    }
   }
 
   handleDivisionFilter = (division) => {
@@ -103,8 +103,7 @@ class CompetitorContainer extends React.Component {
           <CompetitorFilter
             divisions={divisions}
             handleMaleFilter={this.handleMaleFilter}
-            handleFemaleFilter={this.handleFemaleFilter}
-            handleDivisionFilter={this.handleDivisionFilter}
+            handleGenderFilter={this.handleGenderFilter}
           />
           <CompetitorList
             admin={admin}
@@ -123,7 +122,7 @@ class CompetitorContainer extends React.Component {
               onPress={() => navigation.navigate('AddCompetitor')}
             />
             :
-            null
+            <Text>There are currently no competitors available...</Text>
           }
         </View>
       )

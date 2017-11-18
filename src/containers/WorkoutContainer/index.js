@@ -23,23 +23,26 @@ class WorkoutContainer extends React.Component {
   componentWillMount() {
     // default filter is RX Males
     getWorkouts().then((res) => {
-      const defaultFilteredWorkouts = res.filter((workout) => {
+      if (res) {
+        const defaultFilteredWorkouts = res.filter((workout) => {
           return (workout.male) && (workout.division === 'RX')
-      })
-      this.setState({
-        filteredWorkouts: defaultFilteredWorkouts,
-        workouts: res,
-        currentGender: 'Male',
-        currentDivision: 'RX',
-      })
+        })
+        this.setState({
+          filteredWorkouts: defaultFilteredWorkouts,
+          workouts: res,
+          currentGender: 'Male',
+          currentDivision: 'RX',
+        })
+      }
     })
 
     allDivisions().then((divisionsResult) => {
-      const divisionList = Object.keys(divisionsResult)
-      this.setState({
-        divisions: divisionList,
-      })
-
+      if (divisionsResult) {
+        const divisionList = Object.keys(divisionsResult)
+        this.setState({
+          divisions: divisionList,
+        })
+      }
     })
   }
 
