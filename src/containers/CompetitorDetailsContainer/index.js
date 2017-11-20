@@ -1,15 +1,13 @@
 import React from 'react'
-import { Button, FlatList, TouchableHighlight, Text, TextInput, StyleSheet, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-// firebase
+// actions
 import { allDivisions } from '../../actions/divisions'
 import { getWorkoutsByDivisionAndGender } from '../../actions/workouts'
 import { updateCompetitor } from '../../actions/competitors'
-
-// helpers
-import { msToMinutesSeconds, minutesAndSecondsToMs } from '../../utils/time'
 
 // components
 import Competitor from '../../components/Competitor'
@@ -133,6 +131,12 @@ class CompetitorDetailsContainer extends React.Component {
     }
   }
 
+  handleCancel = () => {
+    this.setState((prevState) => ({
+      editMode: !prevState.editMode,
+    }))
+  }
+
   handleScoreEdit = (text, scoreId) => {
     const scoresArr = this.state.scores
 
@@ -234,12 +238,14 @@ class CompetitorDetailsContainer extends React.Component {
 
       if (!this.state.editMode && this.state) {
         return (
-          <Competitor
-            competitor={competitor}
-            scores={scoresArray}
-            admin={admin}
-            handleEditMode={this.handleEditMode}
-          />
+          <ScrollView>
+            <Competitor
+              competitor={competitor}
+              scores={scoresArray}
+              admin={admin}
+              handleEditMode={this.handleEditMode}
+            />
+          </ScrollView>
         )
       } else if (this.state.editMode) {
         const modalData = this.state.divisionList.map((division, index) => {
@@ -249,18 +255,21 @@ class CompetitorDetailsContainer extends React.Component {
           }
         })
         return (
-          <CompetitorEditForm
-            competitor={competitor}
-            selectedDivision={selectedDivision}
-            modalData={modalData}
-            scores={scoresArray}
-            handleFirstNameEdit={this.handleFirstNameEdit}
-            handleLastNameEdit={this.handleLastNameEdit}
-            handleGenderCheckbox={this.handleGenderCheckbox}
-            handleDivisionChange={this.handleDivisionChange}
-            handleScoreEdit={this.handleScoreEdit}
-            handleEditMode={this.handleEditMode}
-          />
+            <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
+              <CompetitorEditForm
+                competitor={competitor}
+                selectedDivision={selectedDivision}
+                modalData={modalData}
+                scores={scoresArray}
+                handleFirstNameEdit={this.handleFirstNameEdit}
+                handleLastNameEdit={this.handleLastNameEdit}
+                handleGenderCheckbox={this.handleGenderCheckbox}
+                handleDivisionChange={this.handleDivisionChange}
+                handleScoreEdit={this.handleScoreEdit}
+                handleEditMode={this.handleEditMode}
+                handleCancel={this.handleCancel}
+              />
+            </KeyboardAwareScrollView>
         )
       }
     } else {

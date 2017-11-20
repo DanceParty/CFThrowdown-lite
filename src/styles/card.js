@@ -23,7 +23,16 @@ export const card = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-around',
-    paddingTop: verticalScale(30),
+    paddingTop: scale(30),
+    paddingBottom: scale(20),
+    paddingLeft: scale(10),
+    paddingRight: scale(10),
+  },
+  unalignedContent: {
+    paddingTop: scale(30),
+    paddingBottom: scale(20),
+    paddingLeft: scale(10),
+    paddingRight: scale(10),
   },
   padding: {
     padding: scale(20),

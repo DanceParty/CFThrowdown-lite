@@ -1,6 +1,4 @@
 import React from 'react'
-import { Button, Text, View } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 
 // container
 import WorkoutDetailsContainer from '../../containers/WorkoutDetailsContainer'

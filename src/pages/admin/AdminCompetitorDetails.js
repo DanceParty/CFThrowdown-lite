@@ -16,6 +16,7 @@ class AdminCompetitorDetails extends React.Component {
       <CompetitorDetailsContainer
         admin={true}
         navigation={this.props.navigation}
+        competitor={competitor}
       />
     )
   }

@@ -1,10 +1,23 @@
 import React from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
-import { CheckBox } from 'react-native-elements'
+import { Card, CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
+
+// styles
+import { typography } from '../../styles/typography'
+import { padding } from '../../styles/padding'
+import { card } from '../../styles/card'
+import { form } from '../../styles/form'
+
+// components
+import PrimaryButton from '../PrimaryButton'
 
 
 class CompetitorEditForm extends React.Component {
+
+  state = {
+    textInputFocused: undefined
+  }
 
   handleFirstNameEdit = (text) => {
     this.props.handleFirstNameEdit(text)
@@ -30,6 +43,22 @@ class CompetitorEditForm extends React.Component {
     this.props.handleEditMode()
   }
 
+  handleCancel = () => {
+    this.props.handleCancel()
+  }
+
+  handleTextInputFocus = (textInput) => {
+    this.setState({
+      textInputFocused: textInput,
+    })
+  }
+
+  handleTextInputOff = () => {
+    this.setState({
+      textInputFocused: undefined,
+    })
+  }
+
   render() {
     const competitor = this.props.competitor
     const firstName = this.props.competitor.firstName
@@ -40,87 +69,146 @@ class CompetitorEditForm extends React.Component {
     const selectedDivision = this.props.selectedDivision
     const scores = this.props.scores
     const modalData = this.props.modalData
+    const focusedInput = this.state.textInputFocused
     return (
-      <View>
-        <Text>NAME: </Text>
-        <TextInput
-          style={styles.textInput}
-          value={firstName}
-          onChangeText={(text) => this.handleFirstNameEdit(text)}
-        />
-        <TextInput
-          style={styles.textInput}
-          value={lastName}
-          onChangeText={(text) => this.handleLastNameEdit(text)}
-        />
-        <Text>GENDER: </Text>
-        <CheckBox
-          title="Male"
-          checked={isMale}
-          onPress={() => this.handleGenderCheckbox('Male')}
-        />
-        <CheckBox
-          title="Female"
-          checked={isFemale}
-          onPress={() => this.handleGenderCheckbox('Female')}
-        />
 
-        <Text>DIVISION: </Text>
-        <ModalSelector
-          data={modalData}
-          initValue={division}
-          onChange={(value) =>
-            this.handleDivisionChange(value.label)
-          }
-        >
-          <TextInput
-            style={styles.modalPicker}
-            editable={false}
-            placeholder={division}
-            value={selectedDivision}
-          />
-        </ModalSelector>
-        <Text>SCORES:</Text>
-        {
-          scores.map((score, index) => {
-            const points = score.points.toString()
-            const pointsText = (score.type === 'Weighted') ? <Text>lbs</Text> : <Text>minutes + seconds</Text>
-            return (
-              <View key={index}>
-                <Text>{score.name}:</Text>
-                <View>
-                  <TextInput
-                    style={styles.textInput}
-                    value={points}
-                    onChangeText={(text) => this.handleScoreEdit(text, score.id)}
-                  />
-                  { pointsText }
+      <View>
+        <Card containerStyle={{padding: 0}}>
+
+          <View style={card.header}>
+            <Text style={[typography.title1, card.title]}>Edit Mode</Text>
+          </View>
+
+          <View style={card.unalignedContent}>
+
+            <View style={form.row}>
+              <View style={form.halfContainer}>
+                <Text style={typography.footnote}>First name</Text>
+                <TextInput
+                  style={(focusedInput === 'firstName') ? form.focusedTextInput : form.textInput}
+                  value={firstName}
+                  underlineColorAndroid="transparent"
+                  onFocus={() => this.handleTextInputFocus('firstName')}
+                  onEndEditing={() => this.handleTextInputOff()}
+                  onChangeText={(text) => this.handleFirstNameEdit(text)}
+                />
+              </View>
+              <View style={form.halfContainer}>
+                <Text style={typography.footnote}>Last name</Text>
+                <TextInput
+                  style={(focusedInput === 'lastName') ? form.focusedTextInput : form.textInput}
+                  value={lastName}
+                  underlineColorAndroid="transparent"
+                  onFocus={() => this.handleTextInputFocus('lastName')}
+                  onEndEditing={() => this.handleTextInputOff()}
+                  onChangeText={(text) => this.handleLastNameEdit(text)}
+                />
+              </View>
+            </View>
+
+            <View style={form.row}>
+              <View style={form.halfContainer}>
+                <Text style={typography.footnote}>Gender</Text>
+                <CheckBox
+                  iconType="material"
+                  checkedIcon="done"
+                  uncheckedIcon="clear"
+                  style={form.checkbox}
+                  title="Male"
+                  checked={isMale}
+                  checkedColor="#4492D0"
+                  uncheckedColor="grey"
+                  onPress={() => this.handleGenderCheckbox('Male')}
+                />
+              </View>
+              <View style={form.halfContainer}>
+                <Text style={typography.footnote}> </Text>
+                <CheckBox
+                  iconType="material"
+                  checkedIcon="done"
+                  uncheckedIcon="clear"
+                  style={form.checkbox}
+                  title="Female"
+                  checked={isFemale}
+                  checkedColor="#4492D0"
+                  uncheckedColor="grey"
+                  onPress={() => this.handleGenderCheckbox('Female')}
+                />
+              </View>
+            </View>
+
+            <View style={form.row}>
+              <View style={form.container}>
+                <Text style={typography.footnote}>Division</Text>
+                <View style={form.modal}>
+                  <ModalSelector
+                    data={modalData}
+                    initValue={division}
+                    onChange={(value) =>
+                      this.handleDivisionChange(value.label)
+                    }
+                  >
+                    <TextInput
+                      style={form.modalInput}
+                      editable={false}
+                      placeholder={division}
+                      value={selectedDivision}
+                    />
+                  </ModalSelector>
                 </View>
               </View>
-            )
-          })
-        }
-        <Button
-          onPress={this.handleEditMode}
-          title="Save Changes"
-          color='purple'
-        />
+            </View>
+
+            <View style={form.row}>
+              <View style={form.container}>
+                <Text style={typography.footnote}>Scores</Text>
+              </View>
+            </View>
+            {
+              scores.map((score, index) => {
+                const points = score.points.toString()
+                return (
+                  <View style={form.row} key={index}>
+                    <View style={form.halfContainer}>
+                      <Text style={{ height: '100%'}}>
+                        <Text style={typography.footnote}>{score.name} </Text>
+                        <Text style={typography.caption3}>({ score.type })</Text>
+                      </Text>
+                    </View>
+                    <View style={form.halfContainer}>
+                      <TextInput
+                        style={form.secondaryInput}
+                        placeholder={score.type === 'Weighted' ? "lbs" : "mmss"}
+                        value={points}
+                        onChangeText={(text) => this.handleScoreEdit(text, score.id)}
+                      />
+                    </View>
+                  </View>
+                )
+              })
+            }
+
+            <View style={form.row}>
+              <View style={form.halfContainer}>
+                <Button
+                  onPress={this.handleCancel}
+                  title="Cancel"
+                  color="red"
+                />
+              </View>
+              <View style={form.halfContainer}>
+                <Button
+                  onPress={this.handleEditMode}
+                  title="Save Changes"
+                />
+              </View>
+            </View>
+
+          </View>
+        </Card>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  modalPicker: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    height: 50,
-  }
-})
 
 export default CompetitorEditForm

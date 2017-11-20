@@ -38,14 +38,14 @@ class WorkoutListItem extends React.Component {
       >
         <View style={listItem.container}>
 
-            <View style={listItem.left}>
-              <Text style={[listItem.item, typography.headline]}>{workout.name}</Text>
-              <Text style={typography.footnote}>{gender} {workout.division}</Text>
-            </View>
+          <View style={listItem.left}>
+            <Text style={[listItem.item, typography.headline]}>{workout.name}</Text>
+            <Text style={typography.footnote}>{gender} {workout.division}</Text>
+          </View>
 
-            <View style={listItem.right}>
-              <Ionicons name="ios-arrow-forward" size={28} color="black" />
-            </View>
+          <View style={listItem.right}>
+            <Ionicons name="ios-arrow-forward" size={28} color="black" />
+          </View>
 
         </View>
       </TouchableHighlight>

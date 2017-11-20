@@ -36,7 +36,6 @@ class CompetitorContainer extends React.Component {
     getCompetitors().then((res) => {
       if (res) {
         const defaultCompetitors = res.filter((competitor) => {
-          console.log(competitor)
           return (competitor.gender === 'Male') && (competitor.division === 'RX')
         })
         // get competitors and store them in state
