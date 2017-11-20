@@ -34,6 +34,11 @@ class Menu extends React.Component {
     return admin ? navigation.navigate('AdminDivisions') : navigation.navigate('Leaderboard')
   }
 
+  handleAboutPress = () => {
+    const navigation = this.props.navigation
+    return navigation.navigate('About')
+  }
+
   render() {
     const admin = this.props.admin
     const navigation=this.props.navigation
@@ -52,6 +57,13 @@ class Menu extends React.Component {
             text={admin ? "Divisions" : "Leaderboard"}
             handleButtonPress={this.handleLeaderboardOrDivisionPress}
           />
+          {
+            !admin &&
+            <PrimaryButton
+              text="About"
+              handleButtonPress={this.handleAboutPress}
+            />
+          }
         </View>
         <View style={[padding.mdPaddingBottom, styles.bottom]}>
           {

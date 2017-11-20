@@ -11,6 +11,7 @@ import Competitors from '../pages/public/Competitors'
 import AdminLogin from '../pages/public/AdminLogin'
 import WorkoutDetails from '../pages/public/WorkoutDetails'
 import CompetitorDetails from '../pages/public/CompetitorDetails'
+import About from '../pages/public/About'
 
 // private pages
 import AdminHome from '../pages/admin/AdminHome'
@@ -30,6 +31,16 @@ const PublicNavigator = StackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  About: {
+    screen: About,
+    navigationOptions: {
+      headerTitle: 'About',
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
+    },
   },
   Workouts: {
     screen: Workouts,
