@@ -1,5 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { Text, TouchableHighlight, View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
+
+// styles
+import { typography } from '../../styles/typography'
+import { listItem } from '../../styles/listItem'
 
 
 const CompetitorListItem = (props) => {
@@ -7,21 +12,24 @@ const CompetitorListItem = (props) => {
   const competitor = props.competitor
   const admin = props.admin
   return (
-    <Text
-      style={styles.text}
+    <TouchableHighlight
+      underlayColor="white"
       onPress={() => admin ? navigation.navigate('AdminCompetitorDetails', { competitor: competitor }) : navigation.navigate('CompetitorDetails', { competitor: competitor })}
     >
-      {competitor.fullName} - {competitor.gender} - {competitor.division}
-    </Text>
+      <View style={listItem.container}>
+
+        <View style={listItem.left}>
+          <Text style={[listItem.item, typography.headline]}>{competitor.fullName}</Text>
+          <Text style={typography.footnote}>{competitor.gender} - {competitor.division}</Text>
+        </View>
+
+        <View style={listItem.right}>
+          <Ionicons name="ios-arrow-forward" size={28} color="black" />
+        </View>
+
+      </View>
+    </TouchableHighlight>
   )
 }
-
-const styles = StyleSheet.create({
-  text: {
-    flex: 1,
-    margin: 25,
-    textAlign: 'center',
-  }
-})
 
 export default CompetitorListItem

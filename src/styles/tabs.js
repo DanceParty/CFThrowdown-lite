@@ -3,6 +3,15 @@ import { StyleSheet } from 'react-native'
 import { scale, verticalScale, moderateScale } from '../utils/scaling'
 
 export const tabs = StyleSheet.create({
+  container: {
+    flex: 0.5,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
   tabsGroup: {
     flex: 0.5,
     alignItems: 'center',

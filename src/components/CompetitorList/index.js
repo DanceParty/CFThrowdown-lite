@@ -4,24 +4,26 @@ import { Button, FlatList, StyleSheet, View } from 'react-native'
 // components
 import CompetitorListItem from '../CompetitorListItem'
 
+// styles
+import { container } from '../../styles/container'
+
 
 const CompetitorList = (props) => {
   const competitors = props.competitors
   const navigation = props.navigation
   const admin = props.admin
   return (
-    <View>
+    <View style={container.containerWhite}>
       <FlatList
-        style={styles.list}
         data={competitors}
+        keyExtractor={(item, index) => index}
         renderItem={({item}) =>
           <CompetitorListItem
             admin={admin}
-            navigation={navigation}
             competitor={item}
+            navigation={navigation}
           />
         }
-        keyExtractor={(item, index) => index}
       />
       {
         admin &&
@@ -33,11 +35,5 @@ const CompetitorList = (props) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  list: {
-    margin: 10,
-  },
-})
 
 export default CompetitorList

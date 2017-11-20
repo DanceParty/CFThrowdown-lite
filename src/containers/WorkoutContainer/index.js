@@ -9,6 +9,9 @@ import { allDivisions } from '../../actions/divisions'
 import WorkoutList from '../../components/WorkoutList'
 import WorkoutFilter from '../../components/WorkoutFilter'
 
+// styles
+import { container } from '../../styles/container'
+
 
 class WorkoutContainer extends React.Component {
 
@@ -90,7 +93,7 @@ class WorkoutContainer extends React.Component {
     const navigation = this.props.navigation
     if (workouts && divisions) {
       return (
-        <View style={styles.container}>
+        <View style={container.container}>
           <WorkoutFilter
             gender={gender}
             divisions={divisions}
@@ -118,11 +121,5 @@ class WorkoutContainer extends React.Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-})
 
 export default WorkoutContainer

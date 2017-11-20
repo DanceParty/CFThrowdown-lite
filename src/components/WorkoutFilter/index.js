@@ -37,12 +37,13 @@ class WorkoutFilter extends React.Component {
     const womenTextStyle = (gender === 'Female') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
 
     return (
-      <View style={styles.container}>
+      <View style={tabs.container}>
+
         <Text style={title}>
           Filters:
         </Text>
-        <View style={tabsGroup}>
 
+        <View style={tabsGroup}>
           <TouchableHighlight
             style={maleTabStyle}
             onPress={() => this.handleGenderFilter('Male')}
@@ -73,23 +74,10 @@ class WorkoutFilter extends React.Component {
             })
           }
         </View>
-
       </View>
     )
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 0.5,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderBottomColor: 'black',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-})
 
 export default WorkoutFilter

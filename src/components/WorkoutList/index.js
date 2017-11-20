@@ -4,6 +4,9 @@ import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
 // components
 import WorkoutListItem from '../WorkoutListItem'
 
+// styles
+import { container } from '../../styles/container'
+
 
 class WorkoutList extends React.Component {
 
@@ -12,7 +15,7 @@ class WorkoutList extends React.Component {
     const workouts = this.props.filteredWorkouts
     const navigation = this.props.navigation
     return (
-      <View style={styles.container}>
+      <View style={container.containerWhite}>
         <FlatList
           data={workouts}
           keyExtractor={(item, index) => index}
@@ -37,12 +40,5 @@ class WorkoutList extends React.Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  }
-})
 
 export default WorkoutList
