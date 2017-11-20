@@ -19,9 +19,9 @@ import CompetitorEditForm from '../../components/CompetitorEditForm'
 class CompetitorDetailsContainer extends React.Component {
 
   state = {
-    competitor: this.props.navigation.state.params.competitor || undefined,
-    originalGender: this.props.navigation.state.params.competitor.gender,
-    originalDivision: this.props.navigation.state.params.competitor.division,
+    competitor: this.props.competitor || undefined,
+    originalGender: this.props.competitor.gender,
+    originalDivision: this.props.competitor.division,
     workouts: undefined,
     editMode: false,
     scores: undefined,
