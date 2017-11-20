@@ -1,5 +1,10 @@
 import React from 'react'
-import { Button, FlatList, Text, StyleSheet,  View } from 'react-native'
+import { Text, TouchableHighlight, View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
+
+// styles
+import { typography } from '../../styles/typography'
+import { listItem } from '../../styles/listItem'
 
 
 class DivisionList extends React.Component {
@@ -7,22 +12,24 @@ class DivisionList extends React.Component {
     const navigation = this.props.navigation
     const division = this.props.item
     return (
-      <Text
-        style={styles.text}
+      <TouchableHighlight
+        underlayColor="white"
         onPress={() => navigation.navigate('AdminDivisionDetails', { division: division })}
       >
-        {division}
-      </Text>
+        <View style={listItem.container}>
+
+          <View style={listItem.left}>
+            <Text style={[listItem.item, typography.headline]}>{division}</Text>
+          </View>
+
+          <View style={listItem.right}>
+            <Ionicons name="ios-arrow-forward" size={28} color="black" />
+          </View>
+
+        </View>
+      </TouchableHighlight>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  text: {
-    flex: 1,
-    margin: 25,
-    textAlign: 'center'
-  }
-})
 
 export default DivisionList

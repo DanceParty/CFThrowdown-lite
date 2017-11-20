@@ -1,8 +1,12 @@
 import React from 'react'
-import { Button, FlatList, Text, StyleSheet,  View } from 'react-native'
+import { Button, FlatList, Text, View } from 'react-native'
 
 // components
 import DivisionListItem from '../DivisionListItem'
+
+// styles
+import { container } from '../../styles/container'
+
 
 class DivisionList extends React.Component {
   render() {
@@ -10,34 +14,27 @@ class DivisionList extends React.Component {
     const navigation = this.props.navigation
     const admin = this.props.admin
     return (
-      <View>
+      <View style={container.containerWhite}>
         <FlatList
-            style={styles.list}
-            data={divisions}
-            keyExtractor={(item, index) => index}
-            renderItem={({item}) =>
-              <DivisionListItem
-                navigation={navigation}
-                item={item}
-              />
-            }
-          />
-          {
-            admin &&
-            <Button
-              title="Add Division"
-              onPress={() => this.props.navigation.navigate('AddDivision')}
+          data={divisions}
+          keyExtractor={(item, index) => index}
+          renderItem={({item}) =>
+            <DivisionListItem
+              navigation={navigation}
+              item={item}
             />
           }
+        />
+        {
+          admin &&
+          <Button
+            title="Add Division"
+            onPress={() => this.props.navigation.navigate('AddDivision')}
+          />
+        }
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  list: {
-    margin: 10,
-  },
-})
 
 export default DivisionList

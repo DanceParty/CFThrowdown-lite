@@ -21,6 +21,6 @@ export const listItem = StyleSheet.create({
     paddingRight: scale(10),
   },
   item: {
-    alignSelf: 'stretch'
-  }
+    //alignSelf: 'stretch',
+  },
 })

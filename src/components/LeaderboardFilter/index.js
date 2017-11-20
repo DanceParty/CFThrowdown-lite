@@ -1,6 +1,11 @@
 import React from 'react'
 import { FlatList, Text, ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native'
 
+// styles
+import { typography } from '../../styles/typography'
+import { tabs } from '../../styles/tabs'
+import { padding } from '../../styles/padding'
+
 
 class LeaderboardFilter extends React.Component {
 
@@ -19,44 +24,56 @@ class LeaderboardFilter extends React.Component {
 
     let isMale = gender === 'Male'
     let isFemale = gender === 'Female'
+
+    // styles
+    const tabsGroup = [tabs.tabsGroup, padding.smPaddingTop]
+    const title = [typography.title3, padding.smPaddingTop]
+    const maleTab = (gender === 'Male') ? tabs.currTab : tabs.tab
+    const maleText = (gender === 'Male') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
+    const femaleTab = (gender === 'Female') ? tabs.currTab : tabs.tab
+    const femaleText = (gender === 'Female') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
     return (
-      <View>
-        <Text>Gender: </Text>
 
-        <Text
-          style={isMale && styles.textHighlight}
-          onPress={() => this.handleGenderFilter('Male')}
-        >
-          Men
-        </Text>
-        <Text
-          style={isFemale && styles.textHighlight}
-          onPress={() => this.handleGenderFilter('Female')}
-        >
-          Women
+      <View style={tabs.container}>
+
+        <Text style={title}>
+          Filters:
         </Text>
 
-        <Text>Division: </Text>
-        {
-          divisions.map((division, index) =>
-            <Text
-              style={(currDivision === division) && styles.textHighlight}
-              key={index}
-              onPress={() => this.handleDivisionFilter(division)}
-            >
-              {division}
-            </Text>
-          )
-        }
+        <View style={tabsGroup}>
+          <TouchableHighlight
+            style={maleTab}
+            onPress={() => this.handleGenderFilter('Male')}
+          >
+            <Text style={maleText}>Men</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={femaleTab}
+            onPress={() => this.handleGenderFilter('Female')}
+          >
+            <Text style={femaleText}>Women</Text>
+          </TouchableHighlight>
+        </View>
+
+        <View style={tabsGroup}>
+          {
+            divisions.map((division, index) => {
+              return (
+                <TouchableHighlight
+                  style={(currDivision === division) ? tabs.currTab : tabs.tab}
+                  onPress={() => this.handleDivisionFilter(division)}
+                  key={index}
+                >
+                  <Text style={(currDivision === division) ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]}>{division}</Text>
+                </TouchableHighlight>
+              )
+            })
+          }
+        </View>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  textHighlight: {
-    color: 'red',
-  },
-})
 
 export default LeaderboardFilter

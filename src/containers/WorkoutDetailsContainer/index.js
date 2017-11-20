@@ -32,6 +32,7 @@ class WorkoutDetailsContainer extends React.Component {
       if (res) {
         const sortedCompetitors = sortByPoints(type, workout, res)
         // iterate through the new array and update each competitor with the object
+
         sortedCompetitors.map((competitor, index) => {
           const competitorId = competitor.id
           const updateScores = competitor.scores.map((score) => {
@@ -45,6 +46,8 @@ class WorkoutDetailsContainer extends React.Component {
               return score
             }
           })
+
+          console.log(updateScores)
 
           // update each competitor
           updateCompetitorScores(competitorId, updateScores)

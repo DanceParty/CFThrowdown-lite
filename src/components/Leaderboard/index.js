@@ -1,38 +1,50 @@
 import React from 'react'
-import { FlatList, Text, StyleSheet } from 'react-native'
+import { FlatList, Text, StyleSheet, View } from 'react-native'
+
+// styles
+import { container } from '../../styles/container'
+import { typography } from '../../styles/typography'
+import { listItem } from '../../styles/listItem'
 
 
 class Leaderboard extends React.Component {
   render() {
-    const competitors = this.props.competitors
+    console.log(this.props.competitors)
+    const competitors = this.props.competitors.sort((a, b) => {
+      return a.totalScore - b.totalScore
+    })
     return (
-      <FlatList
-        style={styles.list}
-        data={competitors.sort((a, b) => {
-          return a.totalScore - b.totalScore
-        })}
-        renderItem={({item}) =>
-          <Text
-            style={styles.text}
-          >
-            {item.fullName}
-          </Text>
-        }
-        keyExtractor={(item, index) => index}
-      />
+      <View style={container.containerWhite}>
+        <FlatList
+          keyExtractor={(item, index) => index}
+          data={competitors}
+          renderItem={({item}) =>
+            <View style={listItem.container}>
+              <View style={listItem.left}>
+                <Text style={typography.headline}>{item.firstName}</Text>
+              </View>
+              <View style={[listItem.right, { alignItems: 'center' }]}>
+                <Text style={typography.caption1}>{item.fullName}</Text>
+                <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
+              </View>
+              <View style={[listItem.right, { alignItems: 'center' }]}>
+                <Text style={typography.caption1}>{item.fullName}</Text>
+                <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
+              </View>
+              <View style={[listItem.right, { alignItems: 'center' }]}>
+                <Text style={typography.caption1}>{item.fullName}</Text>
+                <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
+              </View>
+              <View style={[listItem.right, { alignItems: 'center' }]}>
+                <Text style={typography.caption1}>{item.fullName}</Text>
+                <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
+              </View>
+            </View>
+          }
+        />
+      </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  list: {
-    margin: 10
-  },
-  text: {
-    flex: 1,
-    margin: 25,
-    textAlign: 'center'
-  }
-})
 
 export default Leaderboard

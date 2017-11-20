@@ -1,6 +1,7 @@
 {
   "expo": {
     "sdkVersion": "22.0.0",
-    "name": "Crossfit Throwdown"
+    "name": "Crossfit Throwdown",
+    "orientation" : "portrait"
   }
 }

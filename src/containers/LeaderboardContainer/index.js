@@ -9,6 +9,9 @@ import { allDivisions } from '../../actions/divisions'
 import Leaderboard from '../../components/Leaderboard'
 import LeaderboardFilter from '../../components/LeaderboardFilter'
 
+// styles
+import { container } from '../../styles/container'
+
 
 class LeaderboardContainer extends React.Component {
 
@@ -100,37 +103,23 @@ class LeaderboardContainer extends React.Component {
     const gender = this.state.currentGender
     if (competitors && divisions) {
       return (
-        <ScrollView>
-          <View style={styles.container}>
-
-            <LeaderboardFilter
-              gender={gender}
-              divisions={divisions}
-              currDivision={currDivision}
-              handleGenderFilter={this.handleGenderFilter}
-              handleDivisionFilter={this.handleDivisionFilter}
-            />
-
-            <Leaderboard
-              competitors={competitors}
-            />
-
-          </View>
-        </ScrollView>
+        <View style={container.container}>
+          <LeaderboardFilter
+            gender={gender}
+            divisions={divisions}
+            currDivision={currDivision}
+            handleGenderFilter={this.handleGenderFilter}
+            handleDivisionFilter={this.handleDivisionFilter}
+          />
+          <Leaderboard
+            competitors={competitors}
+          />
+        </View>
       )
     } else {
       return null
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-})
 
 export default LeaderboardContainer
