@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, View } from 'react-native'
+import { Button, Text, ScrollView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 // actions
@@ -103,7 +103,7 @@ class WorkoutDetailsContainer extends React.Component {
     const admin = this.props.admin
     if (workout && gender) {
       return (
-        <View>
+        <ScrollView>
           <Workout
             workout={workout}
             gender={gender}
@@ -111,7 +111,7 @@ class WorkoutDetailsContainer extends React.Component {
             onSubmitWorkout={this.onSubmitWorkout}
             handleRemoveWorkout={this.handleRemoveWorkout}
           />
-        </View>
+        </ScrollView>
       )
     } else {
       return null

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import RootNavigator from './utils/router'
 
 import { firebase } from './firebase/firebase'
@@ -12,12 +12,11 @@ export default class RootComponent extends React.Component {
   }
 
   componentDidMount() {
+    console.ignoredYellowBox = ['Setting a timer']
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('LOGGED IN')
         this.setState(() => ({ user: user, isSignedIn: true }))
       } else {
-        console.log('LOGGED OUT')
         this.setState(() => ({ user: null, isSignedIn: false }))
       }
     })
@@ -28,7 +27,10 @@ export default class RootComponent extends React.Component {
     const isSignedIn = this.state.isSignedIn
     const NavComponent = RootNavigator(isSignedIn)
     return (
-      <NavComponent screenProps={this.state.user} />
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
+        <NavComponent screenProps={this.state.user} />
+      </View>
     );
   }
 }
@@ -36,8 +38,5 @@ export default class RootComponent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  }
+})

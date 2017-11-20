@@ -20,9 +20,7 @@ class MenuContainer extends React.Component {
     const navigation = this.props.navigation
     return (
       <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Logo />
-        </View>
+        <Logo />
         <Menu
           admin={admin}
           navigation={navigation}
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
   },
 })

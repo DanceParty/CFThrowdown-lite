@@ -9,12 +9,22 @@ class Home extends React.Component {
     const admin = false
     const navigation = this.props.navigation
     return (
-      <MenuContainer
-        admin={admin}
-        navigation={navigation}
-      />
+      <View style={styles.page}>
+        <MenuContainer
+          admin={admin}
+          navigation={navigation}
+        />
+      </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignSelf: 'stretch'
+  }
+})
 
 export default Home

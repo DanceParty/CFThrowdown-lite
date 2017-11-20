@@ -1,6 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 
+// styles
+import { typography } from '../../styles/typography'
+import { primaryButton } from '../../styles/primaryButton'
+
 
 class PrimaryButton extends React.Component {
 
@@ -26,38 +30,23 @@ class PrimaryButton extends React.Component {
 
   render() {
     const buttonText = this.props.text
+    const isSmall = this.props.isSmall
+
+    // button style
+    const buttonStyle = isSmall ? primaryButton.smButton : primaryButton.button
+    const textStyle = isSmall ? typography.subhead : typography.headline
     return (
       <TouchableHighlight
-        style={styles.touchableButton}
-        underlayColor="#3f83a7"
+        style={buttonStyle}
+        underlayColor="#4492D0"
         onShowUnderlay={this.onShowUnderlay}
         onHideUnderlay={this.onHideUnderlay}
         onPress={this.handleButtonPress}
       >
-        <Text style={this.state.isPressed ? styles.buttonTextPressed : styles.buttonText}>{buttonText}</Text>
+        <Text style={this.state.isPressed ? [textStyle, primaryButton.buttonActive] : [textStyle, primaryButton.buttonInactive]}>{buttonText}</Text>
       </TouchableHighlight>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  touchableButton: {
-    height: 50,
-    width: 300,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#3f83a7',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonTextPressed: {
-    fontSize: 18,
-    color: 'white'
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#3f83a7'
-  },
-})
 
 export default PrimaryButton

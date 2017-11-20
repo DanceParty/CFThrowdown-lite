@@ -1,6 +1,11 @@
 import React from 'react'
 import { TouchableHighlight, StyleSheet, Text, View } from 'react-native'
 
+// styles
+import { typography } from '../../styles/typography'
+import { tabs } from '../../styles/tabs'
+import { padding } from '../../styles/padding'
+
 
 class WorkoutFilter extends React.Component {
 
@@ -16,35 +21,58 @@ class WorkoutFilter extends React.Component {
     const gender = this.props.gender
     const divisions = this.props.divisions
     const selectedDivision = this.props.selectedDivision
+
+    // group filter style
+    const tabsGroup = [tabs.tabsGroup, padding.smPaddingTop]
+
+    // title style
+    const title = [typography.title3, padding.smPaddingTop]
+
+    // male filter style
+    const maleTabStyle = (gender === 'Male') ? tabs.currTab : tabs.tab
+    const maleTextStyle = (gender === 'Male') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
+
+    // female filter style
+    const womenTabStyle = (gender === 'Female') ? tabs.currTab : tabs.tab
+    const womenTextStyle = (gender === 'Female') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
+
     return (
       <View style={styles.container}>
-        <Text>Gender: </Text>
+        <Text style={title}>
+          Filters:
+        </Text>
+        <View style={tabsGroup}>
 
-        <TouchableHighlight onPress={() => this.handleGenderFilter('Male')}>
-          <Text style={(gender === 'Male') && { color: 'red' }}>
-            Men
-          </Text>
-        </TouchableHighlight>
+          <TouchableHighlight
+            style={maleTabStyle}
+            onPress={() => this.handleGenderFilter('Male')}
+          >
+            <Text style={maleTextStyle}>Men</Text>
+          </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => this.handleGenderFilter('Female')}>
-          <Text style={(gender === 'Female') && { color: 'red' }}>
-            Women
-          </Text>
-        </TouchableHighlight>
+          <TouchableHighlight
+            style={womenTabStyle}
+            onPress={() => this.handleGenderFilter('Female')}
+          >
+            <Text style={womenTextStyle}>Women</Text>
+          </TouchableHighlight>
+        </View>
 
-        <Text>Division: </Text>
-        {
-          divisions.map((division, index) => {
-            return (
-              <TouchableHighlight
-                onPress={() => this.handleDivisionFilter(division)}
-                key={index}
-              >
-                <Text style={(selectedDivision === division) && { color: 'red' }}>{division}</Text>
-              </TouchableHighlight>
-            )
-          })
-        }
+        <View style={tabsGroup}>
+          {
+            divisions.map((division, index) => {
+              return (
+                <TouchableHighlight
+                  style={(selectedDivision === division) ? tabs.currTab : tabs.tab}
+                  onPress={() => this.handleDivisionFilter(division)}
+                  key={index}
+                >
+                  <Text style={(selectedDivision === division) ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]}>{division}</Text>
+                </TouchableHighlight>
+              )
+            })
+          }
+        </View>
 
       </View>
     )
@@ -54,11 +82,14 @@ class WorkoutFilter extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
+    flex: 0.5,
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between'
-  }
+    backgroundColor: 'white',
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
 })
 
 export default WorkoutFilter

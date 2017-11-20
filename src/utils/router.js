@@ -35,41 +35,59 @@ const PublicNavigator = StackNavigator({
     screen: Workouts,
     navigationOptions: {
       headerTitle: 'Workouts',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     }
   },
   WorkoutDetails: {
     screen: WorkoutDetails,
     navigationOptions: {
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   Leaderboard: {
     screen: Leaderboard,
     navigationOptions: {
       headerTitle: 'Leaderboard',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     }
   },
   Competitors: {
     screen: Competitors,
     navigationOptions: {
       headerTitle: 'Competitors',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     }
   },
   CompetitorDetails: {
     screen: CompetitorDetails,
     navigationOptions: {
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminLogin: {
     screen: AdminLogin,
     navigationOptions: {
       headerTitle: 'Admin Login',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
-    }
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
+    },
   }
 });
 
@@ -84,60 +102,87 @@ const AdminNavigator = StackNavigator({
     screen: NewWorkout,
     navigationOptions: {
       headerTitle: 'New Workout',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AddCompetitor: {
     screen: AddCompetitor,
     navigationOptions: {
       headerTitle: 'Add Competitor',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AddDivision: {
     screen: AddDivision,
     navigationOptions: {
       headerTitle: 'Add Division',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminCompetitors: {
     screen: AdminCompetitors,
     navigationOptions: {
       headerTitle: 'Competitors - Admin',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminCompetitorDetails: {
     screen: AdminCompetitorDetails,
     navigationOptions: {
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminWorkouts: {
     screen: AdminWorkouts,
     navigationOptions: {
       headerTitle: 'Workouts - Admin',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminWorkoutDetails: {
     screen: AdminWorkoutDetails,
     navigationOptions: {
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminDivisions: {
     screen: AdminDivisions,
     navigationOptions: {
       headerTitle: 'Divisions - Admin',
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
   AdminDivisionDetails: {
     screen: AdminDivisionDetails,
     navigationOptions: {
-      headerStyle: (Platform.OS === 'android') ? Constants.statusBarHeight : 0,
+      headerTitleStyle: { color: 'white' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#424244', marginTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0 },
     },
   },
 })

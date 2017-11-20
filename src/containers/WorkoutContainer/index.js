@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ScrollView } from 'react-native'
+import { Button, StyleSheet, View } from 'react-native'
 
 // firebase
 import { getWorkouts } from '../../actions/workouts'
@@ -90,7 +90,7 @@ class WorkoutContainer extends React.Component {
     const navigation = this.props.navigation
     if (workouts && divisions) {
       return (
-        <ScrollView>
+        <View style={styles.container}>
           <WorkoutFilter
             gender={gender}
             divisions={divisions}
@@ -104,7 +104,7 @@ class WorkoutContainer extends React.Component {
             filteredWorkouts={workouts}
             admin={admin}
           />
-        </ScrollView>
+        </View>
       )
     } else if ((!workouts || !divisions) && admin) {
       return (
@@ -117,7 +117,12 @@ class WorkoutContainer extends React.Component {
       return null
     }
   }
-
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+})
 
 export default WorkoutContainer

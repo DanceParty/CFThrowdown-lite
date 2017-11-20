@@ -5,6 +5,10 @@ import Button from 'apsl-react-native-button'
 // components
 import PrimaryButton from '../PrimaryButton'
 
+// styles
+import { padding } from '../../styles/padding'
+import { typography } from '../../styles/typography'
+
 
 class Menu extends React.Component {
 
@@ -49,7 +53,7 @@ class Menu extends React.Component {
             handleButtonPress={this.handleLeaderboardOrDivisionPress}
           />
         </View>
-        <View style={styles.bottom}>
+        <View style={[padding.mdPaddingBottom, styles.bottom]}>
           {
             admin ?
             <Text
@@ -59,7 +63,7 @@ class Menu extends React.Component {
               Logout
             </Text>
             :
-            <Text>Admin? <Text style={styles.link} onPress={() => navigation.navigate('AdminLogin')}>Login Here</Text>
+            <Text style={typography.footnote}>Admin? <Text style={styles.link} onPress={() => navigation.navigate('AdminLogin')}>Login Here</Text>
             </Text>
           }
         </View>
@@ -84,24 +88,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: 15,
   },
   link: {
-    color: 'purple',
+    color: '#0D3E9C',
   },
-  buttonText: {
-    fontSize: 18,
-    color: '#3f83a7',
-  },
-  button: {
-    height: 50,
-    width: 300,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#3f83a7',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
 })
 
 export default Menu

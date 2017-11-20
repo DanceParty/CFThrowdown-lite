@@ -14,8 +14,8 @@ class WorkoutList extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
-          style={styles.list}
           data={workouts}
+          keyExtractor={(item, index) => index}
           renderItem={({item}) =>
             <WorkoutListItem
               navigation={navigation}
@@ -23,7 +23,7 @@ class WorkoutList extends React.Component {
               admin={admin}
             />
           }
-          keyExtractor={(item, index) => index}
+
         />
         {
           admin &&
@@ -41,13 +41,8 @@ class WorkoutList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  list: {
-    margin: 10,
-  },
+    backgroundColor: 'white',
+  }
 })
 
 export default WorkoutList
