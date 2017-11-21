@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { Alert, ScrollView, Text, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -53,11 +53,6 @@ class CompetitorDetailsContainer extends React.Component {
           }
         })
       })
-    } else {
-      this.setState({
-        workouts: ["there are no workouts for this competitor."],
-        scores: ["No scores available"]
-      })
     }
   }
 
@@ -77,57 +72,65 @@ class CompetitorDetailsContainer extends React.Component {
       let totalScore = 0
       const competitorId = this.props.navigation.state.params.competitor.id
 
-      console.log(gender, division)
+      const warning = !gender || !this.state.competitor.firstName || !this.state.competitor.lastName
       // check if we need new workouts due to new gender or division
-      if (gender !== originalGender || division !== originalDivision) {
-        // get workouts of new gender + division
-        getWorkoutsByDivisionAndGender(division, gender).then((workoutResult) => {
-          let scores = []
-          let index = -1
-          workoutResult.map((workout) => {
-            scores[index += 1] = {
-              workoutId: workout.id,
-              points: 0,
-              place: 100000,
+      if (warning) {
+        Alert.alert('Edit Competitor Warning', 'Please make sure the form is filled out correctly')
+      } else {
+        if (gender !== originalGender || division !== originalDivision) {
+          // get workouts of new gender + division
+          getWorkoutsByDivisionAndGender(division, gender).then((workoutResult) => {
+            let scores = []
+            if (workoutResult) {
+              let index = -1
+              workoutResult.map((workout) => {
+                scores[index += 1] = {
+                  workoutId: workout.id,
+                  points: 0,
+                  place: 100000,
+                }
+              })
             }
+            let competitor = {
+              division: division,
+              female: (gender === 'Female'),
+              male: (gender === 'Male'),
+              firstName: this.state.competitor.firstName,
+              lastName: this.state.competitor.lastName,
+              scores: scores,
+              totalScore: totalScore,
+            }
+            updateCompetitor(competitorId, competitor)
+
+            this.setState((prevState) => ({
+              scores: scores,
+              editMode: !prevState.editMode,
+            }))
           })
+        } else {
+          if (this.state.scores) {
+            this.state.scores.map(scoreObj => totalScore += scoreObj.points)
+          }
+
           let competitor = {
-            division: division,
-            female: (gender === 'Female'),
-            male: (gender === 'Male'),
+            division: this.state.competitor.division || '',
+            female: (this.state.competitor.gender === 'Female'),
+            male: (this.state.competitor.gender === 'Male'),
             firstName: this.state.competitor.firstName,
             lastName: this.state.competitor.lastName,
-            scores: scores,
+            scores: this.state.scores || [],
             totalScore: totalScore,
           }
+
           updateCompetitor(competitorId, competitor)
 
+          // update state with no more edit mode
           this.setState((prevState) => ({
-            scores: scores,
             editMode: !prevState.editMode,
           }))
-        })
-      } else {
-        this.state.scores.map(scoreObj => totalScore += scoreObj.points)
-
-        let competitor = {
-          division: this.state.competitor.division,
-          female: (this.state.competitor.gender === 'Female'),
-          male: (this.state.competitor.gender === 'Male'),
-          firstName: this.state.competitor.firstName,
-          lastName: this.state.competitor.lastName,
-          scores: this.state.scores,
-          totalScore: totalScore,
         }
-
-        updateCompetitor(competitorId, competitor)
-
-        // update state with no more edit mode
-        this.setState((prevState) => ({
-          editMode: !prevState.editMode,
-        }))
+        this.props.navigation.navigate('AdminHome')
       }
-      this.props.navigation.navigate('AdminHome')
     }
   }
 
@@ -214,10 +217,10 @@ class CompetitorDetailsContainer extends React.Component {
     const workouts = this.state.workouts
     const scores = this.state.competitor.scores
     const selectedDivision = this.state.division
+    const scoresArray = []
     // if there are workouts for this division/gender combination
     // create an array to store them all so we can add points
     if (workouts) {
-      const scoresArray = []
       const index = -1
       if (scores) {
         this.state.workouts.map((workout) => {
@@ -235,48 +238,42 @@ class CompetitorDetailsContainer extends React.Component {
           })
         })
       }
+    }
 
-      if (!this.state.editMode && this.state) {
-        return (
-          <ScrollView>
-            <Competitor
-              competitor={competitor}
-              scores={scoresArray}
-              admin={admin}
-              handleEditMode={this.handleEditMode}
-            />
-          </ScrollView>
-        )
-      } else if (this.state.editMode) {
-        const modalData = this.state.divisionList.map((division, index) => {
-          return {
-            key: index,
-            label: division,
-          }
-        })
-        return (
-            <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
-              <CompetitorEditForm
-                competitor={competitor}
-                selectedDivision={selectedDivision}
-                modalData={modalData}
-                scores={scoresArray}
-                handleFirstNameEdit={this.handleFirstNameEdit}
-                handleLastNameEdit={this.handleLastNameEdit}
-                handleGenderCheckbox={this.handleGenderCheckbox}
-                handleDivisionChange={this.handleDivisionChange}
-                handleScoreEdit={this.handleScoreEdit}
-                handleEditMode={this.handleEditMode}
-                handleCancel={this.handleCancel}
-              />
-            </KeyboardAwareScrollView>
-        )
-      }
-    } else {
+    if (!this.state.editMode && this.state) {
       return (
-        <View>
-          <Text>{this.state.competitor.fullName}</Text>
-        </View>
+        <ScrollView>
+          <Competitor
+            competitor={competitor}
+            scores={scoresArray}
+            admin={admin}
+            handleEditMode={this.handleEditMode}
+          />
+        </ScrollView>
+      )
+    } else if (this.state.editMode) {
+      const modalData = this.state.divisionList.map((division, index) => {
+        return {
+          key: index,
+          label: division,
+        }
+      })
+      return (
+        <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
+          <CompetitorEditForm
+            competitor={competitor}
+            selectedDivision={selectedDivision}
+            modalData={modalData}
+            scores={scoresArray}
+            handleFirstNameEdit={this.handleFirstNameEdit}
+            handleLastNameEdit={this.handleLastNameEdit}
+            handleGenderCheckbox={this.handleGenderCheckbox}
+            handleDivisionChange={this.handleDivisionChange}
+            handleScoreEdit={this.handleScoreEdit}
+            handleEditMode={this.handleEditMode}
+            handleCancel={this.handleCancel}
+          />
+        </KeyboardAwareScrollView>
       )
     }
   }

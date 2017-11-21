@@ -35,19 +35,11 @@ class CompetitorContainer extends React.Component {
     // get all of the competitors and store them in an array in the state
     getCompetitors().then((res) => {
       if (res) {
-        const defaultCompetitors = res.filter((competitor) => {
-          return (competitor.gender === 'Male') && (competitor.division === 'RX')
-        })
-        // get competitors and store them in state
         this.setState({
           competitors: res,
-          filteredCompetitors: defaultCompetitors,
+          filteredCompetitors: res,
         })
       }
-    })
-    this.setState({
-      currentGender: 'Male',
-      currentDivision: 'RX',
     })
   }
 
@@ -114,6 +106,16 @@ class CompetitorContainer extends React.Component {
             handleGenderFilter={this.handleGenderFilter}
             handleDivisionFilter={this.handleDivisionFilter}
           />
+          <CompetitorList
+            admin={admin}
+            competitors={competitors}
+            navigation={navigation}
+          />
+        </View>
+      )
+    } else if (competitors && !divisions) {
+      return (
+        <View style={container.container}>
           <CompetitorList
             admin={admin}
             competitors={competitors}

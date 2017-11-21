@@ -48,7 +48,7 @@ export const typography = StyleSheet.create({
   footnote: {
     fontSize: verticalScale(13),
     fontWeight: '400',
-    lineHeight: verticalScale(20),
+    lineHeight: verticalScale(19),
     letterSpacing: scale(-0.078)
   },
   caption1: {

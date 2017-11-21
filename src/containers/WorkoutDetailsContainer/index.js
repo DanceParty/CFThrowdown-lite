@@ -47,8 +47,6 @@ class WorkoutDetailsContainer extends React.Component {
             }
           })
 
-          console.log(updateScores)
-
           // update each competitor
           updateCompetitorScores(competitorId, updateScores)
         })

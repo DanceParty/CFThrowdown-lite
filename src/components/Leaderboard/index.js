@@ -9,7 +9,6 @@ import { listItem } from '../../styles/listItem'
 
 class Leaderboard extends React.Component {
   render() {
-    console.log(this.props.competitors)
     const competitors = this.props.competitors.sort((a, b) => {
       return a.totalScore - b.totalScore
     })

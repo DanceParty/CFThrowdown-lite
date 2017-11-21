@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // actions
@@ -59,44 +60,49 @@ class NewCompetitorContainer extends React.Component {
 
   submitCompetitorForm = () => {
     const gender = this.state.male ? 'Male' : 'Female'
+    const warning = !this.state.firstName || !this.state.lastName || (!this.state.male && !this.state.female)
 
-    getWorkoutsByDivisionAndGender(this.state.division, gender).then((result) => {
-      if (result) {
-        let scoresArray = []
-        let index = -1
-        result.map((workout) => {
-          scoresArray[index += 1] = {
-            workoutId: workout.id,
-            points: 0,
-            place: 100000,
+    if (warning) {
+      Alert.alert('New Competitor Warning', 'Please check empty fields and try again.')
+    } else {
+      getWorkoutsByDivisionAndGender(this.state.division, gender).then((result) => {
+        if (result) {
+          let scoresArray = []
+          let index = -1
+          result.map((workout) => {
+            scoresArray[index += 1] = {
+              workoutId: workout.id,
+              points: 0,
+              place: 100000,
+            }
+          })
+
+          const competitor = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            division: this.state.division,
+            male: this.state.male,
+            female: this.state.female,
+            scores: scoresArray,
+            totalScore: 0,
           }
-        })
 
-        const competitor = {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          division: this.state.division,
-          male: this.state.male,
-          female: this.state.female,
-          scores: scoresArray,
-          totalScore: 0,
+          addCompetitor(competitor)
+        } else {
+          const competitor = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            division: this.state.division,
+            male: this.state.male,
+            female: this.state.female,
+            scores: null,
+            totalScore: 0,
+          }
+          addCompetitor(competitor)
         }
-
-        addCompetitor(competitor)
-      } else {
-        const competitor = {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          division: this.state.division,
-          male: this.state.male,
-          female: this.state.female,
-          scores: null,
-          totalScore: 0,
-        }
-        addCompetitor(competitor)
-      }
-    })
-    this.props.navigation.navigate('AdminHome')
+      })
+      this.props.navigation.navigate('AdminHome')
+    }
   }
 
   handleCancelForm = () => {

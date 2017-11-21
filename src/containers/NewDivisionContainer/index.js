@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // actions
@@ -20,12 +21,16 @@ class NewDivisionContainer extends React.Component {
   }
 
   handleDivisionSubmit = () => {
-    const division = {
-      name: this.state.name,
-      workouts: [],
+    if (!this.state.name) {
+      Alert.alert('New Division Warning', 'Please enter a division name')
+    } else {
+      const division = {
+        name: this.state.name,
+        workouts: [],
+      }
+      addDivision(division)
+      this.props.navigation.navigate('AdminHome')
     }
-    addDivision(division)
-    this.props.navigation.navigate('AdminHome')
   }
 
   handleCancelDivision = () => {

@@ -10,7 +10,9 @@ import { container } from '../../styles/container'
 
 class DivisionList extends React.Component {
   render() {
-    const divisions = this.props.divisions
+    const divisions = this.props.divisions.sort((a, b) => {
+      return a.length - b.length
+    })
     const navigation = this.props.navigation
     const admin = this.props.admin
     return (

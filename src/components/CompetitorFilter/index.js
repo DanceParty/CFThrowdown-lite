@@ -18,12 +18,15 @@ class CompetitorFilter extends React.Component {
   }
 
   render() {
-    const divisions = this.props.divisions
+    const divisions = this.props.divisions.sort((a, b) => {
+      return a.length - b.length
+    })
     const currGender = this.props.gender
     const currDivision = this.props.division
 
     // styles
-    const tabsGroup = [tabs.tabsGroup, padding.smPaddingTop]
+    const tabsGroup = tabs.tabsGroup
+    const tabsGroupSecondary = tabs.tabsGroupSecondary
     const title = [typography.title3, padding.smPaddingTop]
     const maleTab = (currGender === 'Male') ? tabs.currTab : tabs.tab
     const maleText = (currGender === 'Male') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
@@ -53,7 +56,7 @@ class CompetitorFilter extends React.Component {
           </TouchableHighlight>
         </View>
 
-        <View style={tabsGroup}>
+        <View style={tabsGroupSecondary}>
           {
             divisions.map((division, index) => {
               return (
@@ -62,7 +65,7 @@ class CompetitorFilter extends React.Component {
                   onPress={() => this.handleDivisionFilter(division)}
                   key={index}
                 >
-                  <Text style={(currDivision === division) ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]}>{division}</Text>
+                  <Text style={(currDivision === division) ? [typography.footnote, tabs.currTabText] : [typography.footnote, tabs.tabText]}>{division}</Text>
                 </TouchableHighlight>
               )
             })

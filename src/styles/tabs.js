@@ -13,7 +13,14 @@ export const tabs = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   tabsGroup: {
-    flex: 0.5,
+    flex: 0.4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+  tabsGroupSecondary: {
+    flex: 0.6,
     alignItems: 'center',
     justifyContent: 'center',
     flexWrap: 'wrap',
@@ -30,11 +37,11 @@ export const tabs = StyleSheet.create({
   tab: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: verticalScale(25),
+    height: verticalScale(23),
     width: moderateScale(150),
     paddingLeft: scale(10),
     paddingRight: scale(10),
-    paddingTop: scale(5),
+    paddingTop: scale(2),
   },
   tabText: {
     color: 'black'
