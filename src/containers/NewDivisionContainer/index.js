@@ -1,4 +1,5 @@
 import React from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // actions
 import { addDivision } from '../../actions/divisions'
@@ -27,12 +28,19 @@ class NewDivisionContainer extends React.Component {
     this.props.navigation.navigate('AdminHome')
   }
 
+  handleCancelDivision = () => {
+    this.props.navigation.navigate('AdminHome')
+  }
+
   render() {
     return (
-      <DivisionForm
-        handleNameChange={this.handleNameChange}
-        handleDivisionSubmit={this.handleDivisionSubmit}
-      />
+      <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
+        <DivisionForm
+          handleNameChange={this.handleNameChange}
+          handleDivisionSubmit={this.handleDivisionSubmit}
+          handleCancelDivision={this.handleCancelDivision}
+        />
+      </KeyboardAwareScrollView>
     )
   }
 }

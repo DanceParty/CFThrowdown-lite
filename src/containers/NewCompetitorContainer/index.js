@@ -1,4 +1,5 @@
 import React from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // actions
 import { allDivisions } from '../../actions/divisions'
@@ -98,6 +99,10 @@ class NewCompetitorContainer extends React.Component {
     this.props.navigation.navigate('AdminHome')
   }
 
+  handleCancelForm = () => {
+    this.props.navigation.navigate('AdminHome')
+  }
+
   render() {
     const navigation = this.props.navigation
     const admin = this.props.admin
@@ -113,19 +118,22 @@ class NewCompetitorContainer extends React.Component {
       }
     })
     return (
-      <CompetitorForm
-        firstName={firstName}
-        lastName={lastName}
-        division={division}
-        male={male}
-        female={female}
-        modalData={modalData}
-        handleFirstNameChange={this.handleFirstNameChange}
-        handleLastNameChange={this.handleLastNameChange}
-        handleDivisionChange={this.handleDivisionChange}
-        handleGenderCheckbox={this.handleGenderCheckbox}
-        submitCompetitorForm={this.submitCompetitorForm}
-      />
+      <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
+        <CompetitorForm
+          firstName={firstName}
+          lastName={lastName}
+          division={division}
+          male={male}
+          female={female}
+          modalData={modalData}
+          handleFirstNameChange={this.handleFirstNameChange}
+          handleLastNameChange={this.handleLastNameChange}
+          handleDivisionChange={this.handleDivisionChange}
+          handleGenderCheckbox={this.handleGenderCheckbox}
+          submitCompetitorForm={this.submitCompetitorForm}
+          handleCancelForm={this.handleCancelForm}
+        />
+      </KeyboardAwareScrollView>
     )
   }
 }

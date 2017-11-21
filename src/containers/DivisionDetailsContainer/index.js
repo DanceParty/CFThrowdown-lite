@@ -14,6 +14,7 @@ class DivisionDetailsContainer extends React.Component {
 
   handleDivisionDelete = () => {
     const division = this.props.division
+    const navigation = this.props.navigation
     removeDivision(division)
     // get all workouts
     // TODO, switch this to only query workouts
@@ -56,6 +57,7 @@ class DivisionDetailsContainer extends React.Component {
         })
       }
     })
+    navigation.navigate('AdminHome')
   }
 
   render() {

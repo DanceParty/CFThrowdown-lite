@@ -51,6 +51,14 @@ export const form = StyleSheet.create({
     textAlign: 'right',
     paddingRight: scale(5),
   },
+  secondaryInputLeft: {
+    borderWidth: 1,
+    borderColor: 'grey',
+    width: '90%',
+    height: verticalScale(20),
+    textAlign: 'left',
+    paddingRight: scale(5),
+  },
   showView: {
     flex: 1,
     justifyContent: 'center',

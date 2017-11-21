@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavigationActions } from 'react-navigation'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // firebase
 import { addWorkout } from '../../actions/workouts'
@@ -179,6 +180,10 @@ class NewWorkoutContainer extends React.Component {
     this.props.navigation.dispatch(resetNav)
   }
 
+  handleCancelForm = () => {
+    this.props.navigation.navigate('AdminHome')
+  }
+
   render() {
     const name = this.state.name
     const division = this.state.division
@@ -199,26 +204,29 @@ class NewWorkoutContainer extends React.Component {
       { key: 2, label: 'Points' },
     ]
     return (
-      <WorkoutForm
-        name={name}
-        pickerData={pickerData}
-        division={division}
-        scoreTypeData={scoreTypeData}
-        type={type}
-        stepInputs={stepInputs}
-        steps={steps}
-        male={male}
-        female={female}
-        handleNameChange={this.handleNameChange}
-        handleDivisionChange={this.handleDivisionChange}
-        handleTypeChange={this.handleTypeChange}
-        handleGenderCheckbox={this.handleGenderCheckbox}
-        handleStepInput={this.handleStepInput}
-        handleAddStep={this.handleAddStep}
-        handleRemoveStep={this.handleRemoveStep}
-        handleWorkoutSubmit={this.handleWorkoutSubmit}
-        handleDescriptionChange={this.handleDescriptionChange}
-      />
+      <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
+        <WorkoutForm
+          name={name}
+          pickerData={pickerData}
+          division={division}
+          scoreTypeData={scoreTypeData}
+          type={type}
+          stepInputs={stepInputs}
+          steps={steps}
+          male={male}
+          female={female}
+          handleNameChange={this.handleNameChange}
+          handleDivisionChange={this.handleDivisionChange}
+          handleTypeChange={this.handleTypeChange}
+          handleGenderCheckbox={this.handleGenderCheckbox}
+          handleStepInput={this.handleStepInput}
+          handleAddStep={this.handleAddStep}
+          handleRemoveStep={this.handleRemoveStep}
+          handleWorkoutSubmit={this.handleWorkoutSubmit}
+          handleDescriptionChange={this.handleDescriptionChange}
+          handleCancelForm={this.handleCancelForm}
+        />
+      </KeyboardAwareScrollView>
     )
   }
 }
