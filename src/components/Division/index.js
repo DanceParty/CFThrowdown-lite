@@ -49,6 +49,7 @@ class Division extends React.Component {
                 style={modal.button}
                 title="Delete"
                 onPress={() => this.handleDivisionDelete()}
+                color="red"
               />
             </View>
           </View>
