@@ -11,6 +11,10 @@ export const textInput = StyleSheet.create({
     width: '50%',
     padding: scale(10)
   },
+  containerFull: {
+    width: '90%',
+    padding: scale(10)
+  },
   textInput: {
     width: '100%',
     borderBottomWidth: 1,

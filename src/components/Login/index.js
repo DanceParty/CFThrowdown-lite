@@ -24,8 +24,8 @@ class Login extends React.Component {
     const email = this.props.email
     const password = this.props.password
     return (
-      <View style={[container.container, { alignItems: 'center' }]}>
-        <View style={textInput.container}>
+      <View style={[container.container, { alignItems: 'center', justifyContent: 'center' }]}>
+        <View style={[textInput.containerFull]}>
           <TextInput
             style={textInput.textInput}
             placeholder="Email..."
