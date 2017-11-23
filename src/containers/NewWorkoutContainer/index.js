@@ -14,7 +14,7 @@ import { getGenderString } from '../../utils/competitors'
 import '@expo/vector-icons'
 
 // components
-import WorkoutForm from '../../components/WorkoutForm'
+import WorkoutForm from '../../components/Workout/WorkoutForm'
 
 
 class NewWorkoutContainer extends React.Component {

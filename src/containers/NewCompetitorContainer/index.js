@@ -8,7 +8,7 @@ import { getWorkoutsByDivisionAndGender } from '../../actions/workouts'
 import { addCompetitor } from '../../actions/competitors'
 
 // components
-import CompetitorForm from '../../components/CompetitorForm'
+import CompetitorForm from '../../components/Competitor/CompetitorForm'
 
 
 class NewCompetitorContainer extends React.Component {

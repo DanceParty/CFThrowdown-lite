@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 // firebase actions
 import { startSignout } from '../../actions/auth'
 
 // components
 import Menu from '../../components/Menu'
-import Logo from '../../components/Logo'
+import Logo from '../../components/Utility/Logo'
 
 
 class MenuContainer extends React.Component {

@@ -4,15 +4,13 @@ import React from 'react'
 import NewCompetitorContainer from '../../containers/NewCompetitorContainer'
 
 
-class AddCompetitor extends React.Component {
-  render() {
-    return (
-      <NewCompetitorContainer
-        admin={true}
-        navigation={this.props.navigation}
-      />
-    )
-  }
+const AddCompetitor = (props) => {
+  const navigation = props.navigation
+  return (
+    <NewCompetitorContainer
+      admin={true}
+      navigation={navigation}
+    />
+  )
 }
-
 export default AddCompetitor

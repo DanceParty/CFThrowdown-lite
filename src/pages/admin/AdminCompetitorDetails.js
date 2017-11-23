@@ -12,10 +12,11 @@ class AdminCompetitorDetails extends React.Component {
 
   render() {
     const competitor = this.props.navigation.state.params.competitor
+    const navigation = this.props.navigation
     return (
       <CompetitorDetailsContainer
         admin={true}
-        navigation={this.props.navigation}
+        navigation={navigation}
         competitor={competitor}
       />
     )

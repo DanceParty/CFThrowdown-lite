@@ -4,15 +4,14 @@ import React from 'react'
 import WorkoutContainer from '../../containers/WorkoutContainer'
 
 
-class AdminWorkouts extends React.Component {
-  render() {
-    return (
-      <WorkoutContainer
-        admin={true}
-        navigation={this.props.navigation}
-      />
-    )
-  }
+const AdminWorkouts = (props) => {
+  const navigation = props.navigation
+  return (
+    <WorkoutContainer
+      admin={true}
+      navigation={navigation}
+    />
+  )
 }
 
 export default AdminWorkouts

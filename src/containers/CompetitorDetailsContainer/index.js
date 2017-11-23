@@ -1,7 +1,6 @@
 import React from 'react'
 import { Alert, ScrollView, Text, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
-import ModalSelector from 'react-native-modal-selector'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // actions
@@ -10,8 +9,8 @@ import { getWorkoutsByDivisionAndGender } from '../../actions/workouts'
 import { updateCompetitor } from '../../actions/competitors'
 
 // components
-import Competitor from '../../components/Competitor'
-import CompetitorEditForm from '../../components/CompetitorEditForm'
+import Competitor from '../../components/Competitor/Competitor'
+import CompetitorEditForm from '../../components/Competitor/CompetitorEditForm'
 
 
 class CompetitorDetailsContainer extends React.Component {

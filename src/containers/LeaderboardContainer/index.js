@@ -1,13 +1,13 @@
 import React from 'react'
-import { FlatList, Text, ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native'
+import { View } from 'react-native'
 
 // actions
 import { getCompetitors } from '../../actions/competitors'
 import { allDivisions } from '../../actions/divisions'
 
 // components
-import Leaderboard from '../../components/Leaderboard'
-import LeaderboardFilter from '../../components/LeaderboardFilter'
+import Leaderboard from '../../components/Leaderboard/Leaderboard'
+import LeaderboardFilter from '../../components/Leaderboard/LeaderboardFilter'
 
 // styles
 import { container } from '../../styles/container'

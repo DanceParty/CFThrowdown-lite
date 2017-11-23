@@ -4,15 +4,14 @@ import React from 'react'
 import DivisionContainer from '../../containers/DivisionContainer'
 
 
-class AdminDivisions extends React.Component {
-  render() {
-    return (
-      <DivisionContainer
-        navigation={this.props.navigation}
-        admin={true}
-      />
-    )
-  }
+const AdminDivisions = (props) => {
+  const navigation = props.navigation
+  return (
+    <DivisionContainer
+      navigation={navigation}
+      admin={true}
+    />
+  )
 }
 
 export default AdminDivisions

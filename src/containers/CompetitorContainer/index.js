@@ -1,13 +1,13 @@
 import React from 'react'
-import { Button, FlatList, TouchableHighlight, Text, StyleSheet, View } from 'react-native'
+import { Button, Text, View } from 'react-native'
 
 // firebase
 import { getCompetitors } from '../../actions/competitors'
 import { allDivisions } from '../../actions/divisions'
 
 // components
-import CompetitorList from '../../components/CompetitorList'
-import CompetitorFilter from '../../components/CompetitorFilter'
+import CompetitorList from '../../components/Competitor/CompetitorList'
+import CompetitorFilter from '../../components/Competitor/CompetitorFilter'
 
 // styles
 import { container } from '../../styles/container'

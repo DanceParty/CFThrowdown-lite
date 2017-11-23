@@ -3,16 +3,14 @@ import React from 'react'
 // containers
 import NewDivisionContainer from '../../containers/NewDivisionContainer'
 
-
-class AddDivision extends React.Component {
-  render() {
-    return (
-      <NewDivisionContainer
-        admin={true}
-        navigation={this.props.navigation}
-      />
-    )
-  }
+const AddDivision = (props) => {
+  const navigation = props.navigation
+  return (
+    <NewDivisionContainer
+      admin={true}
+      navigation={navigation}
+    />
+  )
 }
 
 export default AddDivision

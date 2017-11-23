@@ -5,7 +5,7 @@ import { Button, View } from 'react-native'
 import { allDivisions } from '../../actions/divisions'
 
 // components
-import DivisionList from '../../components/DivisionList'
+import DivisionList from '../../components/Division/DivisionList'
 
 // styles
 import { container } from '../../styles/container'

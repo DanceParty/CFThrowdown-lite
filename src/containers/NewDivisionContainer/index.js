@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { addDivision } from '../../actions/divisions'
 
 // components
-import DivisionForm from '../../components/DivisionForm'
+import DivisionForm from '../../components/Division/DivisionForm'
 
 class NewDivisionContainer extends React.Component {
 

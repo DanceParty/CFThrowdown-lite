@@ -1,6 +1,6 @@
 import React from 'react'
 
-// firebase actions
+// actions
 import { startLogin } from '../../actions/auth'
 
 // components

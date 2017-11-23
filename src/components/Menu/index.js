@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Button from 'apsl-react-native-button'
-
-// components
-import PrimaryButton from '../PrimaryButton'
 
 // styles
-import { padding } from '../../styles/padding'
+import { container } from '../../styles/container'
 import { typography } from '../../styles/typography'
+import { padding } from '../../styles/padding'
+
+// components
+import PrimaryButton from '../Utility/PrimaryButton'
 
 
 class Menu extends React.Component {

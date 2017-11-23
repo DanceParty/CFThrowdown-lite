@@ -4,18 +4,16 @@ import { StyleSheet, View } from 'react-native'
 // containers
 import MenuContainer from '../../containers/MenuContainer'
 
-
-class AdminHome extends React.Component {
-  render() {
-    return (
-      <View style={styles.page}>
-        <MenuContainer
-          admin={true}
-          navigation={this.props.navigation}
-        />
-      </View>
-    )
-  }
+const AdminHome = (props) => {
+  const navigation = props.navigation
+  return (
+    <View style={styles.page}>
+      <MenuContainer
+        admin={true}
+        navigation={navigation}
+      />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

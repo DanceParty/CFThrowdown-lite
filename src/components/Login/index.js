@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, Text, TextInput, View } from 'react-native'
 
 // styles
 import { container } from '../../styles/container'
@@ -50,12 +50,5 @@ class Login extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-})
 
 export default Login

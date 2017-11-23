@@ -11,11 +11,13 @@ class AdminDivisionDetails extends React.Component {
   })
 
   render() {
+    const division = this.props.navigation.state.params.division
+    const navigation = this.props.navigation
     return (
       <DivisionDetailsContainer
         admin={true}
-        navigation={this.props.navigation}
-        division={this.props.navigation.state.params.division}
+        navigation={navigation}
+        division={division}
       />
     )
   }

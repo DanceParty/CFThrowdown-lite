@@ -1,13 +1,13 @@
 import React from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { Button, View } from 'react-native'
 
 // firebase
 import { getWorkouts } from '../../actions/workouts'
 import { allDivisions } from '../../actions/divisions'
 
 // components
-import WorkoutList from '../../components/WorkoutList'
-import WorkoutFilter from '../../components/WorkoutFilter'
+import WorkoutList from '../../components/Workout/WorkoutList'
+import WorkoutFilter from '../../components/Workout/WorkoutFilter'
 
 // styles
 import { container } from '../../styles/container'

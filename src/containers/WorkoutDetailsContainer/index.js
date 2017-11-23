@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 // actions
@@ -12,7 +12,7 @@ import { getGenderString } from '../../utils/competitors'
 import { sortByPoints } from '../../utils/scores'
 
 // components
-import Workout from '../../components/Workout'
+import Workout from '../../components/Workout/Workout'
 
 
 class WorkoutDetailsContainer extends React.Component {

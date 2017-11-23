@@ -4,15 +4,14 @@ import React from 'react'
 import LeaderboardContainer from '../../containers/LeaderboardContainer'
 
 
-class Leaderboard extends React.Component {
-  render() {
-    return (
-      <LeaderboardContainer
-        admin={false}
-        navigation={this.props.navigation}
-      />
-    )
-  }
+const Leaderboard = (props) => {
+  const navigation = props.navigation
+  return (
+    <LeaderboardContainer
+      admin={false}
+      navigation={navigation}
+    />
+  )
 }
 
 export default Leaderboard

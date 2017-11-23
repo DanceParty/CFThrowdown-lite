@@ -1,22 +1,20 @@
 import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 // containers
 import MenuContainer from '../../containers/MenuContainer'
 
-class Home extends React.Component {
-  render() {
-    const admin = false
-    const navigation = this.props.navigation
-    return (
-      <View style={styles.page}>
-        <MenuContainer
-          admin={admin}
-          navigation={navigation}
-        />
-      </View>
-    )
-  }
+
+const Home = (props) => {
+  const navigation = props.navigation
+  return (
+    <View style={styles.page}>
+      <MenuContainer
+        admin={false}
+        navigation={navigation}
+      />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

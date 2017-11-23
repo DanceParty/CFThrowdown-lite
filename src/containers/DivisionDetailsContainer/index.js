@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button, View } from 'react-native'
 
 // actions
 import { removeDivision } from '../../actions/divisions'
@@ -7,7 +6,7 @@ import { getWorkouts, removeWorkout } from '../../actions/workouts'
 import { getCompetitorsByDivision, updateCompetitor } from '../../actions/competitors'
 
 // components
-import Division from '../../components/Division'
+import Division from '../../components/Division/Division'
 
 
 class DivisionDetailsContainer extends React.Component {
