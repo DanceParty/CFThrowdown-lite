@@ -20,7 +20,7 @@ const CompetitorListItem = (props) => {
 
         <View style={listItem.left}>
           <Text style={[listItem.item, typography.headline]}>{competitor.fullName}</Text>
-          <Text style={typography.footnote}>{competitor.gender} - {competitor.division}</Text>
+          <Text style={typography.footnote}>{competitor.gender} - {competitor.division || "No Division"}</Text>
         </View>
 
         <View style={listItem.right}>
