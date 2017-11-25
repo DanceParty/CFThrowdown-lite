@@ -13,8 +13,9 @@ const Leaderboard = (props) => {
   })
 
   return (
-    <View style={container.containerWhite}>
+    <View style={container.listContainer}>
       <FlatList
+        style={{ backgroundColor: 'white' }}
         keyExtractor={(item, index) => index}
         data={competitors}
         renderItem={({item}) =>

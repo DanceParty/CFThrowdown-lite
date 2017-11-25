@@ -9,7 +9,17 @@ import { container } from '../../../styles/container'
 
 
 const CompetitorList = (props) => {
-  const competitors = props.competitors
+  const competitors = props.competitors.sort((a, b) => {
+    const aLastName = a.lastName.toUpperCase()
+    const bLastName = b.lastName.toUpperCase()
+    if (aLastName < bLastName) {
+      return -1
+    } else if (aLastName > bLastName) {
+      return 1
+    } else {
+      return 0
+    }
+  })
   const navigation = props.navigation
   const admin = props.admin
   return (

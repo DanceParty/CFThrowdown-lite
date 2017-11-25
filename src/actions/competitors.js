@@ -5,7 +5,7 @@ export const addCompetitor = (competitor) => {
 }
 
 export const getCompetitors = () => {
-  return database.ref(`competitors`).orderByChild('lastName').once('value').then((snapshot) => {
+  return database.ref(`competitors`).once('value').then((snapshot) => {
     if (snapshot.val()) {
       let competitorArray = []
       let index = -1
