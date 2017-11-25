@@ -44,15 +44,15 @@ class NewWorkoutContainer extends React.Component {
   }
 
   handleNameChange = (text) => {
-    this.setState(() => ({ name: text }))
+    this.setState(() => ({ name: text.trim() }))
   }
 
   handleDivisionChange = (text) => {
-    this.setState(() => ({ division: text }))
+    this.setState(() => ({ division: text.trim() }))
   }
 
   handleTypeChange = (text) => {
-    this.setState(() => ({ type: text }))
+    this.setState(() => ({ type: text.trim() }))
   }
 
   handleGenderCheckbox = (gender) => {
@@ -63,7 +63,7 @@ class NewWorkoutContainer extends React.Component {
   }
 
   handleDescriptionChange = (text) => {
-    this.setState(() => ({ description: text }))
+    this.setState(() => ({ description: text.trim() }))
   }
 
   handleAddStep = () => {

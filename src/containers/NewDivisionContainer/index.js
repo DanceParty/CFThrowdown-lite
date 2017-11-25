@@ -16,7 +16,7 @@ class NewDivisionContainer extends React.Component {
 
   handleNameChange = (value) => {
     this.setState(() => ({
-      name: value
+      name: value.trim()
     }))
   }
 

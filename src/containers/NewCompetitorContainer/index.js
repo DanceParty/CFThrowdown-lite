@@ -35,19 +35,19 @@ class NewCompetitorContainer extends React.Component {
 
   handleFirstNameChange = (value) => {
     this.setState(() => ({
-      firstName: value
+      firstName: value.trim()
     }))
   }
 
   handleLastNameChange = (value) => {
     this.setState(() => ({
-      lastName: value
+      lastName: value.trim()
     }))
   }
 
   handleDivisionChange = (value) => {
     this.setState(() => ({
-      division: value
+      division: value.trim()
     }))
   }
 
