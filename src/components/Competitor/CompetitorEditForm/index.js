@@ -146,6 +146,7 @@ class CompetitorEditForm extends React.Component {
                   >
                     <TextInput
                       style={form.modalInput}
+                      underlineColorAndroid="transparent"
                       editable={false}
                       placeholder={division}
                       value={selectedDivision}
@@ -175,6 +176,7 @@ class CompetitorEditForm extends React.Component {
                       <TextInput
                         style={form.secondaryInput}
                         placeholder={score.type === 'Weighted' ? "lbs" : "mmss"}
+                        underlineColorAndroid="transparent"
                         value={points}
                         onChangeText={(text) => this.handleScoreEdit(text, score.id)}
                       />

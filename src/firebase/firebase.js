@@ -13,6 +13,10 @@ const config = {
 
 firebase.initializeApp(config)
 
+
+firebase.database.enableLogging(false);
+
+
 const database = firebase.database()
 
 export { firebase, database }

@@ -138,6 +138,7 @@ class CompetitorForm extends React.Component {
                     <TextInput
                       style={form.modalInput}
                       editable={false}
+                      underlineColorAndroid="transparent"
                       placeholder="Select a division"
                       value={division}
                     />

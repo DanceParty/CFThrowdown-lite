@@ -13,8 +13,9 @@ const CompetitorList = (props) => {
   const navigation = props.navigation
   const admin = props.admin
   return (
-    <View style={container.containerWhite}>
+    <View style={container.listContainer}>
       <FlatList
+        style={{ backgroundColor: 'white' }}
         data={competitors}
         keyExtractor={(item, index) => index}
         renderItem={({item}) =>

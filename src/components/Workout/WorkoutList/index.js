@@ -13,8 +13,9 @@ const WorkoutList = (props) => {
   const workouts = props.filteredWorkouts
   const navigation = props.navigation
   return (
-    <View style={container.containerWhite}>
+    <View style={container.listContainer}>
       <FlatList
+        style={{ backgroundColor: 'white' }}
         data={workouts}
         keyExtractor={(item, index) => index}
         renderItem={({item}) =>

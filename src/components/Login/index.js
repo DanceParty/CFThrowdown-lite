@@ -29,12 +29,14 @@ class Login extends React.Component {
           <TextInput
             style={textInput.textInput}
             placeholder="Email..."
+            underlineColorAndroid="transparent"
             onChangeText={(text) => this.handleChangeEmail(text)}
             value={email}
           />
           <TextInput
             style={textInput.textInput}
             placeholder="Password..."
+            underlineColorAndroid="transparent"
             onChangeText={(text) => this.handleChangePassword(text)}
             value={password}
             secureTextEntry

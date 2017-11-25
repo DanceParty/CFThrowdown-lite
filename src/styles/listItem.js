@@ -1,26 +1,28 @@
-import { StyleSheet } from 'react-native'
+import { PixelRatio, StyleSheet } from 'react-native'
 
 import { scale, verticalScale, moderateScale } from '../utils/scaling'
 
 export const listItem = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    height: verticalScale(60),
-    alignItems: 'center',
+  listItem: {
+    flex: 1,
     borderBottomColor: '#424244',
     borderBottomWidth: StyleSheet.hairlineWidth,
+    padding: PixelRatio.get() <= 2 ? 10 : 15,
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   left: {
-    flex: 1,
-    alignItems: 'flex-start',
-    paddingLeft: scale(10),
+    flex: 0.8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   right: {
-    flex: 1,
+    flex: 0.2,
+    justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingRight: scale(10),
-  },
-  item: {
-    //alignSelf: 'stretch',
   },
 })

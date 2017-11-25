@@ -19,8 +19,8 @@ class WorkoutContainer extends React.Component {
     workouts: undefined,
     filteredWorkouts: undefined,
     divisions: undefined,
-    currentGender: undefined,
-    currentDivision: undefined,
+    currentGender: 'Male',
+    currentDivision: 'RX',
   }
 
   componentWillMount() {
@@ -33,8 +33,6 @@ class WorkoutContainer extends React.Component {
         this.setState({
           filteredWorkouts: defaultFilteredWorkouts,
           workouts: res,
-          currentGender: 'Male',
-          currentDivision: 'RX',
         })
       }
     })
@@ -93,7 +91,7 @@ class WorkoutContainer extends React.Component {
     const navigation = this.props.navigation
     if (workouts && divisions) {
       return (
-        <View style={container.container}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <WorkoutFilter
             gender={gender}
             divisions={divisions}

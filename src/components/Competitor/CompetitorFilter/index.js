@@ -1,10 +1,10 @@
 import React from 'react'
-import { TouchableHighlight, Text, View } from 'react-native'
+import { PixelRatio, TouchableHighlight, Text, View } from 'react-native'
 
 // styles
+import { container } from '../../../styles/container'
 import { typography } from '../../../styles/typography'
 import { tabs } from '../../../styles/tabs'
-import { padding } from '../../../styles/padding'
 
 
 class CompetitorFilter extends React.Component {
@@ -24,48 +24,41 @@ class CompetitorFilter extends React.Component {
     const currGender = this.props.gender
     const currDivision = this.props.division
 
-    // styles
-    const tabsGroup = tabs.tabsGroup
-    const tabsGroupSecondary = tabs.tabsGroupSecondary
-    const title = [typography.title3, padding.smPaddingTop]
-    const maleTab = (currGender === 'Male') ? tabs.currTab : tabs.tab
-    const maleText = (currGender === 'Male') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
-    const femaleTab = (currGender === 'Female') ? tabs.currTab : tabs.tab
-    const femaleText = (currGender === 'Female') ? [typography.callout, tabs.currTabText] : [typography.callout, tabs.tabText]
-
     return (
-      <View style={tabs.container}>
+      <View style={container.filterContainer}>
 
-        <Text style={title}>
-          Filters:
-        </Text>
+        <View style={tabs.tabsGroup}>
+          <Text style={typography.headline}>
+            Filters:
+          </Text>
+        </View>
 
-        <View style={tabsGroup}>
+        <View style={tabs.tabsGroup}>
           <TouchableHighlight
-            style={maleTab}
+            style={(currGender === 'Male') ? tabs.currentGenderTab : tabs.genderTab}
             onPress={() => this.handleGenderFilter('Male')}
           >
-            <Text style={maleText}>Men</Text>
+            <Text style={ [typography.subhead, typography.center, (currGender === 'Male' ? tabs.currTabText : tabs.tabText)] }>Men</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
-            style={femaleTab}
+            style={(currGender === 'Female') ? tabs.currentGenderTab : tabs.genderTab}
             onPress={() => this.handleGenderFilter('Female')}
           >
-            <Text style={femaleText}>Women</Text>
+            <Text style={ [typography.subhead, typography.center, (currGender === 'Female' ? tabs.currTabText : tabs.tabText)] }>Women</Text>
           </TouchableHighlight>
         </View>
 
-        <View style={tabsGroupSecondary}>
+        <View style={tabs.tabsGroupSecondary}>
           {
             divisions.map((division, index) => {
               return (
                 <TouchableHighlight
-                  style={(currDivision === division) ? tabs.currTab : tabs.tab}
+                  style={(division === currDivision ? tabs.currentDivTab : tabs.divTab)}
                   onPress={() => this.handleDivisionFilter(division)}
                   key={index}
                 >
-                  <Text style={(currDivision === division) ? [typography.footnote, tabs.currTabText] : [typography.footnote, tabs.tabText]}>{division}</Text>
+                  <Text style={ [typography.subhead, typography.center, (division === currDivision ? tabs.currTabText : tabs.tabText)] }>{division}</Text>
                 </TouchableHighlight>
               )
             })

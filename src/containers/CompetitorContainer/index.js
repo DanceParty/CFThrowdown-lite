@@ -19,8 +19,8 @@ class CompetitorContainer extends React.Component {
     competitors: undefined,
     filteredCompetitors: undefined,
     divisions: undefined,
-    currentGender: undefined,
-    currentDivision: undefined,
+    currentGender: 'Male',
+    currentDivision: 'RX',
   }
 
   componentWillMount() {
@@ -28,19 +28,26 @@ class CompetitorContainer extends React.Component {
       if (res) {
         const divisionList = Object.keys(res)
         this.setState({
-          divisions: divisionList
+          divisions: ["No Division", ...divisionList]
         })
       }
     })
     // get all of the competitors and store them in an array in the state
     getCompetitors().then((res) => {
       if (res) {
+        const filteredCompetitors = res.filter((competitor) => {
+          return (competitor.gender === 'Male') && (competitor.division === 'RX')
+        })
         this.setState({
           competitors: res,
-          filteredCompetitors: res,
+          filteredCompetitors: filteredCompetitors,
         })
       }
     })
+  }
+
+  handleEndFlatList = () => {
+    const results = this.state.competitors
   }
 
   handleGenderFilter = (gender) => {
@@ -97,7 +104,7 @@ class CompetitorContainer extends React.Component {
     const currGender = this.state.currentGender
     if (competitors && divisions) {
       return (
-        <View style={container.container}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <CompetitorFilter
             gender={currGender}
             division={currDivision}
@@ -115,7 +122,7 @@ class CompetitorContainer extends React.Component {
       )
     } else if (competitors && !divisions) {
       return (
-        <View style={container.container}>
+        <View>
           <CompetitorList
             admin={admin}
             competitors={competitors}

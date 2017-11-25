@@ -13,21 +13,20 @@ const CompetitorListItem = (props) => {
   const admin = props.admin
   return (
     <TouchableHighlight
+      style={listItem.listItem}
       underlayColor="white"
       onPress={() => admin ? navigation.navigate('AdminCompetitorDetails', { competitor: competitor }) : navigation.navigate('CompetitorDetails', { competitor: competitor })}
     >
-      <View style={listItem.container}>
-
+      <View style={listItem.content}>
         <View style={listItem.left}>
-          <Text style={[listItem.item, typography.headline]}>{competitor.fullName}</Text>
-          <Text style={typography.footnote}>{competitor.gender} - {competitor.division || "No Division"}</Text>
+          <Text style={typography.title3}>{competitor.fullName}</Text>
         </View>
 
         <View style={listItem.right}>
           <Ionicons name="ios-arrow-forward" size={28} color="black" />
         </View>
-
       </View>
+
     </TouchableHighlight>
   )
 }

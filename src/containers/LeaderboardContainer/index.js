@@ -103,7 +103,7 @@ class LeaderboardContainer extends React.Component {
     const gender = this.state.currentGender
     if (competitors && divisions) {
       return (
-        <View style={container.container}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <LeaderboardFilter
             gender={gender}
             divisions={divisions}

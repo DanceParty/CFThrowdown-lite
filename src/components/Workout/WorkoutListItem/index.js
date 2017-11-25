@@ -33,14 +33,14 @@ class WorkoutListItem extends React.Component {
     }
     return (
       <TouchableHighlight
+        style={listItem.listItem}
         underlayColor="white"
         onPress={() => this.handleNavigate(workout)}
       >
-        <View style={listItem.container}>
+        <View style={listItem.content}>
 
           <View style={listItem.left}>
-            <Text style={[listItem.item, typography.headline]}>{workout.name}</Text>
-            <Text style={typography.footnote}>{gender} {workout.division}</Text>
+            <Text style={typography.title3}>{workout.name}</Text>
           </View>
 
           <View style={listItem.right}>

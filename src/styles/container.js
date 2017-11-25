@@ -8,4 +8,17 @@ export const container = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  filterContainer: {
+    flex: 0.3,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  listContainer: {
+    flex: 0.7,
+    flexDirection: 'column'
+  }
 })

@@ -3,26 +3,15 @@ import { StyleSheet } from 'react-native'
 import { scale, verticalScale, moderateScale } from '../utils/scaling'
 
 export const tabs = StyleSheet.create({
-  container: {
-    flex: 0.5,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderBottomColor: 'black',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
   tabsGroup: {
-    flex: 0.4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
+    flex: 0.2,
     flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   tabsGroupSecondary: {
     flex: 0.6,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
     flexWrap: 'wrap',
     flexDirection: 'row',
   },
@@ -30,21 +19,42 @@ export const tabs = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#4492D0',
-    height: verticalScale(25),
-    width: moderateScale(150),
+    height: 23,
+    width: 110,
     borderRadius: 50,
   },
-  tab: {
+  genderTab: {
+    width: '33%',
+    height: '70%',
     alignItems: 'center',
     justifyContent: 'center',
-    height: verticalScale(23),
-    width: moderateScale(150),
-    paddingLeft: scale(10),
-    paddingRight: scale(10),
-    paddingTop: scale(2),
+  },
+  divTab: {
+    width: '33%',
+    height: '25%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  currentDivTab: {
+    width: '33%',
+    height: '25%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    backgroundColor: '#4492D0',
+    overflow: 'hidden',
+  },
+  currentGenderTab: {
+    width: '33%',
+    height: '70%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    backgroundColor: '#4492D0',
+    overflow: 'hidden',
   },
   tabText: {
-    color: 'black'
+    color: 'black',
   },
   currTabText: {
     color: 'white',
