@@ -44,15 +44,15 @@ class NewWorkoutContainer extends React.Component {
   }
 
   handleNameChange = (text) => {
-    this.setState(() => ({ name: text.trim() }))
+    this.setState(() => ({ name: text }))
   }
 
   handleDivisionChange = (text) => {
-    this.setState(() => ({ division: text.trim() }))
+    this.setState(() => ({ division: text }))
   }
 
   handleTypeChange = (text) => {
-    this.setState(() => ({ type: text.trim() }))
+    this.setState(() => ({ type: text }))
   }
 
   handleGenderCheckbox = (gender) => {
@@ -63,7 +63,7 @@ class NewWorkoutContainer extends React.Component {
   }
 
   handleDescriptionChange = (text) => {
-    this.setState(() => ({ description: text.trim() }))
+    this.setState(() => ({ description: text }))
   }
 
   handleAddStep = () => {
@@ -105,13 +105,13 @@ class NewWorkoutContainer extends React.Component {
       Alert.alert('Failed Submission', 'Check that all fields are correct and try again.')
     } else {
       const workout = {
-        name: this.state.name,
-        division: this.state.division,
-        type: this.state.type,
+        name: this.state.name.trim(),
+        division: this.state.division.trim(),
+        type: this.state.type.trim(),
         male: this.state.male,
         female: this.state.female,
         steps: [...this.state.steps],
-        description: this.state.description,
+        description: this.state.description.trim(),
       }
 
       let workoutsArray = []
