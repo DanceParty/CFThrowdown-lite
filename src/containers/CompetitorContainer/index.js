@@ -46,10 +46,6 @@ class CompetitorContainer extends React.Component {
     })
   }
 
-  handleEndFlatList = () => {
-    const results = this.state.competitors
-  }
-
   handleGenderFilter = (gender) => {
     const currGender = this.state.currentGender
     const currDivision = this.state.currentDivision
@@ -59,7 +55,11 @@ class CompetitorContainer extends React.Component {
       const competitors = this.state.competitors
       // filter competitor array into a filtered array by gender 'male'
       const filteredArray = competitors.filter((competitor) => {
-        return (competitor.gender === gender) && (competitor.division === currDivision)
+        if (currDivision === 'No Division') {
+          return (competitor.gender === gender) && (!competitor.division)
+        } else {
+          return (competitor.gender === gender) && (competitor.division === currDivision)
+        }
       })
       this.setState(() => ({
         filteredCompetitors: filteredArray,
@@ -75,17 +75,33 @@ class CompetitorContainer extends React.Component {
     // we need to recreate the filtered array so the division filter
     // doesn't stack on top of each other returning zero results
     const filteredDivisions = competitors.filter((competitor) => {
-      if (currentGender) {
-        if ((competitor.gender === currentGender) && (competitor.division === division)) {
-          return true
+      if (division === 'No Division') {
+        if (currentGender) {
+          if ((competitor.gender === currentGender) && (!competitor.division)) {
+            return true
+          } else {
+            return false
+          }
         } else {
-          return false
+          if (!competitor.division) {
+            return true
+          } else {
+            return false
+          }
         }
       } else {
-        if (competitor.division === division) {
-          return true
+        if (currentGender) {
+          if ((competitor.gender === currentGender) && (competitor.division === division)) {
+            return true
+          } else {
+            return false
+          }
         } else {
-          return false
+          if (competitor.division === division) {
+            return true
+          } else {
+            return false
+          }
         }
       }
     })

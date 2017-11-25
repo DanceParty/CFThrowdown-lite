@@ -30,7 +30,6 @@ class LoginContainer extends React.Component {
       } else if (errorCode === 'auth/user-not-found') {
         Alert.alert('Incorrect Login', 'Please check email and password')
       } else {
-        console.log(errorCode)
         Alert.alert('Error:', errorMessage);
       }
     })

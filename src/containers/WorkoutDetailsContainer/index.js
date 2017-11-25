@@ -30,25 +30,30 @@ class WorkoutDetailsContainer extends React.Component {
     // get all competitors for this workouts gender & division
     getCompetitorByGenderAndDivision(division, gender).then((res) => {
       if (res) {
+        // sort the competitors by points based on this workout
         const sortedCompetitors = sortByPoints(type, workout, res)
         // iterate through the new array and update each competitor with the object
-
         sortedCompetitors.map((competitor, index) => {
           const competitorId = competitor.id
+          let totalScore = 0
           const updateScores = competitor.scores.map((score) => {
+            // for each score, add the placing to the totalScore
             if ((score.workoutId === workout.id) && (score.points > 0)) {
+              totalScore += (index+1)
               return {
                 place: index+1,
                 points: score.points,
                 workoutId: score.workoutId,
               }
             } else {
+              totalScore += (score.place || 0)
               return score
             }
           })
 
           // update each competitor
           updateCompetitorScores(competitorId, updateScores)
+          updateCompetitorTotalScore(competitorId, totalScore)
         })
       }
     })

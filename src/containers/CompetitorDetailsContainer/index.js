@@ -68,7 +68,7 @@ class CompetitorDetailsContainer extends React.Component {
       let originalGender = this.state.originalGender
       let division = this.state.competitor.division
       let originalDivision = this.state.originalDivision
-      let totalScore = 0
+      let totalScore = this.state.competitor.totalScore
       const competitorId = this.props.navigation.state.params.competitor.id
 
       const warning = !gender || !this.state.competitor.firstName || !this.state.competitor.lastName
@@ -107,9 +107,6 @@ class CompetitorDetailsContainer extends React.Component {
             }))
           })
         } else {
-          if (this.state.scores) {
-            this.state.scores.map(scoreObj => totalScore += scoreObj.points)
-          }
 
           let competitor = {
             division: this.state.competitor.division || '',

@@ -145,7 +145,6 @@ class NewWorkoutContainer extends React.Component {
             // then create a new object with the workout
             // and update competitor
             if (typeof competitor.scores === "undefined") {
-              console.log('There are no scores object')
               const scores = [
                 {
                   workoutId: newWorkoutKey,
