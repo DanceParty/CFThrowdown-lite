@@ -183,6 +183,23 @@ class WorkoutForm extends React.Component {
 
             <View style={form.row}>
               <View style={form.container}>
+                <Text style={typography.footnote}>Standards</Text>
+                <TextInput
+                  style={(focusedInput === 'description') ? form.focusedTextInput : form.textInput}
+                  underlineColorAndroid="transparent"
+                  onFocus={() => this.handleTextInputFocus('description')}
+                  onEndEditing={() => this.handleTextInputOff()}
+                  multiline
+                  autoCapitalize="sentences"
+                  maxLength = {1000}
+                  value={description}
+                  onChangeText={(text) => this.handleDescriptionChange(text)}
+                />
+              </View>
+            </View>
+
+            <View style={form.row}>
+              <View style={form.container}>
                 <Text style={typography.footnote}>Workout Steps</Text>
               </View>
             </View>
