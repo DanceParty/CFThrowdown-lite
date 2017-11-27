@@ -1,5 +1,6 @@
 import React from 'react'
 import { Alert } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // actions
 import { startLogin } from '../../actions/auth'
@@ -51,13 +52,15 @@ class LoginContainer extends React.Component {
     const email = this.state.email
     const password = this.state.password
     return(
-      <Login
-        email={email}
-        password={password}
-        handleLogin={this.handleLogin}
-        handleChangeEmail={this.handleChangeEmail}
-        handleChangePassword={this.handleChangePassword}
-      />
+      <KeyboardAwareScrollView extraScrollHeight={100} enableOnAndroid={true}>
+        <Login
+          email={email}
+          password={password}
+          handleLogin={this.handleLogin}
+          handleChangeEmail={this.handleChangeEmail}
+          handleChangePassword={this.handleChangePassword}
+        />
+      </KeyboardAwareScrollView>
     )
   }
 }
