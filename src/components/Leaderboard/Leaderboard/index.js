@@ -1,5 +1,6 @@
 import React from 'react'
-import { FlatList, Text, StyleSheet, View } from 'react-native'
+import { FlatList, Text, TouchableHighlight, StyleSheet, View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 
 // styles
 import { container } from '../../../styles/container'
@@ -18,28 +19,23 @@ const Leaderboard = (props) => {
         style={{ backgroundColor: 'white' }}
         keyExtractor={(item, index) => index}
         data={competitors}
-        renderItem={({item}) =>
-          <View style={listItem.container}>
-            <View style={listItem.left}>
-              <Text style={typography.headline}>{item.firstName}</Text>
+        renderItem={({item, index}) =>
+          <TouchableHighlight
+            style={listItem.listItem}
+            underlayColor="white"
+            onPress={() => console.log('')}
+          >
+            <View style={listItem.content}>
+              <View style={listItem.left}>
+                <Text style={typography.headline}>{index+1} - {item.firstName} {item.lastName}</Text>
+              </View>
+
+              <View style={listItem.right}>
+                <Ionicons name="ios-arrow-forward" size={28} color="black" />
+              </View>
             </View>
-            <View style={[listItem.right, { alignItems: 'center' }]}>
-              <Text style={typography.caption1}>{item.fullName}</Text>
-              <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
-            </View>
-            <View style={[listItem.right, { alignItems: 'center' }]}>
-              <Text style={typography.caption1}>{item.fullName}</Text>
-              <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
-            </View>
-            <View style={[listItem.right, { alignItems: 'center' }]}>
-              <Text style={typography.caption1}>{item.fullName}</Text>
-              <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
-            </View>
-            <View style={[listItem.right, { alignItems: 'center' }]}>
-              <Text style={typography.caption1}>{item.fullName}</Text>
-              <Text style={typography.caption3}>{item.gender} - {item.division}</Text>
-            </View>
-          </View>
+
+          </TouchableHighlight>
         }
       />
     </View>
