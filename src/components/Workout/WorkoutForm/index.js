@@ -19,8 +19,8 @@ class WorkoutForm extends React.Component {
     this.props.handleNameChange(text)
   }
 
-  handleDivisionChange = (text) => {
-    this.props.handleDivisionChange(text)
+  handleDivisionCheckbox = (text) => {
+    this.props.handleDivisionCheckbox(text)
   }
 
   handleTypeChange = (text) => {
@@ -69,8 +69,7 @@ class WorkoutForm extends React.Component {
 
   render() {
     const name = this.props.name
-    const pickerData = this.props.pickerData
-    const division = this.props.division
+    const divisions = this.props.divisions
     const scoreTypeData= this.props.scoreTypeData
     const type = this.props.type
     const male = this.props.male
@@ -105,24 +104,31 @@ class WorkoutForm extends React.Component {
             </View>
 
             <View style={form.row}>
-              <View style={form.container}>
-                <Text style={typography.footnote}>Division</Text>
-                <View style={form.modal}>
-                  <ModalSelector
-                    data={pickerData}
-                    initValue="Select a division"
-                    onChange={(value) => this.handleDivisionChange(value.label)}
-                  >
-                    <TextInput
-                      style={form.modalInput}
-                      editable={false}
-                      placeholder="Select a division"
-                      value={division}
-                    />
-                  </ModalSelector>
-                </View>
-              </View>
+              <Text style={typography.footnote}>Divisions</Text>
             </View>
+
+            <View style={[form.row, { flexWrap: 'wrap'}]}>
+              {
+                divisions.map((division, index) => {
+                  return (
+                    <View style={form.halfContainer} key={index}>
+                      <CheckBox
+                        iconType="material"
+                        checkedIcon="done"
+                        uncheckedIcon="clear"
+                        style={form.checkbox}
+                        title={division.label}
+                        checked={division.checked}
+                        checkedColor="#4492D0"
+                        uncheckedColor="grey"
+                        onPress={() => this.handleDivisionCheckbox(division.label)}
+                      />
+                    </View>
+                  )
+                })
+              }
+            </View>
+
 
             <View style={form.row}>
               <View style={form.container}>
