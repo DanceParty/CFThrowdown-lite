@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 // actions
-import { getCompetitorByGenderAndDivision, updateCompetitorScores } from '../../actions/competitors'
+import { getCompetitorByGenderAndDivision, updateCompetitorScores, updateCompetitorTotalScore } from '../../actions/competitors'
 import { getDivisionWorkouts, updateDivisionWorkouts } from '../../actions/divisions'
 import { removeWorkout } from '../../actions/workouts'
 

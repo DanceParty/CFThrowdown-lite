@@ -227,6 +227,7 @@ class CompetitorDetailsContainer extends React.Component {
                   name: workout.name,
                   type: workout.type,
                   points: scoreObj['points'] || '',
+                  place: scoreObj['place'],
                   id: workout.id
                 }
               }

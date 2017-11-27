@@ -12,7 +12,7 @@ const Leaderboard = (props) => {
   const competitors = props.competitors.sort((a, b) => {
     return a.totalScore - b.totalScore
   })
-
+  const navigation = props.navigation
   return (
     <View style={container.listContainer}>
       <FlatList
@@ -23,7 +23,7 @@ const Leaderboard = (props) => {
           <TouchableHighlight
             style={listItem.listItem}
             underlayColor="white"
-            onPress={() => console.log('')}
+            onPress={() => navigation.navigate('CompetitorDetails', { competitor: item })}
           >
             <View style={listItem.content}>
               <View style={listItem.left}>

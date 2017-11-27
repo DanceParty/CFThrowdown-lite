@@ -40,7 +40,7 @@ class Competitor extends React.Component {
                   <View key={index}>
                     <Text>
                       <Text style={[typography.body, padding.smPadding]}>{score.name}: </Text>
-                      <Text style={[typography.headline, padding.smPadding]}>{score.points || '0'}</Text>
+                      <Text style={[typography.headline, padding.smPadding]}>{score.place < 100000 ? score.place : "No score entered"}</Text>
                     </Text>
                   </View>
                 )

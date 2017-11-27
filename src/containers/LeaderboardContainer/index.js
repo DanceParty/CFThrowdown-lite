@@ -97,6 +97,7 @@ class LeaderboardContainer extends React.Component {
   }
 
   render() {
+    const navigation = this.props.navigation
     const competitors = this.state.filteredCompetitors
     const divisions = this.state.divisions
     const currDivision = this.state.currentDivision
@@ -113,6 +114,7 @@ class LeaderboardContainer extends React.Component {
           />
           <Leaderboard
             competitors={competitors}
+            navigation={navigation}
           />
         </View>
       )
