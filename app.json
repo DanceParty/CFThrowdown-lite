@@ -3,10 +3,10 @@
     "sdkVersion": "22.0.0",
     "name": "Crossfit Throwdown",
     "description": "An application used to create and manage Crossfit tournaments. Built for tournament organizers.",
-    "version": "1.0",
+    "version": "1.1",
     "orientation" : "portrait",
     "slug": "crossfit-throwdown",
-    "icon": "./assets/icon/logo(1).png",
+    "icon": "./assets/icon/Icon.png",
     "ios": {
       "bundleIdentifier": "com.keevandance.crossfitthrowdown"
     },
