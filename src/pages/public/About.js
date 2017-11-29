@@ -12,7 +12,7 @@ const About = () => {
         <Text style={[typography.title2, { textAlign: 'center', padding: 15 }]}>About:</Text>
         <Text style={[typography.body, { padding: 15, textAlign: 'center' }]}>This tournament has been hosted and built by Crossfit Yuma.</Text>
         <Text style={[typography.body, { padding: 15, textAlign: 'center' }]}>Mobile application built by Keevan Dance.</Text>
-        <Text style={[typography.title2, { textAlign: 'center', padding: 15 }]}>Sponsers:</Text>
+        <Text style={[typography.title2, { textAlign: 'center', padding: 15 }]}>Sponsors:</Text>
         <Image
           style={styles.logo}
           source={require('../../../assets/sponser-parra.jpg')}
