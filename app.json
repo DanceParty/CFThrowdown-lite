@@ -3,7 +3,7 @@
     "sdkVersion": "22.0.0",
     "name": "Crossfit Throwdown",
     "description": "An application used to create and manage Crossfit tournaments. Built for tournament organizers.",
-    "version": "1.1",
+    "version": "1.2",
     "orientation" : "portrait",
     "slug": "crossfit-throwdown",
     "icon": "./assets/icon/Icon.png",
