@@ -5,9 +5,11 @@ import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { typography } from '../../styles/typography'
 
 
-const About = () => {
-  return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+class About extends React.Component {
+
+  render() {
+    return (
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={{ flex: 1, flexDirection: 'column' }}>
           <Text style={[typography.title2, { textAlign: 'center', padding: 15 }]}>This tournament made possible by:</Text>
@@ -49,7 +51,8 @@ const About = () => {
         </View>
       </ScrollView>
     </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({

@@ -68,10 +68,15 @@ class NewWorkoutContainer extends React.Component {
   }
 
   handleAddStep = () => {
-    const newKey = `input-${this.state.stepInputs.length}`
-    this.setState(() => ({
-      stepInputs: this.state.stepInputs.concat([newKey])
-    }))
+    // this checks if the previous input has any value before creating a new input
+    // TODO: this should also remove the step input if the previous step input's value has been removed
+    const prevStepInput = this.state.steps[this.state.stepInputs.length-1]
+    if (prevStepInput) {
+      const newKey = `input-${this.state.stepInputs.length}`
+      this.setState(() => ({
+        stepInputs: this.state.stepInputs.concat([newKey])
+      }))
+    }
   }
 
   handleRemoveStep = () => {
