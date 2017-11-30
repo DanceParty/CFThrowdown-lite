@@ -19,8 +19,10 @@ class LeaderboardFilter extends React.Component {
 
   render() {
     const gender = this.props.gender
-    const divisions = this.props.divisions
     const currDivision = this.props.currDivision
+    const divisions = this.props.divisions.sort((a, b) => {
+      return a.length - b.length
+    })
 
     let isMale = gender === 'Male'
     let isFemale = gender === 'Female'
