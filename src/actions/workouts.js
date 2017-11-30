@@ -1,7 +1,7 @@
 import { database } from '../firebase/firebase'
 
 export const removeWorkout = (workoutId) => {
-  return database.ref(`workouts/${workoutId}`).remove().then(() => console.log('workout:', workoutId, 'removed'))
+  return database.ref(`workouts/${workoutId}`).remove()
 }
 
 export const addWorkout = (workout) => {

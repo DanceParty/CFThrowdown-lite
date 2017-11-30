@@ -1,7 +1,7 @@
 import { database } from '../firebase/firebase'
 
 export const removeDivision = (divisionId) => {
-  return database.ref(`divisions/${divisionId}`).remove().then(() => console.log(divisionId, 'removed'))
+  return database.ref(`divisions/${divisionId}`).remove()
 }
 
 export const addDivision = (division) => {
