@@ -15,8 +15,9 @@ const DivisionList = (props) => {
   const navigation = props.navigation
   const admin = props.admin
   return (
-    <View style={container.containerWhite}>
+    <View style={container.listContainerDiv}>
       <FlatList
+        style={{ backgroundColor: 'white' }}
         data={divisions}
         keyExtractor={(item, index) => index}
         renderItem={({item}) =>

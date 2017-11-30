@@ -7,9 +7,6 @@ import { allDivisions } from '../../actions/divisions'
 // components
 import DivisionList from '../../components/Division/DivisionList'
 
-// styles
-import { container } from '../../styles/container'
-
 
 class DivisionContainer extends React.Component {
 
@@ -34,7 +31,7 @@ class DivisionContainer extends React.Component {
     const navigation = this.props.navigation
     if (divisions) {
       return (
-        <View style={container.container}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <DivisionList
           divisions={divisions}
           navigation={navigation}
@@ -44,7 +41,7 @@ class DivisionContainer extends React.Component {
       )
     } else {
       return (
-        <View style={container.container}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <Button
             title="Add Division"
             onPress={() => this.props.navigation.navigate('AddDivision')}

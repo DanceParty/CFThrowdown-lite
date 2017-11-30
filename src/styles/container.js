@@ -20,5 +20,9 @@ export const container = StyleSheet.create({
   listContainer: {
     flex: 0.7,
     flexDirection: 'column'
+  },
+  listContainerDiv: {
+    flex: 1,
+    flexDirection: 'column'
   }
 })

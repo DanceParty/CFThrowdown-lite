@@ -12,10 +12,11 @@ const DivisionList = (props) => {
   const division = props.item
   return (
     <TouchableHighlight
+      style={listItem.listItem}
       underlayColor="white"
       onPress={() => navigation.navigate('AdminDivisionDetails', { division: division })}
     >
-      <View style={listItem.container}>
+      <View style={listItem.content}>
 
         <View style={listItem.left}>
           <Text style={[listItem.item, typography.headline]}>{division}</Text>
