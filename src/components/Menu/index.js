@@ -46,16 +46,16 @@ class Menu extends React.Component {
       <View style={styles.container}>
         <View style={styles.middle}>
           <PrimaryButton
+            text={admin ? "Divisions" : "Leaderboard"}
+            handleButtonPress={this.handleLeaderboardOrDivisionPress}
+          />
+          <PrimaryButton
             text="Workouts"
             handleButtonPress={this.handleWorkoutPress}
           />
           <PrimaryButton
             text="Competitors"
             handleButtonPress={this.handleCompetitorsPress}
-          />
-          <PrimaryButton
-            text={admin ? "Divisions" : "Leaderboard"}
-            handleButtonPress={this.handleLeaderboardOrDivisionPress}
           />
           {
             !admin &&

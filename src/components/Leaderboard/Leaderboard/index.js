@@ -27,7 +27,7 @@ const Leaderboard = (props) => {
           >
             <View style={listItem.content}>
               <View style={listItem.left}>
-                <Text style={typography.headline}>{index+1} - {item.firstName} {item.lastName}</Text>
+                <Text style={typography.headline}>{index+1}   <Text style={typography.title3}>{item.firstName} {item.lastName}</Text></Text>
               </View>
 
               <View style={listItem.right}>
