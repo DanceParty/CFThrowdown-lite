@@ -8,14 +8,14 @@ export const sortByPoints = (type, workout, competitors) => {
       let scoreA = 0
       a.scores.map((score) => {
         if (score.workoutId === workout.id) {
-          scoreA = score.points === 0 ? 100000 : score.points
+          scoreA = score.points === 0 ? 9999999999 : score.points
         }
       })
 
       let scoreB = 0
       b.scores.map((score) => {
         if (score.workoutId === workout.id) {
-          scoreB = score.points === 0 ? 100000 : score.points
+          scoreB = score.points === 0 ? 9999999999 : score.points
         }
       })
       return (scoreA < scoreB) ? -1 : 1

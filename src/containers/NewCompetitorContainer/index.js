@@ -73,7 +73,7 @@ class NewCompetitorContainer extends React.Component {
             scoresArray[index += 1] = {
               workoutId: workout.id,
               points: 0,
-              place: 100000,
+              place: 9999999999,
             }
           })
 

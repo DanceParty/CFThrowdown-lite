@@ -27,7 +27,7 @@ const Leaderboard = (props) => {
           >
             <View style={listItem.content}>
               <View style={listItem.left}>
-                <Text style={typography.headline}>{item.totalScore} </Text>
+                <Text style={typography.headline}>{item.totalScore < 9999999999 ? item.totalScore : 0} </Text>
                 <Text style={typography.title3}> {item.firstName} {item.lastName}</Text>
               </View>
 
