@@ -45,8 +45,8 @@ export const typography = StyleSheet.create({
   subhead: {
     fontSize: PixelRatio.get() <= 2 ? 12 : 15,
     fontWeight: '400',
-    lineHeight: 20,
-    letterSpacing: -0.24
+    lineHeight: scale(20),
+    letterSpacing: scale(-0.24)
   },
   footnote: {
     fontSize: 13,
