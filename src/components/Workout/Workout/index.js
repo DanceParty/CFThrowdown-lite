@@ -118,16 +118,20 @@ class Workout extends React.Component {
           {
             admin &&
             <View>
-              <Button
-                style={{ color: '#4492D0', padding: '2%' }}
-                title="Submit Workout Scores"
-                onPress={() => this.onSubmitWorkout()}
-              />
-              <Button
-                style={{ color: '#4492D0', padding: '2%' }}
-                title="Delete Workout"
-                onPress={() => this.handleModalOpenClose(true)}
-              />
+              <View style={{ padding: '10%'}}>
+                <Button
+                  style={{ color: '#4492D0', padding: '2%' }}
+                  title="Submit Workout Scores"
+                  onPress={() => this.onSubmitWorkout()}
+                />
+              </View>
+              <View style={{ padding: '10%'}}>
+                <Button
+                  style={{ color: '#4492D0', padding: '2%' }}
+                  title="Delete Workout"
+                  onPress={() => this.handleModalOpenClose(true)}
+                />
+              </View>
             </View>
           }
         </Card>
