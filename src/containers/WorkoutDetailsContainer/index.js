@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { Alert, ScrollView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 // actions
@@ -57,6 +57,7 @@ class WorkoutDetailsContainer extends React.Component {
         })
       }
     })
+    Alert.alert("Workout scores have been submitted")
     const resetNav = NavigationActions.reset({
       index: 1,
       actions: [
@@ -98,9 +99,18 @@ class WorkoutDetailsContainer extends React.Component {
     })
 
     // remove this workout
-    removeWorkout(workout.id)
+    removeWorkout(workout.id).then(() => {
+      Alert.alert(`${workout.name} has been removed`, 'This automatically removes it from all divisions and competitors as well.')
+      const resetNav = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({ routeName: 'AdminHome' }),
+          NavigationActions.navigate({ routeName: 'AdminWorkouts' })
+        ]
+      })
+      this.props.navigation.dispatch(resetNav)
+    })
 
-    this.props.navigation.navigate('AdminHome')
   }
 
   render() {

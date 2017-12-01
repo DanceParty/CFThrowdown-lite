@@ -18,7 +18,6 @@ export const listItem = StyleSheet.create({
   left: {
     flex: 0.8,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   right: {
     flex: 0.2,

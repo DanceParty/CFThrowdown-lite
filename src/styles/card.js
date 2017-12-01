@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { PixelRatio, StyleSheet } from 'react-native'
 
 import { scale, verticalScale, moderateScale } from '../utils/scaling'
 
@@ -17,7 +17,25 @@ export const card = StyleSheet.create({
   },
   caption: {
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  contentAlt: {
+    flex: 1,
+    padding: PixelRatio.get() <= 2 ? 10 : 15,
+    alignItems: 'center',
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  contentLeft: {
+    flex: 0.33,
+  },
+  contentCenter: {
+    flex: 0.33,
+  },
+  contentRight: {
+    flex: 0.33,
   },
   content: {
     flexDirection: 'column',

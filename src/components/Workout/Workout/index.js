@@ -104,10 +104,7 @@ class Workout extends React.Component {
 
           <View style={card.header}>
             <Text style={[typography.title1, card.title]}>{workout.name}</Text>
-          </View>
-
-          <View style={card.caption}>
-            <Text style={[typography.title2, card.subtitle, padding.mdPaddingTop]}>{gender}, {workout.division}</Text>
+            <Text style={[typography.title2, card.subtitle, padding.mdPaddingTop]}>{gender} - {workout.division}</Text>
           </View>
 
           <View style={card.content}>
@@ -122,13 +119,13 @@ class Workout extends React.Component {
             admin &&
             <View>
               <Button
-                style={{ color: '#4492D0' }}
+                style={{ color: '#4492D0', padding: '2%' }}
                 title="Submit Workout Scores"
                 onPress={() => this.onSubmitWorkout()}
               />
               <Button
-                style={{ color: '#4492D0' }}
-                title="Remove"
+                style={{ color: '#4492D0', padding: '2%' }}
+                title="Delete Workout"
                 onPress={() => this.handleModalOpenClose(true)}
               />
             </View>

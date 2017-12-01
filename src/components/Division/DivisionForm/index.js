@@ -49,7 +49,7 @@ class DivisionForm extends React.Component {
           </View>
 
           <View style={card.content}>
-            <View style={form.halfContainer}>
+            <View style={form.container}>
               <Text style={typography.footnote}>Name</Text>
               <TextInput
                 style={(this.state.textInputFocused === 'name') ? form.focusedTextInput : form.textInput}

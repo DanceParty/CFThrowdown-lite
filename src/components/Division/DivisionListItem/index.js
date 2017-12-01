@@ -19,7 +19,7 @@ const DivisionList = (props) => {
       <View style={listItem.content}>
 
         <View style={listItem.left}>
-          <Text style={[listItem.item, typography.headline]}>{division}</Text>
+          <Text style={[listItem.item, typography.title3]}>{division}</Text>
         </View>
 
         <View style={listItem.right}>

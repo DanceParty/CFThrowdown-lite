@@ -25,23 +25,46 @@ class Competitor extends React.Component {
 
           <View style={card.header}>
             <Text style={[typography.title1, card.title]}>{competitor.firstName} {competitor.lastName}</Text>
-          </View>
-
-          <View style={card.caption}>
             <Text style={[typography.title2, card.subtitle, padding.mdPaddingTop]}>
-              {competitor.gender}, {competitor.division}
+              {competitor.division} - {competitor.gender}
             </Text>
           </View>
 
-          <View style={card.content}>
+          <View style={card.contentAlt}>
+
+            <View style={card.row}>
+              <View style={card.contentLeft}>
+                <Text style={[typography.title2, card.subtitle, padding.mdPaddingTop, {textAlign: 'left'}]}>Workout</Text>
+              </View>
+              <View style={card.contentCenter}>
+                <Text style={[typography.title2, card.subtitle, padding.mdPaddingTop, {textAlign: 'center'}]}>Score</Text>
+              </View>
+              <View style={card.contentRight}>
+                <Text style={[typography.title2, card.subtitle, padding.mdPaddingTop, {textAlign: 'right'}]}>Placing</Text>
+              </View>
+            </View>
+
+          </View>
+
+          <View style={card.contentAlt}>
+
             {
               scores.map((score, index) => {
                 return (
-                  <View key={index}>
-                    <Text>
-                      <Text style={[typography.body, padding.smPadding]}>{score.name}: </Text>
-                      <Text style={[typography.headline, padding.smPadding]}>{score.place < 100000 ? score.place : "No score entered"}</Text>
-                    </Text>
+                  <View style={card.row} key={index}>
+                    <View style={card.contentLeft}>
+                      <Text style={[typography.title3, padding.smPaddingTop, {textAlign: 'left'}]}>{score.name}</Text>
+                    </View>
+                    <View style={card.contentCenter}>
+                      <Text style={[typography.title2, padding.smPaddingTop, {textAlign: 'center'}]}>
+                      {score.points > 0 ? score.points : "N/A"}
+                      </Text>
+                    </View>
+                    <View style={card.contentRight}>
+                      <Text style={[typography.title2, padding.smPaddingTop, padding.smPaddingRight, {textAlign: 'right'}]}>
+                        {score.place < 100000 ? score.place : "N/A"}
+                      </Text>
+                    </View>
                   </View>
                 )
               })
